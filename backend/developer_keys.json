@@ -1,0 +1,12 @@
+{
+  "sk_test_shieldscan_demo_2024": {
+    "key": "sk_test_shieldscan_demo_2024",
+    "app_name": "Demo College Admission Form",
+    "developer": "developer@shieldscan.org",
+    "tier": "FREE_COMMUNITY",
+    "daily_limit": 500,
+    "requests_used": 15,
+    "created_at": "2024-09-01T10:00:00Z",
+    "active": true
+  }
+}
