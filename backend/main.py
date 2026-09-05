@@ -13,11 +13,11 @@ from routers import ocr, validation, tampering, face, audit, risk, screen, devel
 # ─── App Setup ────────────────────────────────────────────────────────────────
 app = FastAPI(
     title="ShieldScan API",
-    description="AI-Based Fake Identity & Document Screening System — SIH 2024 | PS-26188",
+    description="Defense-Grade AI Border & Document Intelligence System",
     version="1.0.0",
     contact={
-        "name": "Team ShieldScan",
-        "email": "shieldscan@sih2024.in",
+        "name": "ShieldScan Security Team",
+        "email": "contact@shieldscan.io",
     },
     license_info={"name": "MIT"},
 )

@@ -104,7 +104,7 @@ export default function LandingPage() {
           marginBottom: 24, boxShadow: "0 0 25px rgba(0, 242, 254, 0.15)"
         }}>
           <span className="radar-beacon" style={{ width: 8, height: 8, borderRadius: "50%", background: "#00f2fe", display: "inline-block" }} />
-          SIH 2024 · PS-26188 · MHA / SSB BORDER CONTROL INITIATIVE
+          SOVEREIGN DEFENSE AI · BORDER & DOCUMENT INTELLIGENCE
         </div>
 
         <h1 style={{
@@ -354,8 +354,8 @@ export default function LandingPage() {
 
       {/* ── Footer ─────────────────────────────────────────────────── */}
       <div style={{ textAlign: "center", marginTop: 60, color: "#4e6b8f", fontSize: "0.82rem", lineHeight: 1.6 }}>
-        <div>ShieldScan · Smart India Hackathon (SIH) 2024 · Problem Statement PS-26188</div>
-        <div>Ministry of Home Affairs (MHA) · Sashastra Seema Bal (SSB) · Air-Gap Sovereign AI Architecture</div>
+        <div>ShieldScan · Defense-Grade AI Document Verification Platform</div>
+        <div>Air-Gap Sovereign AI Architecture · Real-Time Border Intelligence</div>
       </div>
 
     </div>

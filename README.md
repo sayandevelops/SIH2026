@@ -1,8 +1,8 @@
 # 🛡️ ShieldScan — AI Border Document Intelligence System
 
-> **SIH 2024 | Problem Statement ID: 26188**  
-> Ministry of Home Affairs — Sashastra Seema Bal (SSB)  
-> Theme: Blockchain & Cybersecurity
+> **Defense-Grade AI & Sovereign Document Verification Suite**  
+> Air-Gap Sovereign AI Architecture | Blockchain Tamper-Proof Audit  
+> Theme: Cyber Defense, Computer Vision & Identity Intelligence
 
 ---
 
@@ -90,7 +90,7 @@ docker-compose up --build
 
 ## 👥 Team
 
-Built for Smart India Hackathon 2024.
+ShieldScan Core Security & AI Engineering Team.
 
 ---
 
