@@ -86,12 +86,11 @@ export default function DeveloperPortal() {
       });
       setTestResponse(res);
       toast.success(`Verification complete: ${res.status}`);
-      loadKeys(); // refresh usage
+      loadKeys();
     } catch (err) {
-      const errDetail = err.response?.data?.detail || err.message;
       setTestResponse({
         error: true,
-        message: typeof errDetail === "object" ? JSON.stringify(errDetail, null, 2) : errDetail,
+        message: err.response?.data?.detail || err.message,
       });
       toast.error("Verification error occurred");
     } finally {
@@ -130,12 +129,10 @@ async function verifyUploadedDocument(file) {
   // ✅ Document verified authentic! Proceed with database submission
   console.log("Verified ID:", result.extracted_data);
   return true;
-}`,
+}
 
-    react_form: `// React Form Integration with Real-Time Document Rejection
-import React, { useState } from "react";
-
-export function AdmissionForm() {
+// React Form Example:
+function RegistrationForm() {
   const [docFile, setDocFile] = useState(null);
   const [verifying, setVerifying] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -243,86 +240,80 @@ echo "Document Verified Successfully!";
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        style={{ textAlign: "center", marginBottom: 50 }}
+        style={{ textAlign: "center", marginBottom: 46 }}
       >
         <div style={{
           display: "inline-flex", alignItems: "center", gap: 8,
           padding: "6px 18px", borderRadius: "999px",
-          background: "rgba(0, 242, 254, 0.08)", border: "1px solid rgba(0, 242, 254, 0.25)",
-          fontSize: "0.78rem", fontWeight: 700, color: "#00f2fe",
-          letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 20
+          background: "#eff6ff", border: "1px solid #bfdbfe",
+          fontSize: "0.78rem", fontWeight: 700, color: "#2563eb",
+          letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: 18
         }}>
           <Code size={15} /> DEVELOPER API & EMBEDDABLE FRAUD VERIFICATION SDK
         </div>
 
         <h1 style={{
-          fontSize: "clamp(2.3rem, 5vw, 3.8rem)",
+          fontSize: "clamp(2.3rem, 5vw, 3.6rem)",
           fontWeight: 800, lineHeight: 1.15,
           letterSpacing: "-0.03em",
-          background: "linear-gradient(135deg, #ffffff 40%, #00f2fe 100%)",
-          WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+          color: "#0f172a",
           marginBottom: 16
         }}>
           Document Fraud Detection as an API
         </h1>
 
         <p style={{
-          fontSize: "1.12rem", color: "#8da4c4", maxWidth: 720, margin: "0 auto", lineHeight: 1.7
+          fontSize: "1.12rem", color: "#475569", maxWidth: 720, margin: "0 auto", lineHeight: 1.65
         }}>
           Directly plug ShieldScan’s multi-spectral forensics into your college admission forms, KYC portals, or job application backends. Stop forged documents at the point of upload with 3 lines of code.
         </p>
       </motion.div>
 
       {/* ── SECTION 1: Free API Key Generator & Dashboard ──────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(480px, 1fr))", gap: 24, marginBottom: 40 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(480px, 1fr))", gap: 24, marginBottom: 36 }}>
 
         {/* Generate Key Form */}
-        <div className="glass-card hud-frame" style={{ padding: 28 }}>
-          <div className="hud-corner hud-tl" />
-          <div className="hud-corner hud-tr" />
-          <div className="hud-corner hud-bl" />
-          <div className="hud-corner hud-br" />
-
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-            <Key size={20} color="#00f2fe" />
-            <h3 style={{ fontSize: "1.1rem", fontWeight: 700 }}>Generate Free Developer API Key</h3>
+        <div className="glass-card" style={{ padding: 28 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+            <Key size={20} color="#2563eb" />
+            <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#0f172a" }}>Generate Free Developer API Key</h3>
           </div>
-          <p style={{ fontSize: "0.85rem", color: "#8da4c4", marginBottom: 20, lineHeight: 1.5 }}>
+          <p style={{ fontSize: "0.85rem", color: "#64748b", marginBottom: 20, lineHeight: 1.5 }}>
             100% Free for educational, hackathon, and sovereign deployment. Zero cloud bills or credit cards.
           </p>
 
           <form onSubmit={handleGenerateKey} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             <div>
-              <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#8da4c4", display: "block", marginBottom: 6 }}>
+              <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#475569", display: "block", marginBottom: 6 }}>
                 Application / Website Name *
               </label>
               <input
                 type="text"
-                placeholder="e.g. Calcutta University Admission Portal"
+                placeholder="e.g. University Admission Portal"
                 value={appName}
                 onChange={(e) => setAppName(e.target.value)}
                 style={{
-                  width: "100%", padding: "11px 14px", background: "rgba(4, 9, 20, 0.7)",
-                  border: "1px solid rgba(0, 242, 254, 0.2)", borderRadius: 8,
-                  color: "#ffffff", fontSize: "0.88rem", outline: "none"
+                  width: "100%", padding: "10px 14px", background: "#ffffff",
+                  border: "1px solid #cbd5e1", borderRadius: 8,
+                  color: "#0f172a", fontSize: "0.88rem", outline: "none"
                 }}
                 required
               />
             </div>
 
             <div>
-              <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#8da4c4", display: "block", marginBottom: 6 }}>
+              <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#475569", display: "block", marginBottom: 6 }}>
                 Developer Email (Optional)
               </label>
               <input
                 type="email"
-                placeholder="developer@college.edu.in"
+                placeholder="developer@institution.edu.in"
                 value={devEmail}
                 onChange={(e) => setDevEmail(e.target.value)}
                 style={{
-                  width: "100%", padding: "11px 14px", background: "rgba(4, 9, 20, 0.7)",
-                  border: "1px solid rgba(0, 242, 254, 0.2)", borderRadius: 8,
-                  color: "#ffffff", fontSize: "0.88rem", outline: "none"
+                  width: "100%", padding: "10px 14px", background: "#ffffff",
+                  border: "1px solid #cbd5e1", borderRadius: 8,
+                  color: "#0f172a", fontSize: "0.88rem", outline: "none"
                 }}
               />
             </div>
@@ -331,7 +322,7 @@ echo "Document Verified Successfully!";
               type="submit"
               className="btn-primary"
               disabled={generating}
-              style={{ marginTop: 6, padding: "13px" }}
+              style={{ marginTop: 6, padding: "12px" }}
             >
               <Key size={16} /> {generating ? "Generating Token..." : "Generate Instant API Key"}
             </button>
@@ -339,18 +330,13 @@ echo "Document Verified Successfully!";
         </div>
 
         {/* Active Keys & Usage Quota */}
-        <div className="glass-card hud-frame" style={{ padding: 28 }}>
-          <div className="hud-corner hud-tl" />
-          <div className="hud-corner hud-tr" />
-          <div className="hud-corner hud-bl" />
-          <div className="hud-corner hud-br" />
-
+        <div className="glass-card" style={{ padding: 28 }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <Zap size={20} color="#00f59b" />
-              <h3 style={{ fontSize: "1.1rem", fontWeight: 700 }}>Your Active API Keys</h3>
+              <Zap size={20} color="#059669" />
+              <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#0f172a" }}>Your Active API Keys</h3>
             </div>
-            <span style={{ fontSize: "0.76rem", color: "#8da4c4" }}>
+            <span style={{ fontSize: "0.78rem", color: "#64748b", fontWeight: 600 }}>
               {keys.length} Registered
             </span>
           </div>
@@ -361,19 +347,20 @@ echo "Document Verified Successfully!";
                 key={k.key}
                 style={{
                   padding: "14px", borderRadius: 10,
-                  background: selectedKey === k.key ? "rgba(0, 242, 254, 0.08)" : "rgba(4, 9, 20, 0.6)",
-                  border: `1px solid ${selectedKey === k.key ? "rgba(0, 242, 254, 0.4)" : "rgba(0, 242, 254, 0.12)"}`,
-                  cursor: "pointer"
+                  background: selectedKey === k.key ? "#eff6ff" : "#f8fafc",
+                  border: `1px solid ${selectedKey === k.key ? "#bfdbfe" : "#e2e8f0"}`,
+                  cursor: "pointer",
+                  transition: "all 0.2s ease"
                 }}
                 onClick={() => setSelectedKey(k.key)}
               >
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
-                  <div style={{ fontWeight: 700, fontSize: "0.88rem", color: "#ffffff" }}>
+                  <div style={{ fontWeight: 700, fontSize: "0.88rem", color: "#0f172a" }}>
                     {k.app_name}
                   </div>
                   <span style={{
-                    fontSize: "0.68rem", fontWeight: 800, padding: "2px 8px", borderRadius: 4,
-                    background: "rgba(0, 245, 155, 0.15)", color: "#00f59b", border: "1px solid rgba(0, 245, 155, 0.3)"
+                    fontSize: "0.68rem", fontWeight: 700, padding: "2px 8px", borderRadius: 4,
+                    background: "#ecfdf5", color: "#059669", border: "1px solid #a7f3d0"
                   }}>
                     {k.tier}
                   </span>
@@ -381,8 +368,8 @@ echo "Document Verified Successfully!";
 
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
                   <span style={{
-                    fontFamily: "JetBrains Mono, monospace", fontSize: "0.78rem", color: "#00f2fe",
-                    overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"
+                    fontFamily: "JetBrains Mono, monospace", fontSize: "0.78rem", color: "#2563eb",
+                    overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontWeight: 600
                   }}>
                     {k.key}
                   </span>
@@ -391,22 +378,22 @@ echo "Document Verified Successfully!";
                       e.stopPropagation();
                       copyToClipboard(k.key, k.key);
                     }}
-                    className="crypto-chip"
-                    style={{ padding: "4px 8px" }}
+                    className="btn-secondary"
+                    style={{ padding: "4px 8px", borderRadius: 6 }}
                   >
-                    {copiedKey === k.key ? <Check size={12} color="#00f59b" /> : <Copy size={12} />}
+                    {copiedKey === k.key ? <Check size={12} color="#059669" /> : <Copy size={12} />}
                   </button>
                 </div>
 
                 <div style={{ marginTop: 10 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", color: "#8da4c4", marginBottom: 4 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", color: "#64748b", marginBottom: 4 }}>
                     <span>Daily Quota: {k.requests_used || 0} / {k.daily_limit || 500} requests</span>
                     <span>{Math.round(((k.requests_used || 0) / (k.daily_limit || 500)) * 100)}%</span>
                   </div>
-                  <div style={{ height: 4, background: "rgba(0, 242, 254, 0.1)", borderRadius: 2, overflow: "hidden" }}>
+                  <div style={{ height: 4, background: "#e2e8f0", borderRadius: 2, overflow: "hidden" }}>
                     <div style={{
                       width: `${Math.min(100, ((k.requests_used || 0) / (k.daily_limit || 500)) * 100)}%`,
-                      height: "100%", background: "#00f2fe"
+                      height: "100%", background: "#2563eb"
                     }} />
                   </div>
                 </div>
@@ -417,38 +404,33 @@ echo "Document Verified Successfully!";
       </div>
 
       {/* ── SECTION 2: Interactive Live API Playground ─────────────── */}
-      <div className="glass-card hud-frame" style={{ padding: 30, marginBottom: 40 }}>
-        <div className="hud-corner hud-tl" />
-        <div className="hud-corner hud-tr" />
-        <div className="hud-corner hud-bl" />
-        <div className="hud-corner hud-br" />
-
+      <div className="glass-card" style={{ padding: 30, marginBottom: 36 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <Play size={20} color="#00f2fe" />
-              <h2 style={{ fontSize: "1.35rem", fontWeight: 800 }}>Live API Playground</h2>
+              <Play size={20} color="#2563eb" />
+              <h2 style={{ fontSize: "1.35rem", fontWeight: 800, color: "#0f172a" }}>Live API Playground</h2>
             </div>
-            <p style={{ fontSize: "0.85rem", color: "#8da4c4", marginTop: 4 }}>
+            <p style={{ fontSize: "0.85rem", color: "#64748b", marginTop: 4 }}>
               Test your endpoint live right in the browser. See how ShieldScan analyzes documents in sub-second inference.
             </p>
           </div>
 
           <span style={{
-            fontFamily: "JetBrains Mono, monospace", fontSize: "0.78rem", color: "#00f2fe",
-            padding: "5px 12px", background: "rgba(0, 242, 254, 0.08)", borderRadius: 6,
-            border: "1px solid rgba(0, 242, 254, 0.2)"
+            fontFamily: "JetBrains Mono, monospace", fontSize: "0.78rem", color: "#2563eb", fontWeight: 600,
+            padding: "5px 12px", background: "#eff6ff", borderRadius: 6,
+            border: "1px solid #bfdbfe"
           }}>
             POST /api/v1/verify
           </span>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))", gap: 24 }}>
 
           {/* Test Inputs */}
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             <div>
-              <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#8da4c4", display: "block", marginBottom: 6 }}>
+              <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#475569", display: "block", marginBottom: 6 }}>
                 Active API Key
               </label>
               <input
@@ -456,25 +438,25 @@ echo "Document Verified Successfully!";
                 value={selectedKey}
                 onChange={(e) => setSelectedKey(e.target.value)}
                 style={{
-                  width: "100%", padding: "10px 14px", background: "rgba(4, 9, 20, 0.7)",
-                  border: "1px solid rgba(0, 242, 254, 0.2)", borderRadius: 8,
-                  fontFamily: "JetBrains Mono, monospace", fontSize: "0.82rem", color: "#00f2fe", outline: "none"
+                  width: "100%", padding: "10px 14px", background: "#ffffff",
+                  border: "1px solid #cbd5e1", borderRadius: 8,
+                  fontFamily: "JetBrains Mono, monospace", fontSize: "0.82rem", color: "#2563eb", outline: "none", fontWeight: 600
                 }}
               />
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
               <div>
-                <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#8da4c4", display: "block", marginBottom: 6 }}>
+                <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#475569", display: "block", marginBottom: 6 }}>
                   Document Protocol
                 </label>
                 <select
                   value={testDocType}
                   onChange={(e) => setTestDocType(e.target.value)}
                   style={{
-                    width: "100%", padding: "10px 12px", background: "rgba(4, 9, 20, 0.9)",
-                    border: "1px solid rgba(0, 242, 254, 0.2)", borderRadius: 8,
-                    color: "#ffffff", fontSize: "0.82rem", outline: "none"
+                    width: "100%", padding: "10px 12px", background: "#ffffff",
+                    border: "1px solid #cbd5e1", borderRadius: 8,
+                    color: "#0f172a", fontSize: "0.82rem", outline: "none"
                   }}
                 >
                   <option value="AUTO">AUTO (Auto-Detect)</option>
@@ -488,7 +470,7 @@ echo "Document Verified Successfully!";
               </div>
 
               <div>
-                <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#8da4c4", display: "block", marginBottom: 6 }}>
+                <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#475569", display: "block", marginBottom: 6 }}>
                   Strict Inspection Mode
                 </label>
                 <button
@@ -496,9 +478,9 @@ echo "Document Verified Successfully!";
                   onClick={() => setTestStrictMode(!testStrictMode)}
                   style={{
                     width: "100%", padding: "10px 14px", borderRadius: 8,
-                    background: testStrictMode ? "rgba(255, 42, 95, 0.15)" : "rgba(4, 9, 20, 0.7)",
-                    border: `1px solid ${testStrictMode ? "rgba(255, 42, 95, 0.4)" : "rgba(0, 242, 254, 0.2)"}`,
-                    color: testStrictMode ? "#ff2a5f" : "#8da4c4", fontWeight: 600, fontSize: "0.82rem",
+                    background: testStrictMode ? "#fef2f2" : "#f8fafc",
+                    border: `1px solid ${testStrictMode ? "#fecaca" : "#cbd5e1"}`,
+                    color: testStrictMode ? "#dc2626" : "#475569", fontWeight: 600, fontSize: "0.82rem",
                     cursor: "pointer", transition: "all 0.2s ease"
                   }}
                 >
@@ -509,7 +491,7 @@ echo "Document Verified Successfully!";
 
             {/* Document Upload File Input */}
             <div>
-              <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#8da4c4", display: "block", marginBottom: 6 }}>
+              <label style={{ fontSize: "0.78rem", fontWeight: 600, color: "#475569", display: "block", marginBottom: 6 }}>
                 Upload Sample Test Document (Image / PDF) *
               </label>
               <input
@@ -517,13 +499,13 @@ echo "Document Verified Successfully!";
                 accept="image/*,.pdf"
                 onChange={(e) => setTestFile(e.target.files[0])}
                 style={{
-                  width: "100%", padding: "10px 14px", background: "rgba(4, 9, 20, 0.7)",
-                  border: "1px dashed rgba(0, 242, 254, 0.3)", borderRadius: 8,
-                  color: "#8da4c4", fontSize: "0.82rem", outline: "none", cursor: "pointer"
+                  width: "100%", padding: "10px 14px", background: "#f8fafc",
+                  border: "1px dashed #cbd5e1", borderRadius: 8,
+                  color: "#475569", fontSize: "0.82rem", outline: "none", cursor: "pointer"
                 }}
               />
               {testFile && (
-                <div style={{ fontSize: "0.75rem", color: "#00f2fe", marginTop: 4 }}>
+                <div style={{ fontSize: "0.75rem", color: "#2563eb", marginTop: 4, fontWeight: 600 }}>
                   Selected: {testFile.name} ({(testFile.size / 1024).toFixed(1)} KB)
                 </div>
               )}
@@ -533,12 +515,12 @@ echo "Document Verified Successfully!";
               onClick={handleTestRequest}
               disabled={testLoading || !testFile}
               className="btn-primary"
-              style={{ padding: "13px" }}
+              style={{ padding: "12px" }}
             >
               {testLoading ? (
                 <>
-                  <span className="spinner" style={{ width: 16, height: 16 }} />
-                  <span>Executing Neural Verification...</span>
+                  <span className="spinner" style={{ width: 16, height: 16, borderTopColor: "#ffffff" }} />
+                  <span>Executing Verification...</span>
                 </>
               ) : (
                 <>
@@ -551,7 +533,7 @@ echo "Document Verified Successfully!";
           {/* Response Inspector */}
           <div>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-              <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#8da4c4" }}>
+              <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#64748b" }}>
                 JSON RESPONSE PAYLOAD
               </span>
               {testResponse && (
@@ -562,22 +544,22 @@ echo "Document Verified Successfully!";
             </div>
 
             <div style={{
-              background: "rgba(4, 9, 20, 0.85)", borderRadius: 10,
-              border: "1px solid rgba(0, 242, 254, 0.2)", padding: 16,
+              background: "#0f172a", borderRadius: 10,
+              border: "1px solid #334155", padding: 16,
               minHeight: 280, maxHeight: 380, overflowY: "auto",
               fontFamily: "JetBrains Mono, monospace", fontSize: "0.78rem"
             }}>
               {testLoading ? (
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: 260, color: "#00f2fe" }}>
-                  <div className="spinner" style={{ width: 32, height: 32, marginBottom: 12 }} />
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: 260, color: "#38bdf8" }}>
+                  <div className="spinner" style={{ width: 32, height: 32, marginBottom: 12, borderTopColor: "#38bdf8" }} />
                   <span>Processing OCR, Checksums & ELA Forensics...</span>
                 </div>
               ) : testResponse ? (
-                <pre style={{ margin: 0, color: testResponse.is_authentic ? "#00f59b" : testResponse.error ? "#ff2a5f" : "#f0f6fc", whiteSpace: "pre-wrap" }}>
+                <pre style={{ margin: 0, color: testResponse.is_authentic ? "#4ade80" : testResponse.error ? "#f87171" : "#f1f5f9", whiteSpace: "pre-wrap" }}>
                   {JSON.stringify(testResponse, null, 2)}
                 </pre>
               ) : (
-                <div style={{ color: "#4e6b8f", textAlign: "center", paddingTop: 100 }}>
+                <div style={{ color: "#64748b", textAlign: "center", paddingTop: 100 }}>
                   <Terminal size={32} style={{ margin: "0 auto 10px", opacity: 0.4 }} />
                   <p>Choose an image or PDF and click 'Send API Request' to see live JSON verdict.</p>
                 </div>
@@ -588,19 +570,14 @@ echo "Document Verified Successfully!";
       </div>
 
       {/* ── SECTION 3: Integration Code Snippets ───────────────────── */}
-      <div className="glass-card hud-frame" style={{ padding: 30 }}>
-        <div className="hud-corner hud-tl" />
-        <div className="hud-corner hud-tr" />
-        <div className="hud-corner hud-bl" />
-        <div className="hud-corner hud-br" />
-
+      <div className="glass-card" style={{ padding: 30 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20, flexWrap: "wrap", gap: 12 }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <Code size={20} color="#00f2fe" />
-              <h2 style={{ fontSize: "1.35rem", fontWeight: 800 }}>Ready-to-Use Code Snippets</h2>
+              <Code size={20} color="#2563eb" />
+              <h2 style={{ fontSize: "1.35rem", fontWeight: 800, color: "#0f172a" }}>Ready-to-Use Code Snippets</h2>
             </div>
-            <p style={{ fontSize: "0.85rem", color: "#8da4c4", marginTop: 4 }}>
+            <p style={{ fontSize: "0.85rem", color: "#64748b", marginTop: 4 }}>
               Copy & paste into your web application or form backend.
             </p>
           </div>
@@ -628,16 +605,16 @@ echo "Document Verified Successfully!";
         <div style={{ position: "relative" }}>
           <button
             onClick={() => copyToClipboard(codeSnippets[activeCodeTab], "snippet")}
-            className="crypto-chip"
-            style={{ position: "absolute", top: 12, right: 12, zIndex: 5 }}
+            className="btn-secondary"
+            style={{ position: "absolute", top: 12, right: 12, zIndex: 5, padding: "6px 12px", fontSize: "0.78rem" }}
           >
-            {copiedKey === "snippet" ? <Check size={14} color="#00f59b" /> : <Copy size={14} />}
+            {copiedKey === "snippet" ? <Check size={14} color="#059669" /> : <Copy size={14} />}
             {copiedKey === "snippet" ? "COPIED" : "COPY CODE"}
           </button>
 
           <pre style={{
-            background: "rgba(4, 9, 20, 0.9)", border: "1px solid rgba(0, 242, 254, 0.2)",
-            borderRadius: 10, padding: "20px 24px", color: "#f0f6fc",
+            background: "#0f172a", border: "1px solid #1e293b",
+            borderRadius: 10, padding: "20px 24px", color: "#f8fafc",
             fontFamily: "JetBrains Mono, monospace", fontSize: "0.84rem",
             lineHeight: 1.6, overflowX: "auto"
           }}>

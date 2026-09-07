@@ -19,13 +19,13 @@ export default function DeviceCheckerHUD({
   const [showDiagnostics, setShowDiagnostics] = useState(false);
   const [telemetry, setTelemetry] = useState({
     latency: "6ms",
-    temp: "37.2°C",
+    temp: "36.8°C",
     firmware: "v3.1.2-PRO",
-    uvSensor: "Active (365nm)",
-    irSensor: "Active (850nm)",
+    uvSensor: "Optimal (365nm)",
+    irSensor: "Optimal (850nm)",
   });
 
-  // Query actual browser media devices to see real USB cameras/microphones
+  // Query actual browser media devices to see real USB cameras
   const scanDevices = async () => {
     setChecking(true);
     try {
@@ -39,14 +39,13 @@ export default function DeviceCheckerHUD({
           setFaceScannerStatus("standby");
         }
       }
-      // Hardware handshake response
       setDocScannerStatus("ready");
       setTelemetry((prev) => ({
         ...prev,
-        latency: `${Math.floor(Math.random() * 4 + 4)}ms`,
-        temp: `${(36.8 + Math.random() * 0.8).toFixed(1)}°C`,
+        latency: `${Math.floor(Math.random() * 3 + 4)}ms`,
+        temp: `${(36.5 + Math.random() * 0.5).toFixed(1)}°C`,
       }));
-      toast.success("Hardware peripheral handshake synchronized ✓", { id: "hw-sync" });
+      toast.success("Hardware devices synchronized ✓", { id: "hw-sync" });
     } catch (err) {
       console.warn("Device detection error:", err);
       toast.error("Could not query media peripherals");
@@ -59,10 +58,9 @@ export default function DeviceCheckerHUD({
     scanDevices();
   }, []);
 
-  // Trigger hardware optical scan simulation or sample fetch
   const handleTriggerDocScan = () => {
     setDocScannerStatus("scanning");
-    toast("Document scanner optical illumination active (White + UV + IR)...", {
+    toast("Optical document illumination active (White + UV + IR)...", {
       icon: "⚡",
       duration: 2000,
     });
@@ -72,19 +70,19 @@ export default function DeviceCheckerHUD({
       if (onDocumentCapture) {
         onDocumentCapture();
       }
-      toast.success("Passport Optical Image & MRZ Acquired from Cradle!");
+      toast.success("Document Acquired from Optical Cradle!");
     }, 1800);
   };
 
   return (
     <div style={{ marginBottom: 28 }}>
-      {/* Top Bar for Hardware Status */}
+      {/* Top Status Bar */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          marginBottom: 14,
+          marginBottom: 16,
           flexWrap: "wrap",
           gap: 12,
         }}
@@ -95,14 +93,13 @@ export default function DeviceCheckerHUD({
               display: "flex",
               alignItems: "center",
               gap: 6,
-              padding: "4px 10px",
-              borderRadius: "6px",
-              background: "rgba(0, 245, 155, 0.12)",
-              border: "1px solid rgba(0, 245, 155, 0.35)",
-              color: "#00f59b",
-              fontSize: "0.74rem",
-              fontFamily: "JetBrains Mono, monospace",
-              fontWeight: 800,
+              padding: "5px 12px",
+              borderRadius: "8px",
+              background: "#ecfdf5",
+              border: "1px solid #a7f3d0",
+              color: "#059669",
+              fontSize: "0.78rem",
+              fontWeight: 700,
             }}
           >
             <span
@@ -110,15 +107,15 @@ export default function DeviceCheckerHUD({
                 width: 8,
                 height: 8,
                 borderRadius: "50%",
-                background: "#00f59b",
-                boxShadow: "0 0 10px #00f59b",
+                background: "#10b981",
+                boxShadow: "0 0 6px rgba(16, 185, 129, 0.4)",
                 display: "inline-block",
               }}
             />
-            PHYSICAL KIOSK LINK: 2/2 CONNECTED
+            KIOSK HARDWARE LINK: 2/2 CONNECTED
           </div>
-          <span style={{ fontSize: "0.8rem", color: "#8da4c4", fontFamily: "JetBrains Mono" }}>
-            USB 3.2 HUB · BUS 002 DEV 004 · PING {telemetry.latency}
+          <span style={{ fontSize: "0.8rem", color: "#64748b", fontFamily: "JetBrains Mono" }}>
+            USB 3.2 HUB · BUS 002 DEV 004 · LATENCY {telemetry.latency}
           </span>
         </div>
 
@@ -126,47 +123,33 @@ export default function DeviceCheckerHUD({
           <button
             onClick={scanDevices}
             disabled={checking}
+            className="btn-secondary"
             style={{
-              padding: "5px 12px",
+              padding: "6px 14px",
+              fontSize: "0.78rem",
               borderRadius: "8px",
-              background: "rgba(13, 27, 54, 0.7)",
-              border: "1px solid rgba(0, 242, 254, 0.2)",
-              color: "#00f2fe",
-              fontSize: "0.75rem",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              fontFamily: "JetBrains Mono",
             }}
           >
-            <RefreshCw size={12} className={checking ? "spin" : ""} />
-            {checking ? "Checking..." : "Re-Check Link"}
+            <RefreshCw size={13} className={checking ? "spin" : ""} />
+            {checking ? "Testing..." : "Re-Check Link"}
           </button>
 
           <button
             onClick={() => setShowDiagnostics(true)}
+            className="btn-secondary"
             style={{
-              padding: "5px 12px",
+              padding: "6px 14px",
+              fontSize: "0.78rem",
               borderRadius: "8px",
-              background: "rgba(0, 242, 254, 0.1)",
-              border: "1px solid rgba(0, 242, 254, 0.3)",
-              color: "#e8f4ff",
-              fontSize: "0.75rem",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              fontFamily: "JetBrains Mono",
             }}
           >
-            <Sliders size={12} color="#00f2fe" />
-            Diagnostics
+            <Sliders size={13} color="#2563eb" />
+            Device Diagnostics
           </button>
         </div>
       </div>
 
-      {/* Dual Hardware Device Grid (Directly representing the hardware image) */}
+      {/* Dual Hardware Device Grid */}
       <div
         style={{
           display: "grid",
@@ -176,29 +159,22 @@ export default function DeviceCheckerHUD({
       >
         {/* ── CARD 1: DOCUMENT SCANNER (Optical Cradle) ───────────────────── */}
         <div
-          className="glass-card"
           style={{
-            padding: "22px",
+            background: "#ffffff",
+            padding: "24px",
+            borderRadius: "16px",
+            border: docScannerStatus === "scanning"
+              ? "1.5px solid #2563eb"
+              : hasDocument
+              ? "1.5px solid #10b981"
+              : "1px solid #e2e8f0",
+            boxShadow: "0 4px 20px -2px rgba(0, 0, 0, 0.05)",
             position: "relative",
             overflow: "hidden",
-            border:
-              docScannerStatus === "scanning"
-                ? "1.5px solid #00f2fe"
-                : hasDocument
-                ? "1.5px solid rgba(0, 245, 155, 0.5)"
-                : "1px solid rgba(0, 242, 254, 0.25)",
-            background:
-              docScannerStatus === "scanning"
-                ? "linear-gradient(135deg, rgba(0, 242, 254, 0.08), rgba(13, 27, 54, 0.9))"
-                : "rgba(13, 27, 54, 0.75)",
-            boxShadow:
-              docScannerStatus === "scanning"
-                ? "0 0 30px rgba(0, 242, 254, 0.25)"
-                : "0 10px 30px rgba(0, 0, 0, 0.4)",
-            transition: "all 0.3s ease",
+            transition: "all 0.25s ease",
           }}
         >
-          {/* Top Laser Animation if Scanning */}
+          {/* Subtle Scan Beam Animation */}
           {docScannerStatus === "scanning" && (
             <motion.div
               initial={{ top: 0 }}
@@ -209,8 +185,7 @@ export default function DeviceCheckerHUD({
                 left: 0,
                 right: 0,
                 height: 3,
-                background: "linear-gradient(90deg, transparent, #00f2fe, #ffffff, #00f2fe, transparent)",
-                boxShadow: "0 0 15px #00f2fe",
+                background: "linear-gradient(90deg, transparent, #2563eb, transparent)",
                 zIndex: 10,
               }}
             />
@@ -223,16 +198,15 @@ export default function DeviceCheckerHUD({
                 width: 48,
                 height: 48,
                 borderRadius: "12px",
-                background: "linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(0, 114, 255, 0.25))",
-                border: "1.5px solid #00f2fe",
+                background: "#eff6ff",
+                border: "1px solid #bfdbfe",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                boxShadow: "0 0 18px rgba(0, 242, 254, 0.3)",
                 flexShrink: 0,
               }}
             >
-              <Scan size={24} color="#00f2fe" />
+              <Scan size={24} color="#2563eb" />
             </div>
 
             <div style={{ flex: 1 }}>
@@ -240,8 +214,8 @@ export default function DeviceCheckerHUD({
                 <h3
                   style={{
                     fontSize: "1.15rem",
-                    fontWeight: 800,
-                    color: "#ffffff",
+                    fontWeight: 700,
+                    color: "#0f172a",
                     fontFamily: "Outfit, sans-serif",
                     margin: 0,
                   }}
@@ -250,25 +224,22 @@ export default function DeviceCheckerHUD({
                 </h3>
                 <span
                   style={{
-                    fontSize: "0.68rem",
+                    fontSize: "0.7rem",
                     fontWeight: 700,
-                    fontFamily: "JetBrains Mono",
-                    padding: "3px 8px",
-                    borderRadius: "4px",
-                    background:
-                      docScannerStatus === "scanning"
-                        ? "rgba(0, 242, 254, 0.2)"
-                        : hasDocument
-                        ? "rgba(0, 245, 155, 0.2)"
-                        : "rgba(0, 245, 155, 0.15)",
-                    color:
-                      docScannerStatus === "scanning"
-                        ? "#00f2fe"
-                        : hasDocument
-                        ? "#00f59b"
-                        : "#00f59b",
+                    padding: "3px 10px",
+                    borderRadius: "6px",
+                    background: docScannerStatus === "scanning"
+                      ? "#eff6ff"
+                      : hasDocument
+                      ? "#ecfdf5"
+                      : "#ecfdf5",
+                    color: docScannerStatus === "scanning"
+                      ? "#2563eb"
+                      : hasDocument
+                      ? "#059669"
+                      : "#059669",
                     border: `1px solid ${
-                      docScannerStatus === "scanning" ? "#00f2fe" : "#00f59b"
+                      docScannerStatus === "scanning" ? "#bfdbfe" : "#a7f3d0"
                     }`,
                   }}
                 >
@@ -279,23 +250,23 @@ export default function DeviceCheckerHUD({
                     : "ONLINE & READY"}
                 </span>
               </div>
-              <p style={{ fontSize: "0.78rem", color: "#8da4c4", marginTop: 3, margin: "3px 0 0" }}>
+              <p style={{ fontSize: "0.82rem", color: "#64748b", marginTop: 3, margin: "3px 0 0" }}>
                 Captures and verifies identity documents
               </p>
             </div>
           </div>
 
-          {/* Capabilities Checklist (from Image) */}
+          {/* Checklist */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: 8,
-              background: "rgba(3, 7, 18, 0.5)",
-              padding: "12px 14px",
-              borderRadius: "10px",
-              border: "1px solid rgba(0, 242, 254, 0.1)",
-              marginBottom: 16,
+              gap: 9,
+              background: "#f8fafc",
+              padding: "14px 16px",
+              borderRadius: "12px",
+              border: "1px solid #e2e8f0",
+              marginBottom: 18,
             }}
           >
             {[
@@ -310,53 +281,48 @@ export default function DeviceCheckerHUD({
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 8,
-                  fontSize: "0.76rem",
-                  color: "#d0e4ff",
+                  gap: 10,
+                  fontSize: "0.82rem",
+                  color: "#334155",
+                  fontWeight: 500,
                 }}
               >
-                <CheckCircle2 size={13} color="#00f2fe" style={{ flexShrink: 0 }} />
+                <CheckCircle2 size={15} color="#2563eb" style={{ flexShrink: 0 }} />
                 <span>{feature}</span>
               </div>
             ))}
           </div>
 
-          {/* Action Footer */}
-          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <button
-              className="btn-primary"
-              onClick={handleTriggerDocScan}
-              disabled={docScannerStatus === "scanning"}
-              style={{
-                flex: 1,
-                padding: "10px 14px",
-                fontSize: "0.85rem",
-                borderRadius: "8px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 8,
-              }}
-            >
-              <Zap size={15} />
-              {docScannerStatus === "scanning" ? "Acquiring..." : "Trigger Optical Cradle Scan"}
-            </button>
-          </div>
+          {/* Action */}
+          <button
+            className="btn-primary"
+            onClick={handleTriggerDocScan}
+            disabled={docScannerStatus === "scanning"}
+            style={{
+              width: "100%",
+              padding: "11px 16px",
+              fontSize: "0.88rem",
+              borderRadius: "10px",
+            }}
+          >
+            <Zap size={16} />
+            {docScannerStatus === "scanning" ? "Acquiring..." : "Trigger Optical Cradle Scan"}
+          </button>
         </div>
 
         {/* ── CARD 2: FACE SCANNER (Biometric e-Gate Pod) ─────────────────── */}
         <div
-          className="glass-card"
           style={{
-            padding: "22px",
+            background: "#ffffff",
+            padding: "24px",
+            borderRadius: "16px",
+            border: isLiveFaceReady
+              ? "1.5px solid #10b981"
+              : "1px solid #e2e8f0",
+            boxShadow: "0 4px 20px -2px rgba(0, 0, 0, 0.05)",
             position: "relative",
             overflow: "hidden",
-            border: isLiveFaceReady
-              ? "1.5px solid rgba(0, 245, 155, 0.5)"
-              : "1px solid rgba(0, 242, 254, 0.25)",
-            background: "rgba(13, 27, 54, 0.75)",
-            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
-            transition: "all 0.3s ease",
+            transition: "all 0.25s ease",
           }}
         >
           {/* Device Header */}
@@ -366,16 +332,15 @@ export default function DeviceCheckerHUD({
                 width: 48,
                 height: 48,
                 borderRadius: "12px",
-                background: "linear-gradient(135deg, rgba(0, 245, 155, 0.2), rgba(0, 114, 255, 0.25))",
-                border: "1.5px solid #00f59b",
+                background: "#ecfdf5",
+                border: "1px solid #a7f3d0",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                boxShadow: "0 0 18px rgba(0, 245, 155, 0.3)",
                 flexShrink: 0,
               }}
             >
-              <Camera size={24} color="#00f59b" />
+              <Camera size={24} color="#059669" />
             </div>
 
             <div style={{ flex: 1 }}>
@@ -383,8 +348,8 @@ export default function DeviceCheckerHUD({
                 <h3
                   style={{
                     fontSize: "1.15rem",
-                    fontWeight: 800,
-                    color: "#ffffff",
+                    fontWeight: 700,
+                    color: "#0f172a",
                     fontFamily: "Outfit, sans-serif",
                     margin: 0,
                   }}
@@ -393,27 +358,26 @@ export default function DeviceCheckerHUD({
                 </h3>
                 <span
                   style={{
-                    fontSize: "0.68rem",
+                    fontSize: "0.7rem",
                     fontWeight: 700,
-                    fontFamily: "JetBrains Mono",
-                    padding: "3px 8px",
-                    borderRadius: "4px",
+                    padding: "3px 10px",
+                    borderRadius: "6px",
                     background: isLiveFaceReady
-                      ? "rgba(0, 245, 155, 0.2)"
+                      ? "#ecfdf5"
                       : detectedCameras.length > 0
-                      ? "rgba(0, 245, 155, 0.15)"
-                      : "rgba(255, 170, 0, 0.15)",
+                      ? "#ecfdf5"
+                      : "#fffbeb",
                     color: isLiveFaceReady
-                      ? "#00f59b"
+                      ? "#059669"
                       : detectedCameras.length > 0
-                      ? "#00f59b"
-                      : "#ffaa00",
+                      ? "#059669"
+                      : "#d97706",
                     border: `1px solid ${
                       isLiveFaceReady
-                        ? "#00f59b"
+                        ? "#a7f3d0"
                         : detectedCameras.length > 0
-                        ? "#00f59b"
-                        : "#ffaa00"
+                        ? "#a7f3d0"
+                        : "#fde68a"
                     }`,
                   }}
                 >
@@ -424,23 +388,23 @@ export default function DeviceCheckerHUD({
                     : "STANDBY"}
                 </span>
               </div>
-              <p style={{ fontSize: "0.78rem", color: "#8da4c4", marginTop: 3, margin: "3px 0 0" }}>
+              <p style={{ fontSize: "0.82rem", color: "#64748b", marginTop: 3, margin: "3px 0 0" }}>
                 Detects fake identities and ensures liveness
               </p>
             </div>
           </div>
 
-          {/* Capabilities Checklist (from Image) */}
+          {/* Checklist */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: 8,
-              background: "rgba(3, 7, 18, 0.5)",
-              padding: "12px 14px",
-              borderRadius: "10px",
-              border: "1px solid rgba(0, 242, 254, 0.1)",
-              marginBottom: 16,
+              gap: 9,
+              background: "#f8fafc",
+              padding: "14px 16px",
+              borderRadius: "12px",
+              border: "1px solid #e2e8f0",
+              marginBottom: 18,
             }}
           >
             {[
@@ -455,51 +419,54 @@ export default function DeviceCheckerHUD({
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 8,
-                  fontSize: "0.76rem",
-                  color: "#d0e4ff",
+                  gap: 10,
+                  fontSize: "0.82rem",
+                  color: "#334155",
+                  fontWeight: 500,
                 }}
               >
-                <CheckCircle2 size={13} color="#00f59b" style={{ flexShrink: 0 }} />
+                <CheckCircle2 size={15} color="#059669" style={{ flexShrink: 0 }} />
                 <span>{feature}</span>
               </div>
             ))}
           </div>
 
-          {/* Action Footer */}
-          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <button
-              className="btn-primary"
-              onClick={onFaceActivate}
-              style={{
-                flex: 1,
-                padding: "10px 14px",
-                fontSize: "0.85rem",
-                borderRadius: "8px",
-                background: "linear-gradient(135deg, #00f59b, #00b4d8)",
-                color: "#030712",
-                fontWeight: 800,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 8,
-              }}
-            >
-              <Eye size={15} />
-              {isLiveFaceReady ? "Retake Face Biometric" : "Launch Biometric Pod Camera"}
-            </button>
-          </div>
+          {/* Action */}
+          <button
+            onClick={onFaceActivate}
+            style={{
+              width: "100%",
+              padding: "11px 16px",
+              fontSize: "0.88rem",
+              borderRadius: "10px",
+              background: "#059669",
+              color: "#ffffff",
+              border: "none",
+              fontWeight: 700,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              cursor: "pointer",
+              boxShadow: "0 2px 8px rgba(5, 150, 105, 0.25)",
+              transition: "all 0.2s ease",
+            }}
+          >
+            <Eye size={16} />
+            {isLiveFaceReady ? "Retake Face Biometric" : "Launch Biometric Pod Camera"}
+          </button>
         </div>
       </div>
 
-      {/* Trust & Tagline Banner (Directly matching bottom of image) */}
+      {/* Trust & Tagline Banner */}
       <div
         style={{
           marginTop: 18,
-          padding: "10px 18px",
-          borderRadius: "10px",
-          background: "linear-gradient(90deg, rgba(0, 242, 254, 0.08), rgba(0, 114, 255, 0.05))",
-          border: "1px solid rgba(0, 242, 254, 0.2)",
+          padding: "12px 20px",
+          borderRadius: "12px",
+          background: "#ffffff",
+          border: "1px solid #e2e8f0",
+          boxShadow: "0 1px 3px rgba(0, 0, 0, 0.04)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -508,24 +475,24 @@ export default function DeviceCheckerHUD({
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <ShieldCheck size={18} color="#00f2fe" />
+          <ShieldCheck size={18} color="#2563eb" />
           <span
             style={{
-              fontSize: "0.82rem",
-              fontWeight: 800,
-              color: "#ffffff",
+              fontSize: "0.85rem",
+              fontWeight: 700,
+              color: "#0f172a",
               fontFamily: "Outfit, sans-serif",
             }}
           >
             Safer Identities. Smarter Verification.
           </span>
         </div>
-        <span style={{ color: "rgba(0, 242, 254, 0.4)", fontSize: "0.8rem" }}>|</span>
+        <span style={{ color: "#cbd5e1", fontSize: "0.85rem" }}>|</span>
         <span
           style={{
-            fontSize: "0.78rem",
-            color: "#8da4c4",
-            fontFamily: "JetBrains Mono, monospace",
+            fontSize: "0.82rem",
+            color: "#64748b",
+            fontFamily: "Plus Jakarta Sans, sans-serif",
           }}
         >
           Document screening + Face recognition = Fraud prevention
@@ -539,8 +506,8 @@ export default function DeviceCheckerHUD({
             style={{
               position: "fixed",
               inset: 0,
-              background: "rgba(3, 7, 18, 0.8)",
-              backdropFilter: "blur(8px)",
+              background: "rgba(15, 23, 42, 0.4)",
+              backdropFilter: "blur(6px)",
               zIndex: 999,
               display: "flex",
               alignItems: "center",
@@ -552,14 +519,14 @@ export default function DeviceCheckerHUD({
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="glass-card"
               style={{
-                maxWidth: 580,
+                maxWidth: 560,
                 width: "100%",
                 padding: 28,
-                border: "1px solid rgba(0, 242, 254, 0.3)",
-                background: "#0d1b36",
-                boxShadow: "0 20px 50px rgba(0, 0, 0, 0.7)",
+                borderRadius: "16px",
+                border: "1px solid #e2e8f0",
+                background: "#ffffff",
+                boxShadow: "0 20px 40px -8px rgba(0, 0, 0, 0.15)",
               }}
             >
               <div
@@ -571,17 +538,17 @@ export default function DeviceCheckerHUD({
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <Cpu size={20} color="#00f2fe" />
+                  <Cpu size={20} color="#2563eb" />
                   <h3
                     style={{
-                      fontSize: "1.2rem",
-                      fontWeight: 800,
-                      color: "#fff",
+                      fontSize: "1.15rem",
+                      fontWeight: 700,
+                      color: "#0f172a",
                       fontFamily: "Outfit",
                       margin: 0,
                     }}
                   >
-                    Hardware Telemetry & Peripheral Diagnostic
+                    Hardware Telemetry & Peripheral Diagnostics
                   </h3>
                 </div>
                 <button
@@ -589,8 +556,9 @@ export default function DeviceCheckerHUD({
                   style={{
                     background: "none",
                     border: "none",
-                    color: "#8da4c4",
+                    color: "#64748b",
                     cursor: "pointer",
+                    padding: 4,
                   }}
                 >
                   <X size={20} />
@@ -607,38 +575,38 @@ export default function DeviceCheckerHUD({
               >
                 <div
                   style={{
-                    background: "rgba(3, 7, 18, 0.6)",
-                    padding: 12,
-                    borderRadius: 8,
-                    border: "1px solid rgba(0,242,254,0.1)",
+                    background: "#f8fafc",
+                    padding: 14,
+                    borderRadius: 10,
+                    border: "1px solid #e2e8f0",
                   }}
                 >
-                  <div style={{ fontSize: "0.7rem", color: "#4e6b8f", fontFamily: "JetBrains Mono" }}>
+                  <div style={{ fontSize: "0.72rem", color: "#64748b", fontFamily: "JetBrains Mono", fontWeight: 700 }}>
                     DEVICE 1 (CRADLE)
                   </div>
-                  <div style={{ fontSize: "0.88rem", fontWeight: 700, color: "#fff", marginTop: 4 }}>
+                  <div style={{ fontSize: "0.92rem", fontWeight: 700, color: "#0f172a", marginTop: 4 }}>
                     ShieldScan DSS-9000
                   </div>
-                  <div style={{ fontSize: "0.72rem", color: "#00f2fe", marginTop: 2 }}>
+                  <div style={{ fontSize: "0.75rem", color: "#2563eb", marginTop: 2 }}>
                     USB 3.2 High-Speed (850nm IR / 365nm UV)
                   </div>
                 </div>
 
                 <div
                   style={{
-                    background: "rgba(3, 7, 18, 0.6)",
-                    padding: 12,
-                    borderRadius: 8,
-                    border: "1px solid rgba(0,242,254,0.1)",
+                    background: "#f8fafc",
+                    padding: 14,
+                    borderRadius: 10,
+                    border: "1px solid #e2e8f0",
                   }}
                 >
-                  <div style={{ fontSize: "0.7rem", color: "#4e6b8f", fontFamily: "JetBrains Mono" }}>
+                  <div style={{ fontSize: "0.72rem", color: "#64748b", fontFamily: "JetBrains Mono", fontWeight: 700 }}>
                     DEVICE 2 (BIOPOD)
                   </div>
-                  <div style={{ fontSize: "0.88rem", fontWeight: 700, color: "#fff", marginTop: 4 }}>
+                  <div style={{ fontSize: "0.92rem", fontWeight: 700, color: "#0f172a", marginTop: 4 }}>
                     BioPod Vision-X
                   </div>
-                  <div style={{ fontSize: "0.72rem", color: "#00f59b", marginTop: 2 }}>
+                  <div style={{ fontSize: "0.75rem", color: "#059669", marginTop: 2 }}>
                     UVC Video Stream (FHD 60FPS)
                   </div>
                 </div>
@@ -646,25 +614,26 @@ export default function DeviceCheckerHUD({
 
               <div
                 style={{
-                  background: "rgba(3, 7, 18, 0.5)",
-                  padding: 14,
+                  background: "#f8fafc",
+                  padding: 16,
                   borderRadius: 10,
-                  fontSize: "0.78rem",
+                  border: "1px solid #e2e8f0",
+                  fontSize: "0.82rem",
                   fontFamily: "JetBrains Mono",
-                  color: "#8da4c4",
+                  color: "#334155",
                   display: "flex",
                   flexDirection: "column",
-                  gap: 6,
-                  marginBottom: 20,
+                  gap: 8,
+                  marginBottom: 22,
                 }}
               >
-                <div>• Firmware Revision: <span style={{ color: "#00f2fe" }}>{telemetry.firmware}</span></div>
-                <div>• Optical Sensor Temp: <span style={{ color: "#00f59b" }}>{telemetry.temp}</span></div>
-                <div>• Bus Transfer Latency: <span style={{ color: "#00f2fe" }}>{telemetry.latency}</span></div>
-                <div>• UV Multi-Spectral Lamp: <span style={{ color: "#00f59b" }}>{telemetry.uvSensor}</span></div>
-                <div>• Real Video Inputs Detected: <span style={{ color: "#fff" }}>{detectedCameras.length} Camera(s)</span></div>
+                <div>• Firmware Revision: <span style={{ color: "#2563eb", fontWeight: 600 }}>{telemetry.firmware}</span></div>
+                <div>• Optical Sensor Temp: <span style={{ color: "#059669", fontWeight: 600 }}>{telemetry.temp}</span></div>
+                <div>• Bus Transfer Latency: <span style={{ color: "#2563eb", fontWeight: 600 }}>{telemetry.latency}</span></div>
+                <div>• UV Multi-Spectral Lamp: <span style={{ color: "#059669", fontWeight: 600 }}>{telemetry.uvSensor}</span></div>
+                <div>• Real Video Inputs Detected: <span style={{ color: "#0f172a", fontWeight: 700 }}>{detectedCameras.length} Camera(s)</span></div>
                 {detectedCameras.map((c, i) => (
-                  <div key={i} style={{ paddingLeft: 12, color: "#60a5fa" }}>
+                  <div key={i} style={{ paddingLeft: 12, color: "#2563eb" }}>
                     ↳ [{i + 1}] {c.label || `Camera Stream ${i + 1}`}
                   </div>
                 ))}

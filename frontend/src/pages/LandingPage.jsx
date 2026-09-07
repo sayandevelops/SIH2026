@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Shield, Zap, Eye, Cpu, Lock, ArrowRight, CheckCircle2,
-  Terminal, FileText, Fingerprint, Layers, Check, Sparkles,
-  Search, AlertCircle, Compass, HardDrive, ShieldCheck
+  FileText, Fingerprint, Layers, Check, Sparkles,
+  Search, AlertCircle, HardDrive, ShieldCheck
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -65,9 +65,9 @@ const stats = [
 export default function LandingPage() {
   const navigate = useNavigate();
 
-  // Terminal log simulation
+  // Activity feed simulation
   const [logIndex, setLogIndex] = useState(0);
-  const terminalLogs = [
+  const activityLogs = [
     { time: "00:01.02", mod: "OCR_ENGINE", text: "EasyOCR: Document type detected -> PASSPORT (ICAO 9303 TD3)", status: "OK" },
     { time: "00:01.48", mod: "ICAO_VERIFY", text: "MRZ Line 1 & Line 2 parsed. Verifying 73-char composite checksum...", status: "VALID" },
     { time: "00:02.15", mod: "TAMPER_ELA", text: "Error Level Analysis computed at 90% JPEG quality. Variance: 14.2 (Low)", status: "CLEARED" },
@@ -80,123 +80,117 @@ export default function LandingPage() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setLogIndex((prev) => (prev < terminalLogs.length ? prev + 1 : 1));
+      setLogIndex((prev) => (prev < activityLogs.length ? prev + 1 : 1));
     }, 1100);
     return () => clearInterval(timer);
-  }, [terminalLogs.length]);
+  }, [activityLogs.length]);
 
   return (
     <div style={{ maxWidth: 1240, margin: "0 auto", padding: "40px 24px 80px" }}>
       
-      {/* ── Tactical Badge & Hero ────────────────────────────────── */}
+      {/* ── Executive Hero ────────────────────────────────── */}
       <motion.div
-        initial={{ opacity: 0, y: 25 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        style={{ textAlign: "center", marginBottom: 60 }}
+        transition={{ duration: 0.5 }}
+        style={{ textAlign: "center", marginBottom: 54 }}
       >
         <div style={{
           display: "inline-flex", alignItems: "center", gap: 10,
-          padding: "7px 20px", borderRadius: "999px",
-          background: "rgba(0, 242, 254, 0.08)", border: "1px solid rgba(0, 242, 254, 0.3)",
-          fontSize: "0.8rem", fontWeight: 700, color: "#00f2fe",
-          letterSpacing: "0.1em", textTransform: "uppercase",
-          marginBottom: 24, boxShadow: "0 0 25px rgba(0, 242, 254, 0.15)"
+          padding: "6px 18px", borderRadius: "999px",
+          background: "#eff6ff", border: "1px solid #bfdbfe",
+          fontSize: "0.78rem", fontWeight: 700, color: "#2563eb",
+          letterSpacing: "0.04em", textTransform: "uppercase",
+          marginBottom: 20,
         }}>
-          <span className="radar-beacon" style={{ width: 8, height: 8, borderRadius: "50%", background: "#00f2fe", display: "inline-block" }} />
-          SOVEREIGN DEFENSE AI · BORDER & DOCUMENT INTELLIGENCE
+          <ShieldCheck size={14} color="#2563eb" />
+          SOVEREIGN DEFENSE AI · BORDER & IDENTITY INTELLIGENCE
         </div>
 
         <h1 style={{
-          fontSize: "clamp(2.5rem, 5.5vw, 4.2rem)",
-          fontWeight: 800, lineHeight: 1.1,
-          letterSpacing: "-0.035em",
-          background: "linear-gradient(135deg, #ffffff 30%, #00f2fe 80%, #0088ff 100%)",
-          WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-          marginBottom: 22,
+          fontSize: "clamp(2.4rem, 5vw, 3.8rem)",
+          fontWeight: 800, lineHeight: 1.15,
+          letterSpacing: "-0.03em",
+          color: "#0f172a",
+          marginBottom: 20,
         }}>
-          Defense-Grade Border &<br />Document Intelligence
+          Enterprise-Grade Border &<br />Document Intelligence
         </h1>
 
         <p style={{
-          fontSize: "1.18rem", color: "#8da4c4",
-          maxWidth: 680, margin: "0 auto 36px",
-          lineHeight: 1.7,
+          fontSize: "1.15rem", color: "#475569",
+          maxWidth: 660, margin: "0 auto 34px",
+          lineHeight: 1.65,
         }}>
           ShieldScan instantly exposes forged passports, counterfeit national IDs, and identity impersonation in under 10 seconds — designed for border security forces with complete offline air-gap autonomy.
         </p>
 
         {/* CTA Actions */}
-        <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
           <button
             className="btn-primary"
             onClick={() => navigate("/scan")}
-            style={{ fontSize: "1.05rem", padding: "16px 42px", gap: 12 }}
+            style={{ fontSize: "1rem", padding: "14px 36px", gap: 10 }}
           >
-            <Shield size={20} /> Launch Screening Console <ArrowRight size={18} />
+            <Shield size={18} /> Launch Screening Console <ArrowRight size={16} />
           </button>
           
           <button
             className="btn-secondary"
             onClick={() => navigate("/audit")}
-            style={{ fontSize: "1rem", padding: "16px 36px" }}
+            style={{ fontSize: "1rem", padding: "14px 30px" }}
           >
-            <Lock size={18} /> Blockchain Ledger
+            <Lock size={16} /> Blockchain Ledger
           </button>
         </div>
       </motion.div>
 
-      {/* ── Live Cyber Terminal Simulation Box ─────────────────────── */}
+      {/* ── Live Security Pipeline Monitor ─────────────────────── */}
       <motion.div
-        initial={{ opacity: 0, y: 25 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.15 }}
-        style={{ marginBottom: 70 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        style={{ marginBottom: 60 }}
       >
-        <div className="terminal-window hud-frame">
-          <div className="hud-corner hud-tl" />
-          <div className="hud-corner hud-tr" />
-          <div className="hud-corner hud-bl" />
-          <div className="hud-corner hud-br" />
-
-          {/* Terminal Title Bar */}
+        <div className="terminal-window">
+          {/* Header */}
           <div className="terminal-header">
-            <div className="terminal-dot" style={{ background: "#ff2a5f" }} />
-            <div className="terminal-dot" style={{ background: "#ffb800" }} />
-            <div className="terminal-dot" style={{ background: "#00f59b" }} />
-            <span style={{ fontSize: "0.76rem", color: "#8da4c4", marginLeft: 10, letterSpacing: "0.06em", display: "flex", alignItems: "center", gap: 6 }}>
-              <Terminal size={14} color="#00f2fe" />
-              SHIELDSCAN_KERNEL_V4.2 :: AIR-GAP EMBEDDED PIPELINE (SSB-SECTOR-ALPHA)
+            <div className="terminal-dot" style={{ background: "#ef4444" }} />
+            <div className="terminal-dot" style={{ background: "#f59e0b" }} />
+            <div className="terminal-dot" style={{ background: "#10b981" }} />
+            <span style={{ fontSize: "0.8rem", color: "#475569", marginLeft: 8, fontWeight: 600, display: "flex", alignItems: "center", gap: 6 }}>
+              <Cpu size={14} color="#2563eb" />
+              SHIELDSCAN KERNEL V4.2 :: AIR-GAP VERIFICATION PIPELINE (SSB-SECTOR-ALPHA)
             </span>
-            <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#00f59b" }} />
-              <span style={{ fontSize: "0.72rem", color: "#00f59b", fontWeight: 700 }}>LIVE ENGINE</span>
+            <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#10b981" }} />
+              <span style={{ fontSize: "0.72rem", color: "#059669", fontWeight: 700 }}>ACTIVE ENGINE</span>
             </div>
           </div>
 
-          {/* Terminal Animated Feed */}
+          {/* Activity Feed */}
           <div className="terminal-body">
-            {terminalLogs.slice(0, logIndex).map((log, i) => (
+            {activityLogs.slice(0, logIndex).map((log, i) => (
               <div key={i} style={{ display: "flex", gap: 12, marginBottom: 8, alignItems: "flex-start" }}>
-                <span style={{ color: "#4e6b8f", flexShrink: 0 }}>[{log.time}]</span>
-                <span style={{ color: "#00f2fe", fontWeight: 600, flexShrink: 0, width: 110 }}>{log.mod}:</span>
-                <span style={{ color: "#e8f4ff", flex: 1 }}>{log.text}</span>
+                <span style={{ color: "#94a3b8", flexShrink: 0 }}>[{log.time}]</span>
+                <span style={{ color: "#2563eb", fontWeight: 700, flexShrink: 0, width: 110 }}>{log.mod}:</span>
+                <span style={{ color: "#1e293b", flex: 1 }}>{log.text}</span>
                 <span style={{
-                  padding: "1px 8px", borderRadius: 4, fontSize: "0.7rem", fontWeight: 700,
+                  padding: "2px 8px", borderRadius: 6, fontSize: "0.72rem", fontWeight: 700,
                   background: log.status === "VALID" || log.status === "CLEARED" || log.status === "AUTHENTIC" || log.status === "MATCH" || log.status === "SEALED" || log.status === "OK"
-                    ? "rgba(0, 245, 155, 0.15)" : "rgba(0, 242, 254, 0.15)",
+                    ? "#ecfdf5" : "#eff6ff",
                   color: log.status === "VALID" || log.status === "CLEARED" || log.status === "AUTHENTIC" || log.status === "MATCH" || log.status === "SEALED" || log.status === "OK"
-                    ? "#00f59b" : "#00f2fe",
-                  border: `1px solid ${log.status === "VALID" || log.status === "CLEARED" || log.status === "AUTHENTIC" || log.status === "MATCH" || log.status === "SEALED" || log.status === "OK" ? "rgba(0, 245, 155, 0.3)" : "rgba(0, 242, 254, 0.3)"}`,
+                    ? "#059669" : "#2563eb",
+                  border: `1px solid ${log.status === "VALID" || log.status === "CLEARED" || log.status === "AUTHENTIC" || log.status === "MATCH" || log.status === "SEALED" || log.status === "OK" ? "#a7f3d0" : "#bfdbfe"}`,
                 }}>
                   {log.status}
                 </span>
               </div>
             ))}
-            {logIndex < terminalLogs.length && (
-              <div style={{ display: "flex", gap: 8, alignItems: "center", color: "#00f2fe", marginTop: 12 }}>
+            {logIndex < activityLogs.length && (
+              <div style={{ display: "flex", gap: 8, alignItems: "center", color: "#2563eb", marginTop: 12, fontSize: "0.8rem" }}>
                 <span className="spinner" style={{ width: 14, height: 14, borderWidth: 2 }} />
-                <span>Running neural inference models...</span>
+                <span>Running neural verification models...</span>
               </div>
             )}
           </div>
@@ -207,25 +201,23 @@ export default function LandingPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 18, marginBottom: 70 }}
+        transition={{ duration: 0.5, delay: 0.15 }}
+        style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 18, marginBottom: 60 }}
       >
         {stats.map((s, i) => (
-          <div key={i} className="glass-card hud-frame" style={{ padding: "26px 20px", textAlign: "center" }}>
-            <div className="hud-corner hud-tl" />
-            <div className="hud-corner hud-br" />
+          <div key={i} className="glass-card" style={{ padding: "24px 20px", textAlign: "center" }}>
             <div style={{
-              width: 36, height: 36, borderRadius: 10,
-              background: "rgba(0, 242, 254, 0.08)", border: "1px solid rgba(0, 242, 254, 0.2)",
+              width: 40, height: 40, borderRadius: 10,
+              background: "#eff6ff", border: "1px solid #bfdbfe",
               display: "flex", alignItems: "center", justifyContent: "center",
-              margin: "0 auto 12px", color: "#00f2fe"
+              margin: "0 auto 12px", color: "#2563eb"
             }}>
-              <s.icon size={18} />
+              <s.icon size={20} />
             </div>
-            <div style={{ fontSize: "2.1rem", fontWeight: 800, color: "#ffffff", marginBottom: 4, letterSpacing: "-0.02em" }}>
+            <div style={{ fontSize: "2rem", fontWeight: 800, color: "#0f172a", marginBottom: 4, letterSpacing: "-0.02em" }}>
               {s.value}
             </div>
-            <div style={{ fontSize: "0.78rem", color: "#8da4c4", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+            <div style={{ fontSize: "0.78rem", color: "#64748b", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>
               {s.label}
             </div>
           </div>
@@ -233,12 +225,12 @@ export default function LandingPage() {
       </motion.div>
 
       {/* ── Supported Identity Documents ──────────────────────────── */}
-      <div style={{ marginBottom: 70 }}>
-        <div style={{ textAlign: "center", marginBottom: 30 }}>
-          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#00f2fe", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+      <div style={{ marginBottom: 60 }}>
+        <div style={{ textAlign: "center", marginBottom: 28 }}>
+          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#2563eb", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             UNIVERSAL COMPATIBILITY
           </span>
-          <h2 style={{ fontSize: "1.9rem", fontWeight: 800, marginTop: 4 }}>
+          <h2 style={{ fontSize: "1.85rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
             Multi-Protocol Document Engine
           </h2>
         </div>
@@ -250,13 +242,12 @@ export default function LandingPage() {
               className="glass-card"
               style={{
                 padding: "20px 16px", textAlign: "center",
-                background: "rgba(13, 27, 54, 0.5)",
-                border: "1px solid rgba(0, 242, 254, 0.18)",
+                background: "#ffffff",
               }}
             >
               <div style={{ fontSize: "2rem", marginBottom: 8 }}>{doc.icon}</div>
-              <div style={{ fontWeight: 700, fontSize: "0.92rem", color: "#f0f6fc", marginBottom: 4 }}>{doc.name}</div>
-              <div style={{ fontSize: "0.72rem", color: "#00f2fe", fontFamily: "JetBrains Mono, monospace" }}>{doc.standard}</div>
+              <div style={{ fontWeight: 700, fontSize: "0.92rem", color: "#0f172a", marginBottom: 4 }}>{doc.name}</div>
+              <div style={{ fontSize: "0.72rem", color: "#2563eb", fontFamily: "JetBrains Mono, monospace" }}>{doc.standard}</div>
             </div>
           ))}
         </div>
@@ -266,17 +257,17 @@ export default function LandingPage() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        style={{ marginBottom: 70 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        style={{ marginBottom: 60 }}
       >
-        <div style={{ textAlign: "center", marginBottom: 36 }}>
-          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#00f2fe", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#2563eb", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             HIGH-SECURITY FORENSICS
           </span>
-          <h2 style={{ fontSize: "2rem", fontWeight: 800, marginTop: 4 }}>
+          <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
             6-Tier Neural Screening Architecture
           </h2>
-          <p style={{ color: "#8da4c4", maxWidth: 600, margin: "8px auto 0", fontSize: "0.95rem" }}>
+          <p style={{ color: "#64748b", maxWidth: 600, margin: "8px auto 0", fontSize: "0.95rem" }}>
             Zero third-party cloud dependencies. Every model runs locally in sub-second inference cycles on standard border checkpoint hardware.
           </p>
         </div>
@@ -285,39 +276,36 @@ export default function LandingPage() {
           {features.map((f, i) => (
             <motion.div
               key={i}
-              className="glass-card feature-card-glow hud-frame"
-              style={{ padding: "30px 26px" }}
-              initial={{ opacity: 0, y: 20 }}
+              className="glass-card"
+              style={{ padding: "28px 24px" }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.08 * i }}
+              transition={{ delay: 0.06 * i }}
             >
-              <div className="hud-corner hud-tl" />
-              <div className="hud-corner hud-br" />
-
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
                 <div style={{
-                  width: 46, height: 46, borderRadius: 12,
-                  background: "linear-gradient(135deg, rgba(0, 242, 254, 0.15) 0%, rgba(0, 136, 255, 0.15) 100%)",
-                  border: "1px solid rgba(0, 242, 254, 0.3)",
+                  width: 44, height: 44, borderRadius: 10,
+                  background: "#eff6ff",
+                  border: "1px solid #bfdbfe",
                   display: "flex", alignItems: "center", justifyContent: "center",
                 }}>
-                  <f.icon size={22} color="#00f2fe" />
+                  <f.icon size={20} color="#2563eb" />
                 </div>
                 <span style={{
-                  fontSize: "0.68rem", fontWeight: 800, letterSpacing: "0.1em",
-                  padding: "4px 10px", borderRadius: 4,
-                  background: "rgba(0, 242, 254, 0.08)", color: "#00f2fe",
-                  border: "1px solid rgba(0, 242, 254, 0.2)",
+                  fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.06em",
+                  padding: "4px 10px", borderRadius: 6,
+                  background: "#f1f5f9", color: "#475569",
+                  border: "1px solid #e2e8f0",
                   fontFamily: "JetBrains Mono, monospace"
                 }}>
                   {f.tag}
                 </span>
               </div>
 
-              <h3 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: 10, color: "#ffffff" }}>
+              <h3 style={{ fontSize: "1.05rem", fontWeight: 700, marginBottom: 8, color: "#0f172a" }}>
                 {f.title}
               </h3>
-              <p style={{ fontSize: "0.88rem", color: "#8da4c4", lineHeight: 1.65 }}>
+              <p style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: 1.6 }}>
                 {f.desc}
               </p>
             </motion.div>
@@ -326,34 +314,37 @@ export default function LandingPage() {
       </motion.div>
 
       {/* ── Ready to Screen Banner ─────────────────────────────────── */}
-      <div className="glass-card hud-frame" style={{
+      <div style={{
         padding: "48px 36px", textAlign: "center",
-        background: "radial-gradient(circle at center, rgba(0, 242, 254, 0.12) 0%, rgba(8, 16, 33, 0.8) 100%)",
-        border: "1px solid rgba(0, 242, 254, 0.35)",
+        background: "linear-gradient(135deg, #1e40af 0%, #2563eb 100%)",
+        borderRadius: "20px",
+        boxShadow: "0 10px 30px rgba(37, 99, 235, 0.2)",
+        color: "#ffffff",
       }}>
-        <div className="hud-corner hud-tl" />
-        <div className="hud-corner hud-tr" />
-        <div className="hud-corner hud-bl" />
-        <div className="hud-corner hud-br" />
-
-        <h2 style={{ fontSize: "2.2rem", fontWeight: 800, marginBottom: 14 }}>
+        <h2 style={{ fontSize: "2rem", fontWeight: 800, marginBottom: 12, color: "#ffffff" }}>
           Begin Checkpoint Verification
         </h2>
-        <p style={{ color: "#8da4c4", maxWidth: 540, margin: "0 auto 30px", fontSize: "1rem" }}>
-          Load an official document image or PDF, take a live webcam verification snapshot, and receive an instant forensic verdict.
+        <p style={{ color: "#dbeafe", maxWidth: 540, margin: "0 auto 28px", fontSize: "0.98rem" }}>
+          Load an official document image or PDF, take a live biometric verification snapshot, and receive an instant forensic verdict.
         </p>
 
         <button
-          className="btn-primary"
           onClick={() => navigate("/scan")}
-          style={{ fontSize: "1.05rem", padding: "16px 44px" }}
+          style={{
+            fontSize: "1rem", padding: "14px 36px",
+            background: "#ffffff", color: "#1e40af",
+            border: "none", borderRadius: "12px",
+            fontWeight: 700, cursor: "pointer",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+            display: "inline-flex", alignItems: "center", gap: 10,
+          }}
         >
-          Open Scanner Terminal <ArrowRight size={18} />
+          Open Screening Console <ArrowRight size={18} />
         </button>
       </div>
 
       {/* ── Footer ─────────────────────────────────────────────────── */}
-      <div style={{ textAlign: "center", marginTop: 60, color: "#4e6b8f", fontSize: "0.82rem", lineHeight: 1.6 }}>
+      <div style={{ textAlign: "center", marginTop: 50, color: "#94a3b8", fontSize: "0.82rem", lineHeight: 1.6 }}>
         <div>ShieldScan · Defense-Grade AI Document Verification Platform</div>
         <div>Air-Gap Sovereign AI Architecture · Real-Time Border Intelligence</div>
       </div>

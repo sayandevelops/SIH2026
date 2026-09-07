@@ -3,15 +3,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Lock, Shield, CheckCircle2, XCircle, RefreshCw,
   AlertTriangle, Search, Filter, Copy, Check, ExternalLink,
-  Layers, Database, ArrowUpDown, ChevronRight, Hash, Calendar
+  Layers, Database, ArrowUpDown, ChevronRight, Hash, Calendar, X
 } from "lucide-react";
 import { getAuditLog, verifyChainIntegrity } from "../api/shieldscan";
 import toast from "react-hot-toast";
 
 const BAND_COLORS = {
-  GREEN:  { color: "#00f59b", bg: "rgba(0, 245, 155, 0.12)",  border: "rgba(0, 245, 155, 0.35)" },
-  YELLOW: { color: "#ffb800", bg: "rgba(255, 184, 0, 0.12)",  border: "rgba(255, 184, 0, 0.35)" },
-  RED:    { color: "#ff2a5f", bg: "rgba(255, 42, 95, 0.12)",  border: "rgba(255, 42, 95, 0.4)" },
+  GREEN:  { color: "#059669", bg: "#ecfdf5", border: "#a7f3d0" },
+  YELLOW: { color: "#d97706", bg: "#fffbeb", border: "#fde68a" },
+  RED:    { color: "#dc2626", bg: "#fef2f2", border: "#fecaca" },
 };
 
 export default function AuditPage() {
@@ -75,15 +75,15 @@ export default function AuditPage() {
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
         <div>
           <div style={{
-            fontSize: "0.74rem", fontFamily: "JetBrains Mono, monospace",
-            color: "#8da4c4", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4
+            fontSize: "0.74rem", fontFamily: "Plus Jakarta Sans, sans-serif", fontWeight: 700,
+            color: "#2563eb", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 4
           }}>
-            SECURITY OPERATIONS CENTER // IMMUTABLE LEDGER
+            SECURITY OPERATIONS CENTER · IMMUTABLE LEDGER
           </div>
-          <h1 style={{ fontSize: "2rem", fontWeight: 800, display: "flex", alignItems: "center", gap: 12 }}>
-            <Lock size={28} color="#9d4edd" /> Blockchain Audit Chain
+          <h1 style={{ fontSize: "2rem", fontWeight: 800, color: "#0f172a", display: "flex", alignItems: "center", gap: 12 }}>
+            <Lock size={26} color="#7c3aed" /> Blockchain Audit Chain
           </h1>
-          <p style={{ color: "#8da4c4", fontSize: "0.95rem", marginTop: 4 }}>
+          <p style={{ color: "#64748b", fontSize: "0.95rem", marginTop: 4 }}>
             SHA-256 Merkle hash-chain — every screening event is cryptographically anchored and court-admissible.
           </p>
         </div>
@@ -99,40 +99,32 @@ export default function AuditPage() {
 
       {/* ── Metric Summary Tiles ──────────────────────────────────── */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginBottom: 28 }}>
-        <div className="glass-card hud-frame" style={{ padding: "20px" }}>
-          <div className="hud-corner hud-tl" />
-          <div className="hud-corner hud-br" />
-          <div style={{ fontSize: "0.72rem", color: "#8da4c4", textTransform: "uppercase", letterSpacing: "0.08em" }}>Total Screened Records</div>
-          <div style={{ fontSize: "1.9rem", fontWeight: 800, color: "#ffffff", marginTop: 4 }}>{events.length}</div>
-          <div style={{ fontSize: "0.74rem", color: "#00f2fe", marginTop: 4 }}>Live database records</div>
+        <div className="glass-card" style={{ padding: "22px 20px" }}>
+          <div style={{ fontSize: "0.74rem", color: "#64748b", textTransform: "uppercase", fontWeight: 700 }}>Total Screened Records</div>
+          <div style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>{events.length}</div>
+          <div style={{ fontSize: "0.76rem", color: "#2563eb", marginTop: 4, fontWeight: 600 }}>Live database records</div>
         </div>
 
-        <div className="glass-card hud-frame" style={{ padding: "20px" }}>
-          <div className="hud-corner hud-tl" />
-          <div className="hud-corner hud-br" />
-          <div style={{ fontSize: "0.72rem", color: "#8da4c4", textTransform: "uppercase", letterSpacing: "0.08em" }}>Threats Flagged</div>
-          <div style={{ fontSize: "1.9rem", fontWeight: 800, color: "#ff2a5f", marginTop: 4 }}>{threatCount}</div>
-          <div style={{ fontSize: "0.74rem", color: "#8da4c4", marginTop: 4 }}>High/Moderate risk events</div>
+        <div className="glass-card" style={{ padding: "22px 20px" }}>
+          <div style={{ fontSize: "0.74rem", color: "#64748b", textTransform: "uppercase", fontWeight: 700 }}>Threats Flagged</div>
+          <div style={{ fontSize: "1.9rem", fontWeight: 800, color: "#dc2626", marginTop: 4 }}>{threatCount}</div>
+          <div style={{ fontSize: "0.76rem", color: "#64748b", marginTop: 4 }}>High/Moderate risk events</div>
         </div>
 
-        <div className="glass-card hud-frame" style={{ padding: "20px" }}>
-          <div className="hud-corner hud-tl" />
-          <div className="hud-corner hud-br" />
-          <div style={{ fontSize: "0.72rem", color: "#8da4c4", textTransform: "uppercase", letterSpacing: "0.08em" }}>Chain Verification</div>
-          <div style={{ fontSize: "1.9rem", fontWeight: 800, color: integrity?.intact ? "#00f59b" : "#ff2a5f", marginTop: 4 }}>
+        <div className="glass-card" style={{ padding: "22px 20px" }}>
+          <div style={{ fontSize: "0.74rem", color: "#64748b", textTransform: "uppercase", fontWeight: 700 }}>Chain Verification</div>
+          <div style={{ fontSize: "1.9rem", fontWeight: 800, color: integrity?.intact ? "#059669" : "#dc2626", marginTop: 4 }}>
             {integrity?.intact ? "100% INTACT" : "COMPROMISED"}
           </div>
-          <div style={{ fontSize: "0.74rem", color: "#8da4c4", marginTop: 4 }}>
+          <div style={{ fontSize: "0.76rem", color: "#64748b", marginTop: 4 }}>
             {integrity?.total_blocks || events.length} cryptographic blocks checked
           </div>
         </div>
 
-        <div className="glass-card hud-frame" style={{ padding: "20px" }}>
-          <div className="hud-corner hud-tl" />
-          <div className="hud-corner hud-br" />
-          <div style={{ fontSize: "0.72rem", color: "#8da4c4", textTransform: "uppercase", letterSpacing: "0.08em" }}>Air-Gap Status</div>
-          <div style={{ fontSize: "1.9rem", fontWeight: 800, color: "#00f2fe", marginTop: 4 }}>ACTIVE</div>
-          <div style={{ fontSize: "0.74rem", color: "#8da4c4", marginTop: 4 }}>Zero cloud data leakage</div>
+        <div className="glass-card" style={{ padding: "22px 20px" }}>
+          <div style={{ fontSize: "0.74rem", color: "#64748b", textTransform: "uppercase", fontWeight: 700 }}>Air-Gap Status</div>
+          <div style={{ fontSize: "1.9rem", fontWeight: 800, color: "#059669", marginTop: 4 }}>ACTIVE</div>
+          <div style={{ fontSize: "0.76rem", color: "#64748b", marginTop: 4 }}>Zero cloud data leakage</div>
         </div>
       </div>
 
@@ -141,29 +133,25 @@ export default function AuditPage() {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="glass-card hud-frame"
+          className="glass-card"
           style={{
             padding: "20px 24px", marginBottom: 28,
             display: "flex", alignItems: "center", gap: 16,
-            borderLeft: `4px solid ${integrity.intact ? "var(--emerald-core)" : "var(--crimson-core)"}`,
+            borderLeft: `4px solid ${integrity.intact ? "#059669" : "#dc2626"}`,
+            background: integrity.intact ? "#ecfdf5" : "#fef2f2",
           }}
         >
-          <div className="hud-corner hud-tl" />
-          <div className="hud-corner hud-tr" />
-          <div className="hud-corner hud-bl" />
-          <div className="hud-corner hud-br" />
-
           {integrity.intact ? (
-            <CheckCircle2 size={32} color="#00f59b" style={{ flexShrink: 0 }} />
+            <CheckCircle2 size={28} color="#059669" style={{ flexShrink: 0 }} />
           ) : (
-            <AlertTriangle size={32} color="#ff2a5f" style={{ flexShrink: 0 }} />
+            <AlertTriangle size={28} color="#dc2626" style={{ flexShrink: 0 }} />
           )}
 
           <div>
-            <div style={{ fontWeight: 800, fontSize: "1.05rem", color: integrity.intact ? "#00f59b" : "#ff2a5f" }}>
+            <div style={{ fontWeight: 800, fontSize: "1.02rem", color: integrity.intact ? "#065f46" : "#991b1b" }}>
               {integrity.intact ? "Cryptographic Hash-Chain Integrity Intact" : "WARNING: Audit Hash-Chain Compromised"}
             </div>
-            <div style={{ fontSize: "0.84rem", color: "#8da4c4", marginTop: 2 }}>
+            <div style={{ fontSize: "0.84rem", color: "#475569", marginTop: 2 }}>
               {integrity.detail} — verified against sequential SHA-256 parent hash pointers.
             </div>
           </div>
@@ -177,18 +165,18 @@ export default function AuditPage() {
       )}
 
       {/* ── Filter & Search Toolbar ────────────────────────────────── */}
-      <div className="glass-card" style={{ padding: "16px 20px", marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
+      <div className="glass-card" style={{ padding: "14px 20px", marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
         {/* Search Bar */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1, minWidth: 280 }}>
-          <Search size={18} color="#00f2fe" />
+          <Search size={18} color="#2563eb" />
           <input
             type="text"
-            placeholder="Search by name, doc number, officer ID, checkpoint, or hash..."
+            placeholder="Search by name, document number, officer ID, or hash..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
               width: "100%", background: "transparent", border: "none",
-              color: "#ffffff", fontSize: "0.88rem", outline: "none",
+              color: "#0f172a", fontSize: "0.88rem", outline: "none",
               fontFamily: "Plus Jakarta Sans, sans-serif"
             }}
           />
@@ -209,34 +197,29 @@ export default function AuditPage() {
       </div>
 
       {/* ── Events Table ───────────────────────────────────────────── */}
-      <div className="glass-card hud-frame" style={{ overflow: "hidden" }}>
-        <div className="hud-corner hud-tl" />
-        <div className="hud-corner hud-tr" />
-        <div className="hud-corner hud-bl" />
-        <div className="hud-corner hud-br" />
-
+      <div className="glass-card" style={{ overflow: "hidden" }}>
         <div style={{
-          padding: "16px 24px", borderBottom: "1px solid rgba(0, 242, 254, 0.12)",
+          padding: "16px 24px", borderBottom: "1px solid #e2e8f0",
           display: "flex", alignItems: "center", justifyContent: "space-between"
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <Shield size={16} color="#00f2fe" />
-            <span style={{ fontWeight: 700, fontSize: "0.92rem" }}>Screening Ledger Records</span>
+            <Shield size={16} color="#2563eb" />
+            <span style={{ fontWeight: 700, fontSize: "0.92rem", color: "#0f172a" }}>Screening Ledger Records</span>
           </div>
-          <span style={{ fontSize: "0.78rem", color: "#8da4c4", fontFamily: "JetBrains Mono, monospace" }}>
+          <span style={{ fontSize: "0.78rem", color: "#64748b", fontFamily: "JetBrains Mono, monospace" }}>
             Showing {filteredEvents.length} of {events.length} blocks
           </span>
         </div>
 
         {loading ? (
-          <div style={{ padding: "60px", textAlign: "center", color: "#8da4c4" }}>
-            <div className="spinner" style={{ margin: "0 auto 16px", width: 32, height: 32 }} />
-            <span>Validating cryptographic merkle tree blocks...</span>
+          <div style={{ padding: "60px", textAlign: "center", color: "#64748b" }}>
+            <div className="spinner" style={{ margin: "0 auto 16px", width: 28, height: 28 }} />
+            <span>Validating cryptographic Merkle tree blocks...</span>
           </div>
         ) : filteredEvents.length === 0 ? (
-          <div style={{ padding: "60px", textAlign: "center", color: "#8da4c4" }}>
-            <Lock size={40} style={{ margin: "0 auto 14px", opacity: 0.3 }} />
-            <div style={{ fontSize: "1rem", fontWeight: 600, color: "#f0f6fc" }}>No matching records found</div>
+          <div style={{ padding: "60px", textAlign: "center", color: "#64748b" }}>
+            <Lock size={36} style={{ margin: "0 auto 14px", opacity: 0.3 }} />
+            <div style={{ fontSize: "1rem", fontWeight: 600, color: "#0f172a" }}>No matching records found</div>
             <p style={{ fontSize: "0.85rem", marginTop: 4 }}>
               Try adjusting your search query or band filter.
             </p>
@@ -272,25 +255,25 @@ export default function AuditPage() {
                       style={{ cursor: "pointer" }}
                       onClick={() => setInspectEvent(ev)}
                     >
-                      <td style={{ color: "#00f2fe", fontFamily: "JetBrains Mono, monospace", fontWeight: 700 }}>
+                      <td style={{ color: "#2563eb", fontFamily: "JetBrains Mono, monospace", fontWeight: 700 }}>
                         #{String(ev.id).padStart(4, "0")}
                       </td>
-                      <td style={{ fontSize: "0.8rem", color: "#8da4c4" }}>
+                      <td style={{ fontSize: "0.8rem", color: "#64748b" }}>
                         {new Date(ev.timestamp).toLocaleTimeString()} · {new Date(ev.timestamp).toLocaleDateString()}
                       </td>
-                      <td style={{ fontWeight: 600, color: "#ffffff" }}>
+                      <td style={{ fontWeight: 600, color: "#0f172a" }}>
                         {ev.officer_id}
                       </td>
-                      <td style={{ color: "#8da4c4", fontSize: "0.82rem" }}>
+                      <td style={{ color: "#64748b", fontSize: "0.82rem" }}>
                         {ev.checkpoint}
                       </td>
-                      <td style={{ fontWeight: 700, color: "#f0f6fc" }}>
+                      <td style={{ fontWeight: 700, color: "#0f172a" }}>
                         {ev.extracted_name || "—"}
                       </td>
-                      <td style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.82rem", color: "#00f2fe" }}>
+                      <td style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.82rem", color: "#2563eb", fontWeight: 600 }}>
                         {ev.doc_number || "—"}
                       </td>
-                      <td style={{ fontSize: "0.78rem", color: "#8da4c4", textTransform: "capitalize" }}>
+                      <td style={{ fontSize: "0.78rem", color: "#64748b", textTransform: "capitalize" }}>
                         {ev.doc_type?.replace(/_/g, " ")}
                       </td>
                       <td style={{
@@ -301,7 +284,7 @@ export default function AuditPage() {
                       </td>
                       <td>
                         <span style={{
-                          padding: "3px 10px", borderRadius: "999px", fontSize: "0.72rem", fontWeight: 800,
+                          padding: "3px 10px", borderRadius: "999px", fontSize: "0.72rem", fontWeight: 700,
                           background: bc.bg, border: `1px solid ${bc.border}`, color: bc.color,
                         }}>
                           {band}
@@ -313,10 +296,10 @@ export default function AuditPage() {
                             e.stopPropagation();
                             copyHash(ev.event_hash, ev.id);
                           }}
-                          className="crypto-chip"
-                          style={{ fontSize: "0.72rem", padding: "3px 8px" }}
+                          className="btn-secondary"
+                          style={{ fontSize: "0.72rem", padding: "3px 8px", borderRadius: "6px" }}
                         >
-                          {copiedId === ev.id ? <Check size={12} color="#00f59b" /> : <Copy size={12} />}
+                          {copiedId === ev.id ? <Check size={12} color="#059669" /> : <Copy size={12} />}
                           <span>{ev.event_hash?.slice(0, 10)}...</span>
                         </button>
                       </td>
@@ -334,37 +317,35 @@ export default function AuditPage() {
         {inspectEvent && (
           <div
             style={{
-              position: "fixed", inset: 0, background: "rgba(3, 7, 18, 0.8)",
-              backdropFilter: "blur(8px)", zIndex: 100, display: "flex",
+              position: "fixed", inset: 0, background: "rgba(15, 23, 42, 0.4)",
+              backdropFilter: "blur(6px)", zIndex: 100, display: "flex",
               alignItems: "center", justifyContent: "center", padding: 24
             }}
             onClick={() => setInspectEvent(null)}
           >
             <motion.div
-              initial={{ scale: 0.92, opacity: 0 }}
+              initial={{ scale: 0.94, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.92, opacity: 0 }}
-              className="glass-card hud-frame"
-              style={{ maxWidth: 640, width: "100%", padding: 30 }}
+              exit={{ scale: 0.94, opacity: 0 }}
+              style={{
+                maxWidth: 600, width: "100%", padding: 30,
+                background: "#ffffff", borderRadius: "16px", border: "1px solid #e2e8f0",
+                boxShadow: "0 20px 40px -8px rgba(0, 0, 0, 0.15)",
+              }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="hud-corner hud-tl" />
-              <div className="hud-corner hud-tr" />
-              <div className="hud-corner hud-bl" />
-              <div className="hud-corner hud-br" />
-
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <Lock size={22} color="#9d4edd" />
-                  <h3 style={{ fontSize: "1.2rem", fontWeight: 800 }}>
+                  <Lock size={22} color="#7c3aed" />
+                  <h3 style={{ fontSize: "1.2rem", fontWeight: 800, color: "#0f172a" }}>
                     Block #{String(inspectEvent.id).padStart(4, "0")} Inspection
                   </h3>
                 </div>
                 <button
                   onClick={() => setInspectEvent(null)}
-                  style={{ background: "transparent", border: "none", color: "#8da4c4", cursor: "pointer", fontSize: "1.2rem" }}
+                  style={{ background: "transparent", border: "none", color: "#64748b", cursor: "pointer", padding: 4 }}
                 >
-                  ✕
+                  <X size={20} />
                 </button>
               </div>
 
@@ -377,23 +358,23 @@ export default function AuditPage() {
                   { label: "Checkpoint", val: inspectEvent.checkpoint },
                   { label: "Risk Score", val: `${inspectEvent.risk_score?.toFixed(1)} (${inspectEvent.risk_band})` },
                 ].map(({ label, val }) => (
-                  <div key={label} style={{ padding: "10px 12px", background: "rgba(0, 242, 254, 0.04)", borderRadius: 8, border: "1px solid rgba(0, 242, 254, 0.1)" }}>
-                    <div style={{ fontSize: "0.72rem", color: "#8da4c4" }}>{label}</div>
-                    <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "#ffffff", marginTop: 2 }}>{val}</div>
+                  <div key={label} style={{ padding: "10px 14px", background: "#f8fafc", borderRadius: 8, border: "1px solid #e2e8f0" }}>
+                    <div style={{ fontSize: "0.72rem", color: "#64748b", fontWeight: 600 }}>{label}</div>
+                    <div style={{ fontSize: "0.88rem", fontWeight: 700, color: "#0f172a", marginTop: 2 }}>{val}</div>
                   </div>
                 ))}
               </div>
 
               <div style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: "0.74rem", color: "#8da4c4", marginBottom: 4 }}>Block SHA-256 Hash:</div>
-                <div style={{ padding: "8px 12px", background: "rgba(4, 9, 20, 0.8)", borderRadius: 6, fontFamily: "JetBrains Mono, monospace", fontSize: "0.78rem", color: "#c4b5fd", wordBreak: "break-all" }}>
+                <div style={{ fontSize: "0.74rem", color: "#64748b", marginBottom: 4, fontWeight: 600 }}>Block SHA-256 Hash:</div>
+                <div style={{ padding: "10px 14px", background: "#f8fafc", borderRadius: 8, border: "1px solid #e2e8f0", fontFamily: "JetBrains Mono, monospace", fontSize: "0.8rem", color: "#7c3aed", wordBreak: "break-all", fontWeight: 600 }}>
                   {inspectEvent.event_hash}
                 </div>
               </div>
 
               <div style={{ marginBottom: 20 }}>
-                <div style={{ fontSize: "0.74rem", color: "#8da4c4", marginBottom: 4 }}>Previous Block Pointer:</div>
-                <div style={{ padding: "8px 12px", background: "rgba(4, 9, 20, 0.8)", borderRadius: 6, fontFamily: "JetBrains Mono, monospace", fontSize: "0.78rem", color: "#8da4c4", wordBreak: "break-all" }}>
+                <div style={{ fontSize: "0.74rem", color: "#64748b", marginBottom: 4, fontWeight: 600 }}>Previous Block Pointer:</div>
+                <div style={{ padding: "10px 14px", background: "#f8fafc", borderRadius: 8, border: "1px solid #e2e8f0", fontFamily: "JetBrains Mono, monospace", fontSize: "0.8rem", color: "#64748b", wordBreak: "break-all" }}>
                   {inspectEvent.prev_hash}
                 </div>
               </div>
