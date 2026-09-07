@@ -75,16 +75,16 @@ export default function Navbar() {
           </span>
         </NavLink>
 
-        {/* Center Nav Links - Modern Clean Pills */}
+        {/* Center Nav Links - Modern Clean Floating Navigation */}
         <nav
           style={{
             display: "flex",
             alignItems: "center",
             gap: "6px",
-            background: "#f1f5f9",
+            background: "transparent",
             padding: "4px",
             borderRadius: "12px",
-            border: "1px solid #e2e8f0",
+            border: "1px solid transparent",
           }}
         >
           {navLinks.map(({ to, label, icon: Icon }) => {
@@ -105,6 +105,7 @@ export default function Navbar() {
                   textDecoration: "none",
                   color: isActive ? "#2563eb" : "#64748b",
                   background: isActive ? "#ffffff" : "transparent",
+                  border: isActive ? "1px solid #e2e8f0" : "1px solid transparent",
                   boxShadow: isActive ? "0 1px 3px rgba(0, 0, 0, 0.06)" : "none",
                   transition: "all 0.18s ease",
                 }}
