@@ -8,9 +8,10 @@ import {
   Upload, Camera, FileText, Shield, Loader2,
   CheckCircle2, XCircle, ChevronRight, RotateCcw,
   Fingerprint, Eye, Cpu, AlertTriangle, Layers,
-  Terminal, Check, Sparkles
+  Terminal, Check, Sparkles, Usb, Laptop
 } from "lucide-react";
 import { screenDocument } from "../api/shieldscan";
+import DeviceCheckerHUD from "../components/Scanner/DeviceCheckerHUD";
 
 const DOC_TYPES = [
   { id: "PASSPORT",        label: "Passport",        sub: "ICAO 9303 MRZ",          icon: "🛂", desc: "Passports with machine readable zone & checksums" },
@@ -25,14 +26,96 @@ export default function ScanPage() {
   const navigate = useNavigate();
   const webcamRef = useRef(null);
 
-  const [step,        setStep]        = useState(1);
-  const [docFile,     setDocFile]     = useState(null);
-  const [docPreview,  setDocPreview]  = useState(null);
-  const [docType,     setDocType]     = useState("PASSPORT");
-  const [liveSnap,    setLiveSnap]    = useState(null);
-  const [webcamOn,    setWebcamOn]    = useState(false);
-  const [loading,     setLoading]     = useState(false);
-  const [activeStage, setActiveStage] = useState(0);
+  const [step,         setStep]         = useState(1);
+  const [docFile,      setDocFile]      = useState(null);
+  const [docPreview,   setDocPreview]   = useState(null);
+  const [docType,      setDocType]      = useState("PASSPORT");
+  const [liveSnap,     setLiveSnap]     = useState(null);
+  const [webcamOn,     setWebcamOn]     = useState(false);
+  const [loading,      setLoading]      = useState(false);
+  const [activeStage,  setActiveStage]  = useState(0);
+  const [hardwareMode, setHardwareMode] = useState(true); // Default ON to showcase physical immigration kiosk
+
+  // ── Cradle Hardware Document Simulation ───────────────────────────
+  const handleHardwareDocCapture = () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 800;
+    canvas.height = 560;
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      ctx.fillStyle = "#0c1e3d";
+      ctx.fillRect(0, 0, 800, 560);
+
+      // Guilloche pattern lines
+      ctx.strokeStyle = "rgba(0, 242, 254, 0.12)";
+      for (let i = 0; i < 800; i += 35) {
+        ctx.beginPath();
+        ctx.moveTo(i, 0);
+        ctx.lineTo(800 - i, 560);
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = "#00f2fe";
+      ctx.font = "bold 24px 'Courier New', monospace";
+      ctx.fillText("REPUBLIC OF INDIA / PASSPORT", 40, 50);
+      ctx.fillStyle = "#8da4c4";
+      ctx.font = "14px 'Courier New', monospace";
+      ctx.fillText("OPTICAL SCANNER DSS-9000 ACQUISITION", 40, 75);
+
+      ctx.fillStyle = "#162b4d";
+      ctx.fillRect(40, 95, 190, 245);
+      ctx.strokeStyle = "#00f2fe";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(40, 95, 190, 245);
+
+      ctx.fillStyle = "#8da4c4";
+      ctx.beginPath();
+      ctx.arc(135, 175, 48, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(135, 295, 78, 55, 0, Math.PI, 0);
+      ctx.fill();
+
+      ctx.strokeStyle = "rgba(0, 245, 155, 0.6)";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.arc(180, 285, 32, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.fillStyle = "#00f59b";
+      ctx.font = "bold 10px monospace";
+      ctx.fillText("SECURE ID", 158, 289);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "16px monospace";
+      ctx.fillText("Type / Type: P", 260, 130);
+      ctx.fillText("Country Code: IND", 440, 130);
+      ctx.fillText("Passport No: Z9182341", 260, 170);
+      ctx.fillText("Surname: SHARMA", 260, 210);
+      ctx.fillText("Given Names: RAHUL", 260, 250);
+      ctx.fillText("Nationality: INDIAN", 260, 290);
+      ctx.fillText("Date of Birth: 14/08/1996", 260, 330);
+
+      ctx.fillStyle = "#071224";
+      ctx.fillRect(20, 380, 760, 150);
+      ctx.strokeStyle = "rgba(0, 242, 254, 0.3)";
+      ctx.strokeRect(20, 380, 760, 150);
+      ctx.fillStyle = "#00f59b";
+      ctx.font = "bold 20px 'Courier New', monospace";
+      ctx.fillText("P<INDSHARMA<<RAHUL<<<<<<<<<<<<<<<<<<<<<<<<<<", 40, 435);
+      ctx.fillText("Z9182341<4IND9608148M3108204<<<<<<<<<<<<<<02", 40, 490);
+    }
+
+    canvas.toBlob((blob) => {
+      if (blob) {
+        const file = new File([blob], "cradle_scan_passport_Z9182341.png", { type: "image/png" });
+        setDocFile(file);
+        setDocPreview(URL.createObjectURL(file));
+        setDocType("PASSPORT");
+        setStep(2);
+        toast.success("Document acquired from Optical Cradle Scanner! ✓");
+      }
+    }, "image/png");
+  };
 
   const STAGES = [
     { title: "OCR Multi-Engine Extraction", desc: "Scanning document text, numbers & MRZ lines" },
@@ -141,8 +224,65 @@ export default function ScanPage() {
           </p>
         </div>
 
-        {/* Status Indicators */}
-        <div style={{ display: "flex", gap: 10 }}>
+        {/* Status Indicators & Hardware Mode Toggle */}
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+          {/* Hardware Kiosk Mode Toggle */}
+          <div
+            onClick={() => {
+              const next = !hardwareMode;
+              setHardwareMode(next);
+              if (next) {
+                toast.success("Hardware Kiosk Link Engaged: Querying Peripherals...", { icon: "🔌" });
+              } else {
+                toast("Manual Cloud Mode Active: Drag & drop enabled.", { icon: "💻" });
+              }
+            }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              padding: "8px 16px",
+              borderRadius: "10px",
+              background: hardwareMode
+                ? "linear-gradient(135deg, rgba(0, 245, 155, 0.15), rgba(0, 242, 254, 0.15))"
+                : "rgba(13, 27, 54, 0.6)",
+              border: `1.5px solid ${hardwareMode ? "#00f59b" : "rgba(0, 242, 254, 0.15)"}`,
+              cursor: "pointer",
+              boxShadow: hardwareMode ? "0 0 20px rgba(0, 245, 155, 0.25)" : "none",
+              transition: "all 0.3s ease",
+              userSelect: "none",
+            }}
+          >
+            <div style={{ textAlign: "left" }}>
+              <div style={{ fontSize: "0.65rem", color: hardwareMode ? "#00f59b" : "#4e6b8f", textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "JetBrains Mono", fontWeight: 700 }}>
+                KIOSK HARDWARE LINK
+              </div>
+              <div style={{ fontSize: "0.85rem", fontWeight: 800, color: hardwareMode ? "#ffffff" : "#8da4c4", fontFamily: "Outfit" }}>
+                {hardwareMode ? "HARDWARE ONLINE" : "MANUAL CLOUD MODE"}
+              </div>
+            </div>
+            <div style={{
+              width: 42,
+              height: 22,
+              borderRadius: 12,
+              background: hardwareMode ? "#00f59b" : "#162b4d",
+              padding: 2,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: hardwareMode ? "flex-end" : "flex-start",
+              transition: "all 0.25s ease",
+            }}>
+              <div style={{
+                width: 18,
+                height: 18,
+                borderRadius: "50%",
+                background: "#030712",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.4)",
+              }} />
+            </div>
+          </div>
+
+          {/* Operator ID Badge */}
           <div style={{
             padding: "8px 16px", borderRadius: "10px",
             background: "rgba(13, 27, 54, 0.6)", border: "1px solid rgba(0, 242, 254, 0.15)",
@@ -200,6 +340,28 @@ export default function ScanPage() {
           );
         })}
       </div>
+
+      {/* Dynamic Hardware Device Checker HUD */}
+      <AnimatePresence>
+        {hardwareMode && (
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.3 }}
+          >
+            <DeviceCheckerHUD
+              onDocumentCapture={handleHardwareDocCapture}
+              onFaceActivate={() => {
+                setWebcamOn(true);
+                toast("Biometric Pod Camera feed engaged ✓", { icon: "📷" });
+              }}
+              isLiveFaceReady={!!liveSnap}
+              hasDocument={!!docFile}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Main Screening Layout Grid */}
       <div style={{ display: "grid", gridTemplateColumns: docPreview ? "1.2fr 1fr" : "1fr", gap: 28, alignItems: "start" }}>

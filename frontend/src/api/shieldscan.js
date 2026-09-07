@@ -5,8 +5,11 @@
 
 import axios from "axios";
 
+const rawBaseURL = import.meta.env.VITE_API_URL || "";
+const cleanBaseURL = rawBaseURL.endsWith("/") ? rawBaseURL.slice(0, -1) : rawBaseURL;
+
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL !== undefined ? import.meta.env.VITE_API_URL : "",
+  baseURL: cleanBaseURL,
   timeout: 120000, // 2 min timeout for AI processing
 });
 

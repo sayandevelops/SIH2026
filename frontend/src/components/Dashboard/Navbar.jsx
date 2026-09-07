@@ -137,6 +137,37 @@ export default function Navbar() {
           <span>{time || "00:00:00"}</span>
         </div>
 
+        {/* Kiosk Peripherals Status Pill */}
+        <NavLink
+          to="/scan"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            padding: "6px 12px",
+            borderRadius: "999px",
+            background: "rgba(0, 242, 254, 0.08)",
+            border: "1px solid rgba(0, 242, 254, 0.25)",
+            fontSize: "0.72rem",
+            fontWeight: 800,
+            fontFamily: "Outfit, sans-serif",
+            color: "#00f2fe",
+            letterSpacing: "0.04em",
+            textDecoration: "none",
+          }}
+        >
+          <div
+            style={{
+              width: 7,
+              height: 7,
+              borderRadius: "50%",
+              background: "#00f2fe",
+              boxShadow: "0 0 8px #00f2fe",
+            }}
+          />
+          KIOSK HW: 2 ONLINE
+        </NavLink>
+
         {/* Live Defense Beacon */}
         <div style={{
           display: "flex", alignItems: "center", gap: "8px",

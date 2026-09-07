@@ -305,7 +305,7 @@ export default function ResultsPage() {
                   }}>
                     <div style={{ fontSize: "0.7rem", color: "#8da4c4", marginBottom: 6, textTransform: "uppercase" }}>ELA Analysis Layer</div>
                     <img
-                      src={`http://localhost:8000${tampering.heatmap_url}`}
+                      src={`${import.meta.env.VITE_API_URL || "http://localhost:8000"}${tampering.heatmap_url}`}
                       alt="ELA Heatmap"
                       style={{ width: "100%", height: 180, objectFit: "contain", borderRadius: 6 }}
                     />
@@ -328,7 +328,7 @@ export default function ResultsPage() {
                   border: "1px solid rgba(0, 242, 254, 0.2)", padding: 12, textAlign: "center"
                 }}>
                   <img
-                    src={`http://localhost:8000${tampering.heatmap_url}`}
+                    src={`${import.meta.env.VITE_API_URL || "http://localhost:8000"}${tampering.heatmap_url}`}
                     alt="ELA Full Heatmap"
                     style={{ width: "100%", maxHeight: 260, objectFit: "contain", borderRadius: 8 }}
                   />

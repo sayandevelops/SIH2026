@@ -100,6 +100,7 @@ export default function DeveloperPortal() {
   };
 
   // Code Snippet Templates
+  const apiBase = import.meta.env.VITE_API_URL || "http://localhost:8000";
   const codeSnippets = {
     javascript: `// Node.js / React / Next.js / Express Example
 // When a user uploads a document in your form:
@@ -110,7 +111,7 @@ async function verifyUploadedDocument(file) {
   formData.append("document_type", "AUTO"); // or "AADHAAR", "PAN_CARD", "PASSPORT"
   formData.append("strict_mode", "false");
 
-  const response = await fetch("http://localhost:8000/api/v1/verify", {
+  const response = await fetch("${apiBase}/api/v1/verify", {
     method: "POST",
     headers: {
       "X-API-Key": "${selectedKey}"
@@ -148,7 +149,7 @@ export function AdmissionForm() {
     data.append("file", docFile);
     data.append("document_type", "AADHAAR");
 
-    const res = await fetch("http://localhost:8000/api/v1/verify", {
+    const res = await fetch("${apiBase}/api/v1/verify", {
       method: "POST",
       headers: { "X-API-Key": "${selectedKey}" },
       body: data
@@ -178,7 +179,7 @@ export function AdmissionForm() {
     python: `# Python / FastAPI / Django Integration Example
 import requests
 
-url = "http://localhost:8000/api/v1/verify"
+url = "${apiBase}/api/v1/verify"
 headers = {
     "X-API-Key": "${selectedKey}"
 }
@@ -199,7 +200,7 @@ else:
     print("✅ AUTHENTIC DOCUMENT:", result.get("extracted_data"))`,
 
     curl: `# cURL Command Line Example
-curl -X POST "http://localhost:8000/api/v1/verify" \\
+curl -X POST "${apiBase}/api/v1/verify" \\
   -H "X-API-Key: ${selectedKey}" \\
   -F "file=@/path/to/passport.jpg" \\
   -F "document_type=PASSPORT" \\
@@ -209,7 +210,7 @@ curl -X POST "http://localhost:8000/api/v1/verify" \\
 // PHP cURL Form Integration
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, "http://localhost:8000/api/v1/verify");
+curl_setopt($ch, CURLOPT_URL, "${apiBase}/api/v1/verify");
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "X-API-Key: ${selectedKey}"
