@@ -62,14 +62,151 @@ const features = [
   },
 ];
 
+// ── Security Document Guilloche Lathe Background Pattern ─────────
+const SecurityGuillocheBg = ({ color = "#2563eb" }) => (
+  <svg
+    width="100%"
+    height="100%"
+    viewBox="0 0 160 140"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{
+      position: "absolute",
+      right: -15,
+      bottom: -15,
+      width: 140,
+      height: 120,
+      opacity: 0.12,
+      pointerEvents: "none",
+    }}
+  >
+    <circle cx="80" cy="70" r="52" stroke={color} strokeWidth="1" strokeDasharray="2 3" />
+    <circle cx="80" cy="70" r="36" stroke={color} strokeWidth="1" />
+    <circle cx="80" cy="70" r="22" stroke={color} strokeWidth="1" strokeDasharray="3 2" />
+    <path d="M10 70 Q 45 15, 80 70 T 150 70" stroke={color} strokeWidth="1.2" />
+    <path d="M10 70 Q 45 125, 80 70 T 150 70" stroke={color} strokeWidth="1.2" />
+    <path d="M80 5 Q 15 45, 80 70 T 80 135" stroke={color} strokeWidth="0.8" strokeDasharray="2 2" />
+    <path d="M80 5 Q 145 45, 80 70 T 80 135" stroke={color} strokeWidth="0.8" strokeDasharray="2 2" />
+  </svg>
+);
+
 // ── Universal Supported Document Standards ────────────────────────
 const supportedDocs = [
-  { code: "PASSPORT", name: "International Passport", standard: "ICAO 9303 Doc 9303 TD3", icon: "🛂" },
-  { code: "AADHAAR",  name: "UIDAI Aadhaar Card",    standard: "Verhoeff D5 / Secure QR",   icon: "🆔" },
-  { code: "PAN_CARD", name: "Income Tax PAN Card",   standard: "NSDL / UTIITSL Format",    icon: "💳" },
-  { code: "DRIVING",  name: "MoRTH Driving License", standard: "State Sarathi V4 Code",   icon: "🚗" },
-  { code: "VISA",     name: "Consular Visa Permit",   standard: "Schengen / Indian eVisa",   icon: "📄" },
-  { code: "NAT_ID",   name: "National Citizen ID",   standard: "Universal Gov Card TD1/2",  icon: "🪪" },
+  {
+    code: "PASSPORT",
+    name: "International Passport",
+    standard: "ICAO 9303 Doc 9303 TD3",
+    protocol: "RFID 13.56 MHz",
+    feature: "MRZ + UV Hologram",
+    color: "#2563eb",
+    bgGlow: "rgba(37, 99, 235, 0.06)",
+    badgeBg: "linear-gradient(135deg, #1e40af 0%, #2563eb 100%)",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="2" width="18" height="20" rx="3" fill="#1e40af" stroke="#60a5fa" strokeWidth="1.5" />
+        <circle cx="12" cy="10" r="3.5" stroke="#fcd34d" strokeWidth="1.2" />
+        <ellipse cx="12" cy="10" rx="2" ry="3.5" stroke="#fcd34d" strokeWidth="0.8" />
+        <line x1="8.5" y1="10" x2="15.5" y2="10" stroke="#fcd34d" strokeWidth="0.8" />
+        <rect x="7" y="16" width="10" height="2.5" rx="1" fill="#fcd34d" />
+        <circle cx="12" cy="17.25" r="0.75" fill="#1e40af" />
+      </svg>
+    ),
+  },
+  {
+    code: "AADHAAR",
+    name: "UIDAI Aadhaar Card",
+    standard: "Verhoeff D5 / Secure QR",
+    protocol: "Verhoeff D5 Checksum",
+    feature: "2048-bit Digital Sign",
+    color: "#4338ca",
+    bgGlow: "rgba(67, 56, 202, 0.06)",
+    badgeBg: "linear-gradient(135deg, #3730a3 0%, #4f46e5 100%)",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="3" width="20" height="18" rx="3" fill="#3730a3" stroke="#818cf8" strokeWidth="1.5" />
+        <circle cx="12" cy="12" r="5" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="2 2" />
+        <path d="M12 9 C 10.5 9 9.5 10 9.5 12 C 9.5 13.5 10.2 14.5 11 15 C 11.5 15.3 12.5 15.3 13 15" stroke="#ffffff" strokeWidth="1.2" strokeLinecap="round" />
+        <path d="M12 7 C 9.5 7 8 8.8 8 12 C 8 14.2 9 16 10.5 16.8" stroke="#ffffff" strokeWidth="1.2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    code: "PAN_CARD",
+    name: "Income Tax PAN Card",
+    standard: "NSDL / UTIITSL Format",
+    protocol: "10-Digit Alphanumeric",
+    feature: "Hologram + IT Seal",
+    color: "#0284c7",
+    bgGlow: "rgba(2, 132, 199, 0.06)",
+    badgeBg: "linear-gradient(135deg, #0369a1 0%, #0284c7 100%)",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="4" width="20" height="16" rx="3" fill="#0284c7" stroke="#38bdf8" strokeWidth="1.5" />
+        <rect x="5" y="7" width="5" height="4" rx="1" fill="#f59e0b" stroke="#fef3c7" strokeWidth="0.6" />
+        <circle cx="16" cy="9" r="2.5" fill="#e0f2fe" />
+        <path d="M13.5 15 C 13.5 13.5 14.5 12.8 16 12.8 C 17.5 12.8 18.5 13.5 18.5 15" fill="#e0f2fe" />
+        <line x1="5" y1="14" x2="11" y2="14" stroke="#ffffff" strokeWidth="1.2" strokeLinecap="round" />
+        <line x1="5" y1="16.5" x2="9" y2="16.5" stroke="#bae6fd" strokeWidth="1" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    code: "DRIVING",
+    name: "MoRTH Driving License",
+    standard: "State Sarathi V4 Code",
+    protocol: "ISO/IEC 7816 Smart Card",
+    feature: "Optical Micro-Chip",
+    color: "#059669",
+    bgGlow: "rgba(5, 150, 105, 0.06)",
+    badgeBg: "linear-gradient(135deg, #047857 0%, #059669 100%)",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="4" width="20" height="16" rx="3" fill="#047857" stroke="#34d399" strokeWidth="1.5" />
+        <circle cx="12" cy="12" r="4.5" stroke="#fef08a" strokeWidth="1.2" />
+        <circle cx="12" cy="12" r="1.5" fill="#fef08a" />
+        <line x1="12" y1="7.5" x2="12" y2="10.5" stroke="#fef08a" strokeWidth="1.2" />
+        <line x1="8.5" y1="14" x2="10.8" y2="12.8" stroke="#fef08a" strokeWidth="1.2" />
+        <line x1="15.5" y1="14" x2="13.2" y2="12.8" stroke="#fef08a" strokeWidth="1.2" />
+      </svg>
+    ),
+  },
+  {
+    code: "VISA",
+    name: "Consular Visa Permit",
+    standard: "Schengen / Indian eVisa",
+    protocol: "ICAO MRZ Format-A",
+    feature: "Kinegram Foil Check",
+    color: "#d97706",
+    bgGlow: "rgba(217, 119, 6, 0.06)",
+    badgeBg: "linear-gradient(135deg, #b45309 0%, #d97706 100%)",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="18" height="18" rx="3" fill="#b45309" stroke="#fbbf24" strokeWidth="1.5" />
+        <polygon points="12,6 13.8,9.6 17.7,10.2 14.8,13 15.5,17 12,15.1 8.5,17 9.2,13 6.3,10.2 10.2,9.6" fill="#fef3c7" stroke="#f59e0b" strokeWidth="0.8" />
+        <line x1="6" y1="19" x2="18" y2="19" stroke="#fef3c7" strokeWidth="1" strokeDasharray="1.5 1.5" />
+      </svg>
+    ),
+  },
+  {
+    code: "NAT_ID",
+    name: "National Citizen ID",
+    standard: "Universal Gov Card TD1/2",
+    protocol: "ISO/IEC 14443 Contactless",
+    feature: "Ghost Image & OVI Ink",
+    color: "#4f46e5",
+    bgGlow: "rgba(79, 70, 229, 0.06)",
+    badgeBg: "linear-gradient(135deg, #4338ca 0%, #4f46e5 100%)",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="4" width="20" height="16" rx="3" fill="#4338ca" stroke="#a5b4fc" strokeWidth="1.5" />
+        <circle cx="8" cy="10" r="2.5" fill="#ffffff" />
+        <path d="M5.5 16 C 5.5 14.2 6.5 13.5 8 13.5 C 9.5 13.5 10.5 14.2 10.5 16" fill="#ffffff" />
+        <rect x="13" y="8" width="6" height="2" rx="0.5" fill="#fbcfe8" />
+        <rect x="13" y="11.5" width="6" height="1.5" rx="0.5" fill="#c7d2fe" />
+        <rect x="13" y="14.5" width="4" height="1.5" rx="0.5" fill="#c7d2fe" />
+      </svg>
+    ),
+  },
 ];
 
 // ── High-Impact Strategic Numbers ────────────────────────────────
@@ -799,21 +936,109 @@ export default function LandingPage() {
           </h2>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 14 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
           {supportedDocs.map((doc, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="glass-card"
+              whileHover={{ y: -6, boxShadow: `0 14px 28px -4px ${doc.color}25` }}
+              transition={{ duration: 0.2 }}
               style={{
-                padding: "20px 16px", textAlign: "center",
-                background: "#ffffff",
-                border: "1px solid #e2e8f0"
+                padding: "24px 20px",
+                position: "relative",
+                overflow: "hidden",
+                background: `radial-gradient(circle at 100% 0%, ${doc.bgGlow}, #ffffff 65%)`,
+                borderRadius: "16px",
+                border: "1px solid #e2e8f0",
+                boxShadow: "0 4px 16px -2px rgba(0, 0, 0, 0.04)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                textAlign: "left",
+                cursor: "pointer",
               }}
+              onClick={() => navigate("/scan")}
             >
-              <div style={{ fontSize: "2rem", marginBottom: 8 }}>{doc.icon}</div>
-              <div style={{ fontWeight: 700, fontSize: "0.92rem", color: "#0f172a", marginBottom: 4 }}>{doc.name}</div>
-              <div style={{ fontSize: "0.72rem", color: "#2563eb", fontFamily: "JetBrains Mono, monospace" }}>{doc.standard}</div>
-            </div>
+              {/* Background SVG Guilloche Lathe Security Watermark */}
+              <SecurityGuillocheBg color={doc.color} />
+
+              {/* Card Top Row: Custom SVG Emblem + Protocol Badge */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16, position: "relative", zIndex: 1 }}>
+                <div style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: "12px",
+                  background: doc.badgeBg,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: `0 4px 12px ${doc.color}35`,
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                }}>
+                  {doc.icon}
+                </div>
+
+                <span style={{
+                  fontSize: "0.68rem",
+                  fontWeight: 700,
+                  fontFamily: "JetBrains Mono, monospace",
+                  padding: "3px 8px",
+                  borderRadius: "6px",
+                  background: "#ffffff",
+                  color: doc.color,
+                  border: `1px solid ${doc.color}30`,
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+                }}>
+                  {doc.protocol}
+                </span>
+              </div>
+
+              {/* Title & Standard */}
+              <div style={{ position: "relative", zIndex: 1, marginBottom: 14 }}>
+                <h3 style={{
+                  fontWeight: 800,
+                  fontSize: "1rem",
+                  color: "#0f172a",
+                  marginBottom: 5,
+                  letterSpacing: "-0.01em",
+                }}>
+                  {doc.name}
+                </h3>
+                <div style={{
+                  fontSize: "0.74rem",
+                  color: "#64748b",
+                  fontFamily: "JetBrains Mono, monospace",
+                }}>
+                  {doc.standard}
+                </div>
+              </div>
+
+              {/* Bottom Micro Feature Tag */}
+              <div style={{
+                position: "relative",
+                zIndex: 1,
+                borderTop: "1px solid #f1f5f9",
+                paddingTop: 10,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}>
+                <span style={{
+                  fontSize: "0.72rem",
+                  fontWeight: 600,
+                  color: "#059669",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 5,
+                }}>
+                  <CheckCircle2 size={12} color="#059669" />
+                  {doc.feature}
+                </span>
+
+                <span style={{ fontSize: "0.7rem", fontWeight: 700, color: doc.color }}>
+                  Scan →
+                </span>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
