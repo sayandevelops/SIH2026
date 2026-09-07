@@ -14,15 +14,18 @@ export default function App() {
         position="top-right"
         toastOptions={{
           style: {
-            background: "#0d1f3c",
-            color: "#e8f4ff",
-            border: "1px solid rgba(0,212,255,0.25)",
-            fontFamily: "Inter, sans-serif",
+            background: "#ffffff",
+            color: "#0f172a",
+            border: "1px solid #e2e8f0",
+            boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+            fontFamily: "Plus Jakarta Sans, sans-serif",
+            fontWeight: 500,
+            fontSize: "0.88rem",
           },
         }}
       />
       <Navbar />
-      <main style={{ paddingTop: "72px", minHeight: "100vh" }}>
+      <main style={{ paddingTop: "64px", minHeight: "100vh" }}>
         <Routes>
           <Route path="/"           element={<LandingPage />} />
           <Route path="/scan"       element={<ScanPage />} />

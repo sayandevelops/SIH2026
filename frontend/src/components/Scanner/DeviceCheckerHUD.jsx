@@ -256,6 +256,55 @@ export default function DeviceCheckerHUD({
             </div>
           </div>
 
+          {/* Hardware Photo Preview */}
+          <div
+            style={{
+              position: "relative",
+              borderRadius: "12px",
+              overflow: "hidden",
+              height: 140,
+              marginBottom: 16,
+              border: "1px solid #e2e8f0",
+              boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.05)",
+            }}
+          >
+            <img
+              src="/images/passport_scanner.jpg"
+              alt="Optical Document Cradle Scanner"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                padding: "8px 12px",
+                background: "linear-gradient(to top, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.2) 80%, transparent)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <span style={{ fontSize: "0.74rem", color: "#ffffff", fontWeight: 700 }}>
+                3M / Gemalto CR5400 Optical Bed
+              </span>
+              <span
+                style={{
+                  fontSize: "0.68rem",
+                  fontWeight: 700,
+                  color: "#a7f3d0",
+                  background: "rgba(5, 150, 105, 0.2)",
+                  padding: "2px 8px",
+                  borderRadius: "4px",
+                  border: "1px solid rgba(167, 243, 208, 0.4)",
+                }}
+              >
+                500 DPI UV/IR ACTIVE
+              </span>
+            </div>
+          </div>
+
           {/* Checklist */}
           <div
             style={{
@@ -391,6 +440,55 @@ export default function DeviceCheckerHUD({
               <p style={{ fontSize: "0.82rem", color: "#64748b", marginTop: 3, margin: "3px 0 0" }}>
                 Detects fake identities and ensures liveness
               </p>
+            </div>
+          </div>
+
+          {/* Hardware Photo Preview */}
+          <div
+            style={{
+              position: "relative",
+              borderRadius: "12px",
+              overflow: "hidden",
+              height: 140,
+              marginBottom: 16,
+              border: "1px solid #e2e8f0",
+              boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.05)",
+            }}
+          >
+            <img
+              src="/images/biometric_face.jpg"
+              alt="Biometric e-Gate Verification Sensor"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                padding: "8px 12px",
+                background: "linear-gradient(to top, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.2) 80%, transparent)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <span style={{ fontSize: "0.74rem", color: "#ffffff", fontWeight: 700 }}>
+                Automated e-Gate Biometric Sensor
+              </span>
+              <span
+                style={{
+                  fontSize: "0.68rem",
+                  fontWeight: 700,
+                  color: "#93c5fd",
+                  background: "rgba(37, 99, 235, 0.2)",
+                  padding: "2px 8px",
+                  borderRadius: "4px",
+                  border: "1px solid rgba(147, 197, 253, 0.4)",
+                }}
+              >
+                ARCFACE 1:1 READY
+              </span>
             </div>
           </div>
 

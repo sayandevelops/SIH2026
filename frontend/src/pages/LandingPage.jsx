@@ -143,6 +143,116 @@ export default function LandingPage() {
             <Lock size={16} /> Blockchain Ledger
           </button>
         </div>
+
+        {/* ── Executive Hero Showcase Banner ────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          style={{
+            marginTop: 44,
+            borderRadius: "20px",
+            overflow: "hidden",
+            border: "1px solid #e2e8f0",
+            boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.03)",
+            background: "#ffffff",
+            position: "relative",
+          }}
+        >
+          {/* Top Banner Toolbar */}
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "12px 20px",
+            background: "linear-gradient(to right, #ffffff, #f8fafc)",
+            borderBottom: "1px solid #e2e8f0",
+            flexWrap: "wrap",
+            gap: 10,
+          }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{
+                width: 8, height: 8, borderRadius: "50%", background: "#10b981",
+                boxShadow: "0 0 0 3px rgba(16, 185, 129, 0.2)",
+              }} />
+              <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#1e293b", letterSpacing: "0.04em" }}>
+                AUTOMATED BORDER CHECKPOINT KIOSK & e-GATE SUITE
+              </span>
+            </div>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <span style={{
+                fontSize: "0.72rem", fontWeight: 700, padding: "3px 10px", borderRadius: "999px",
+                background: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe",
+              }}>
+                OPTICAL 500 DPI UV/IR
+              </span>
+              <span style={{
+                fontSize: "0.72rem", fontWeight: 700, padding: "3px 10px", borderRadius: "999px",
+                background: "#ecfdf5", color: "#059669", border: "1px solid #a7f3d0",
+              }}>
+                ARCFACE 1:1 LIVE
+              </span>
+            </div>
+          </div>
+
+          {/* Banner Image Container */}
+          <div style={{ position: "relative", width: "100%", maxHeight: "500px", overflow: "hidden" }}>
+            <img
+              src="/images/hero_banner.jpg"
+              alt="ShieldScan Border Control Security Platform"
+              style={{
+                width: "100%",
+                height: "auto",
+                display: "block",
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+            />
+            {/* Ambient Overlay at bottom */}
+            <div style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: "30px 24px 20px",
+              background: "linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.4) 60%, transparent 100%)",
+              color: "#ffffff",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              flexWrap: "wrap",
+              gap: 16,
+            }}>
+              <div>
+                <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "#93c5fd", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 4 }}>
+                  MISSION-READY DEPLOYMENT
+                </div>
+                <div style={{ fontSize: "1.35rem", fontWeight: 800, color: "#ffffff" }}>
+                  Autonomous e-Gate Screening & Multi-Spectral Passport Readers
+                </div>
+              </div>
+              <button
+                onClick={() => navigate("/scan")}
+                style={{
+                  background: "#2563eb",
+                  color: "#ffffff",
+                  border: "none",
+                  padding: "10px 22px",
+                  borderRadius: "10px",
+                  fontWeight: 700,
+                  fontSize: "0.88rem",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.4)",
+                }}
+              >
+                Launch Scanner Console <ArrowRight size={15} />
+              </button>
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
 
       {/* ── Live Security Pipeline Monitor ─────────────────────── */}
@@ -223,6 +333,117 @@ export default function LandingPage() {
           </div>
         ))}
       </motion.div>
+
+      {/* ── Real-World Checkpoint Hardware Suite ─────────────────── */}
+      <div style={{ marginBottom: 68 }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#2563eb", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            HARDWARE INTEGRATION
+          </span>
+          <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
+            Engineered for Border Kiosks & Automated e-Gates
+          </h2>
+          <p style={{ color: "#64748b", maxWidth: 640, margin: "8px auto 0", fontSize: "0.95rem" }}>
+            Direct plug-and-play compatibility with standard immigration checkpoint hardware, desktop passport readers, and biometric traveler cameras.
+          </p>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: 24 }}>
+          {/* Card 1: Document Scanner Hardware */}
+          <div className="glass-card" style={{ padding: 0, overflow: "hidden", borderRadius: "18px", border: "1px solid #e2e8f0" }}>
+            <div style={{ height: 250, overflow: "hidden", position: "relative", background: "#f1f5f9" }}>
+              <img
+                src="/images/passport_scanner.jpg"
+                alt="Optical Document & e-Passport Reader Cradle"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+              <div style={{
+                position: "absolute", top: 14, left: 14,
+                background: "rgba(15, 23, 42, 0.8)", backdropFilter: "blur(6px)",
+                color: "#ffffff", padding: "5px 12px", borderRadius: "6px",
+                fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.04em",
+                display: "flex", alignItems: "center", gap: 6,
+              }}>
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#10b981" }} />
+                CRADLE STATUS: OPTICAL READY
+              </div>
+            </div>
+            <div style={{ padding: "24px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                <h3 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#0f172a", margin: 0 }}>
+                  Optical & RFID Document Reader
+                </h3>
+                <span style={{
+                  fontSize: "0.72rem", fontWeight: 700, padding: "2px 8px", borderRadius: "6px",
+                  background: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe"
+                }}>
+                  3M / GEMALTO CLASS
+                </span>
+              </div>
+              <p style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: 1.6, marginBottom: 16 }}>
+                Multi-spectral illumination bed capturing high-resolution 500 DPI images under White light, UV 365nm for forensic watermarks, and IR 850nm for B900 ink validation.
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {["ICAO 9303 TD1/TD2/TD3", "ISO 14443 Type A/B RFID", "UV Phosphor Check", "Anti-Glare Bed"].map((tag, tIdx) => (
+                  <span key={tIdx} style={{
+                    fontSize: "0.72rem", fontWeight: 600, padding: "4px 10px", borderRadius: "6px",
+                    background: "#f8fafc", color: "#475569", border: "1px solid #e2e8f0"
+                  }}>
+                    ✓ {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Biometric e-Gate Sensor */}
+          <div className="glass-card" style={{ padding: 0, overflow: "hidden", borderRadius: "18px", border: "1px solid #e2e8f0" }}>
+            <div style={{ height: 250, overflow: "hidden", position: "relative", background: "#f1f5f9" }}>
+              <img
+                src="/images/biometric_face.jpg"
+                alt="Automated e-Gate Biometric Facial Verification"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+              <div style={{
+                position: "absolute", top: 14, left: 14,
+                background: "rgba(15, 23, 42, 0.8)", backdropFilter: "blur(6px)",
+                color: "#ffffff", padding: "5px 12px", borderRadius: "6px",
+                fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.04em",
+                display: "flex", alignItems: "center", gap: 6,
+              }}>
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#10b981" }} />
+                SENSOR STATUS: LIVE 60 FPS
+              </div>
+            </div>
+            <div style={{ padding: "24px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                <h3 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#0f172a", margin: 0 }}>
+                  Biometric e-Gate Facial Terminal
+                </h3>
+                <span style={{
+                  fontSize: "0.72rem", fontWeight: 700, padding: "2px 8px", borderRadius: "6px",
+                  background: "#ecfdf5", color: "#059669", border: "1px solid #a7f3d0"
+                }}>
+                  ARCFACE 512D
+                </span>
+              </div>
+              <p style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: 1.6, marginBottom: 16 }}>
+                Real-time 1:1 facial matching against ID document photos with sub-second vector cosine comparison and neural passive liveness detection.
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {["1:1 Vector Match", "Anti-Spoof Liveness", "Wide-Angle HDR", "Zero Biometric Storage"].map((tag, tIdx) => (
+                  <span key={tIdx} style={{
+                    fontSize: "0.72rem", fontWeight: 600, padding: "4px 10px", borderRadius: "6px",
+                    background: "#f8fafc", color: "#475569", border: "1px solid #e2e8f0"
+                  }}>
+                    ✓ {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* ── Supported Identity Documents ──────────────────────────── */}
       <div style={{ marginBottom: 60 }}>
