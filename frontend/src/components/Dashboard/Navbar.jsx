@@ -1,9 +1,10 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { Shield, Scan, BookOpen, Code, ArrowRight } from "lucide-react";
+import { Shield, Scan, BookOpen, Code, ArrowRight, ShoppingBag } from "lucide-react";
 
 const navLinks = [
   { to: "/", label: "Overview", icon: Shield },
   { to: "/scan", label: "Scanner", icon: Scan },
+  { to: "/store", label: "Hardware Store", icon: ShoppingBag },
   { to: "/audit", label: "Ledger", icon: BookOpen },
   { to: "/developers", label: "API Docs", icon: Code },
 ];
