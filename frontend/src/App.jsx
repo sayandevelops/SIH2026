@@ -7,6 +7,7 @@ import AuditPage from "./pages/AuditPage";
 import LandingPage from "./pages/LandingPage";
 import DeveloperPortal from "./pages/DeveloperPortal";
 import StorePage from "./pages/StorePage";
+import GuidePage from "./pages/GuidePage";
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/audit"      element={<AuditPage />} />
           <Route path="/developers" element={<DeveloperPortal />} />
           <Route path="/store"      element={<StorePage />} />
+          <Route path="/guide"      element={<GuidePage />} />
         </Routes>
       </main>
     </Router>
