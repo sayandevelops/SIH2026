@@ -3,7 +3,7 @@ import { Shield, Scan, BookOpen, Code, ArrowRight, ShoppingBag } from "lucide-re
 
 const navLinks = [
   { to: "/", label: "Overview", icon: Shield },
-  { to: "/scan", label: "Scanner", icon: Scan },
+  { to: "/scan", label: "AI Detection", icon: Scan },
   { to: "/store", label: "Hardware Store", icon: ShoppingBag },
   { to: "/audit", label: "Ledger", icon: BookOpen },
   { to: "/developers", label: "API Docs", icon: Code },
@@ -165,7 +165,7 @@ export default function Navbar() {
               transition: "all 0.2s ease",
             }}
           >
-            <span>Launch Scanner</span>
+            <span>Launch Detection</span>
             <ArrowRight size={14} />
           </NavLink>
         </div>
