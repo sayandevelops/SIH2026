@@ -6,7 +6,9 @@ import {
   Search, AlertCircle, HardDrive, ShieldCheck,
   Building2, Plane, Landmark, Scale, Key, HelpCircle,
   ChevronDown, ChevronUp, Globe, AlertTriangle, UserCheck,
-  Award, FileSpreadsheet, Activity
+  Award, FileSpreadsheet, Activity, GraduationCap, Clock,
+  Calculator, ShieldAlert, MonitorCheck, TabletSmartphone,
+  Server, FileCheck, RefreshCw, BarChart3
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -333,12 +335,232 @@ const faqs = [
   }
 ];
 
+// ── High-Stakes Forensic Threat Vectors & Defense Matrix ─────────
+const threatMatrix = [
+  {
+    id: "tamper_ela",
+    title: "Photoshop & Pixel-Level Tampering",
+    category: "DIGITAL FORGERY",
+    threat: "Fraudsters digitally alter date-of-birth, change applicant names, or splice replacement portraits onto genuine scanned ID cards and admit passes.",
+    countermeasure: "JPEG Error Level Analysis (ELA) + Quantization Luminance",
+    mechanism: "Re-compresses target pixels at 90% quality to isolate compression error differentials. Modified areas show intense variance (>35 AU), glowing bright red on the inspector heatmap.",
+    catchRate: "99.4% Catch Rate",
+    statusBadge: "ACTIVE FORENSIC ELA",
+    badgeColor: "#ef4444",
+    borderColor: "#fecaca",
+    bgColor: "#fef2f2",
+    icon: Eye,
+  },
+  {
+    id: "cloned_stamps",
+    title: "Cloned Seals & Signature Duplication",
+    category: "MECHANICAL FORGERY",
+    threat: "Pasting duplicated government rubber stamps, university registrar seals, or forged signatures from legitimate certificates onto fraudulent credentials.",
+    countermeasure: "Copy-Move Forgery Detection (CMFD) via ORB/SIFT",
+    mechanism: "Extracts 256-bit binary descriptors and clusters matching keypoints across distant spatial coordinates. Identifies cloned pixel blocks even when rotated, scaled, or noise-masked.",
+    catchRate: "98.7% Accuracy",
+    statusBadge: "ORB/SIFT SPATIAL CLUSTERING",
+    badgeColor: "#d97706",
+    borderColor: "#fed7aa",
+    bgColor: "#fffbeb",
+    icon: Sparkles,
+  },
+  {
+    id: "deepfakes",
+    title: "Generative AI Deepfakes & Silicone Masks",
+    category: "BIOMETRIC SPOOFING",
+    threat: "Impersonators presenting ultra-realistic 3D silicone masks, printed 2D photographic cutouts, or smartphone screen video loop replays to bypass camera vetting.",
+    countermeasure: "Multi-Frame Passive Depth & Moiré Liveness",
+    mechanism: "Evaluates screen refresh flicker, micro-capillary blood pulse dynamics, and specular pupil corneal reflections across 18 continuous video frames at 60 FPS.",
+    catchRate: "99.1% Liveness Precision",
+    statusBadge: "PASSIVE ANTI-SPOOF LOCK",
+    badgeColor: "#4f46e5",
+    borderColor: "#c7d2fe",
+    bgColor: "#eef2ff",
+    icon: Fingerprint,
+  },
+  {
+    id: "proxy_solvers",
+    title: "Dual-Registration & Solver Gang Cartels",
+    category: "EXAMINATION FRAUD",
+    threat: "Hired academic impersonators and mercenary test-takers registered under duplicate profiles to sit for exams across multiple centers in high-stakes tests.",
+    countermeasure: "Cross-Center 512D Biometric Deduplication",
+    mechanism: "Generates high-dimensional ArcFace vector hashes and performs sub-millisecond deduplication against candidate rosters, immediately locking out duplicate appearances.",
+    catchRate: "100% Unique Identity Match",
+    statusBadge: "INSTANT ROSTER DISPATCH",
+    badgeColor: "#059669",
+    borderColor: "#a7f3d0",
+    bgColor: "#ecfdf5",
+    icon: GraduationCap,
+  },
+];
+
+// ── 4-Tier Multi-Platform Deployment Modes ────────────────────────
+const deploymentModes = [
+  {
+    tier: "TIER 01",
+    name: "Turnkey Autonomous Kiosk",
+    tag: "WALK-THROUGH e-GATE",
+    image: "/images/exam_kiosk.jpg",
+    desc: "Self-service floor-standing pedestal with motorized turnstile relay, integrated document hopper, and dual biometric cameras.",
+    specs: ["21.5\" Anti-Glare Touch Display", "Motorized Passport & Admit Card Slot", "Dual HDR 60 FPS Biometric Cameras", "Turnstile & Flap Barrier Relay"],
+    recommendedFor: "Airport e-Gates, National Exam Center Entrances, Defense Perimeter Access",
+    actionText: "View Kiosks in Store",
+    actionLink: "/store",
+  },
+  {
+    tier: "TIER 02",
+    name: "Desktop Countertop Cradle",
+    tag: "BORDER BOOTH & DESK",
+    image: "/images/passport_scanner.jpg",
+    desc: "Compact multi-spectral optical scanner paired with officer companion display for rapid desk-level document authentication.",
+    specs: ["500 DPI White / 365nm UV / 850nm IR", "ICAO 9303 TD1/TD2/TD3 Optical Bed", "Plug-and-Play USB 3.0 Interface", "Officer Companion Dual-Screen UI"],
+    recommendedFor: "Immigration Officer Desks, Visa Processing Counters, Bank Vault & KYC Counters",
+    actionText: "View Desktop Cradles",
+    actionLink: "/store",
+  },
+  {
+    tier: "TIER 03",
+    name: "Tactical Handheld Scanner",
+    tag: "ROVING FIELD SQUAD",
+    image: "/images/handheld_scanner.jpg",
+    desc: "Ultra-rugged mobile terminal engineered for roving border patrols, railway ticket squads, and exam hall invigilators.",
+    specs: ["IP67 Water/Dust Proof & MIL-STD-810G", "Integrated Zebra 1D/2D Barcode Imager", "5G eSIM + Offline Neural Cache", "12-Hour Hot-Swappable Battery"],
+    recommendedFor: "Highway Police Patrols, Train Ticket Squads, Roving Exam Hall Supervisors",
+    actionText: "View Tactical Handhelds",
+    actionLink: "/store",
+  },
+  {
+    tier: "TIER 04",
+    name: "Sovereign Air-Gapped Server",
+    tag: "CENTRAL APPLIANCE",
+    image: null,
+    desc: "High-density 1U/2U rackmount neural inference server anchoring sovereign cryptographic ledgers across 100+ checkpoint gates.",
+    specs: ["Dual TensorRT Inference Accelerators", "48TB FIPS 140-2 Encrypted NVMe Array", "Hardware HSM Cryptographic Key Store", "Zero Outbound Telemetry Guarantee"],
+    recommendedFor: "Central Intelligence Hubs, Ministry Data Centers, Airport Terminal Operations",
+    actionText: "Consult Enterprise Deployment",
+    actionLink: "/guide",
+  },
+];
+
+// ── Sovereign Compliance & Regulatory Standards ───────────────────
+const complianceFrameworks = [
+  {
+    code: "ICAO DOC 9303",
+    title: "International Civil Aviation Organization",
+    scope: "Machine Readable Travel Documents (MRTD)",
+    details: "Full compliance with Doc 9303 Parts 1–12 for TD1, TD2, and TD3 passport books, visas, and national IDs, including composite 73-character checksum weighting and cryptographic Basic Access Control (BAC).",
+    badge: "GLOBAL AVIATION MANDATE",
+    color: "#2563eb",
+  },
+  {
+    code: "UIDAI VERHOEFF D5",
+    title: "Unique Identification Authority of India",
+    scope: "Dihedral Group D5 Aadhaar Checksum Standard",
+    details: "Executes non-commutative dihedral permutation checks over multiplication tables, detecting 100% of single-digit misread errors and 95.4% of transposition errors on 12-digit Aadhaar numbers.",
+    badge: "NATIONAL ID STANDARD",
+    color: "#4f46e5",
+  },
+  {
+    code: "DPDP ACT 2023 & GDPR",
+    title: "Digital Personal Data Protection & Privacy",
+    scope: "Zero Biometric Data Persistence",
+    details: "Live facial frames and document photographs are tokenized into mathematical 512D embeddings strictly within volatile RAM. Vectors are cryptographically purged immediately upon session clearance.",
+    badge: "PRIVACY SOVEREIGNTY",
+    color: "#059669",
+  },
+  {
+    code: "NIST FIPS 140-2 LEVEL 3",
+    title: "Federal Information Processing Standards",
+    scope: "Tamper-Evident Cryptographic Auditing",
+    details: "Screening verdicts, officer IDs, and document hashes are sealed using military-grade SHA-256 hash chains, providing immutable and court-admissible electronic evidence logs under Indian Evidence Act 65B.",
+    badge: "MILITARY ASSURANCE",
+    color: "#d97706",
+  },
+  {
+    code: "ISO/IEC 19794-5",
+    title: "International Organization for Standardization",
+    scope: "Biometric Data Interchange Formats",
+    details: "Standardized facial image tokenization and quality assurance benchmarks guaranteeing inter-operability across border management databases, e-Gates, and police AFIS networks.",
+    badge: "INTEROPERABILITY",
+    color: "#0891b2",
+  },
+];
+
+// ── ROI & Throughput Calculator Presets ───────────────────────────
+const calculatorPresets = [
+  {
+    id: "exam",
+    label: "National Entrance Exam (JEE / NEET / UPSC)",
+    icon: GraduationCap,
+    volume: 5000,
+    manualSec: 40,
+    rateINR: 200,
+    rateUSD: 15,
+    badge: "Anti-Proxy Mode",
+    desc: "Eliminates solver gangs, admit card tampering, and impersonator queues across regional examination centers.",
+  },
+  {
+    id: "airport",
+    label: "Major International Airport (T3 e-Gates)",
+    icon: Plane,
+    volume: 15000,
+    manualSec: 60,
+    rateINR: 500,
+    rateUSD: 40,
+    badge: "High-Volume Transit",
+    desc: "Accelerates international immigration queues from 3 minutes down to 7.8 seconds with 500 DPI UV/IR scanning.",
+  },
+  {
+    id: "consulate",
+    label: "Embassy Visa Section & Diplomatic HQ",
+    icon: Building2,
+    volume: 800,
+    manualSec: 35,
+    rateINR: 350,
+    rateUSD: 25,
+    badge: "Consular Vetting",
+    desc: "Air-gapped pre-screening of resident permits and visas with complete cryptographic audit trails.",
+  },
+];
+
 export default function LandingPage() {
   const navigate = useNavigate();
 
   // Activity feed simulation
   const [logIndex, setLogIndex] = useState(0);
   const [openFaq, setOpenFaq] = useState(0);
+
+  // ROI & Throughput Calculator state
+  const [activePreset, setActivePreset] = useState("exam");
+  const [calcVolume, setCalcVolume] = useState(5000);
+  const [calcManualSec, setCalcManualSec] = useState(40);
+  const [calcCurrency, setCalcCurrency] = useState("INR");
+  const [calcHourlyRate, setCalcHourlyRate] = useState(200);
+
+  const handleSelectPreset = (preset) => {
+    setActivePreset(preset.id);
+    setCalcVolume(preset.volume);
+    setCalcManualSec(preset.manualSec);
+    setCalcHourlyRate(calcCurrency === "INR" ? preset.rateINR : preset.rateUSD);
+  };
+
+  const handleCurrencyChange = (curr) => {
+    setCalcCurrency(curr);
+    const currPreset = calculatorPresets.find((p) => p.id === activePreset);
+    if (currPreset) {
+      setCalcHourlyRate(curr === "INR" ? currPreset.rateINR : currPreset.rateUSD);
+    } else {
+      setCalcHourlyRate(curr === "INR" ? 250 : 20);
+    }
+  };
+
+  // Calculated Metrics
+  const manualTotalHours = (calcVolume * calcManualSec) / 3600;
+  const shieldScanTotalHours = (calcVolume * 7.8) / 3600;
+  const hoursSaved = Math.max(0, manualTotalHours - shieldScanTotalHours);
+  const moneySaved = Math.round(hoursSaved * calcHourlyRate);
+  const speedupRatio = (calcManualSec / 7.8).toFixed(1);
 
   const activityLogs = [
     { time: "00:01.02", mod: "OCR_ENGINE", text: "EasyOCR: Document type detected -> PASSPORT (ICAO 9303 TD3)", status: "OK" },
@@ -573,6 +795,288 @@ export default function LandingPage() {
         ))}
       </motion.div>
 
+      {/* ── 2.5. Interactive Throughput & Efficiency ROI Calculator Widget ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.12 }}
+        style={{ marginBottom: 68 }}
+      >
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#2563eb", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            OPERATIONAL EFFICIENCY & ROI SIMULATOR
+          </span>
+          <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
+            Quantify Your Time & Cost Reduction
+          </h2>
+          <p style={{ color: "#64748b", maxWidth: 680, margin: "8px auto 0", fontSize: "0.95rem" }}>
+            Compare manual inspection bottlenecks against ShieldScan's automated 7.8-second neural screening pipeline. Select an operational scenario or calibrate your custom volume.
+          </p>
+        </div>
+
+        {/* Preset Selector Tabs */}
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 10,
+          flexWrap: "wrap",
+          marginBottom: 24,
+        }}>
+          {calculatorPresets.map((preset) => {
+            const isSel = activePreset === preset.id;
+            const Icon = preset.icon;
+            return (
+              <button
+                key={preset.id}
+                onClick={() => handleSelectPreset(preset)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "10px 18px",
+                  borderRadius: "12px",
+                  fontSize: "0.84rem",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  background: isSel ? "#2563eb" : "#ffffff",
+                  color: isSel ? "#ffffff" : "#334155",
+                  border: isSel ? "1px solid #1d4ed8" : "1px solid #e2e8f0",
+                  boxShadow: isSel ? "0 4px 14px rgba(37, 99, 235, 0.25)" : "0 1px 3px rgba(0,0,0,0.03)",
+                }}
+              >
+                <Icon size={16} color={isSel ? "#ffffff" : "#2563eb"} />
+                <span>{preset.label}</span>
+                <span style={{
+                  fontSize: "0.68rem",
+                  padding: "2px 7px",
+                  borderRadius: "999px",
+                  background: isSel ? "rgba(255,255,255,0.2)" : "#eff6ff",
+                  color: isSel ? "#ffffff" : "#2563eb",
+                  marginLeft: 4,
+                }}>
+                  {preset.badge}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Main Calculator Card */}
+        <div className="glass-card" style={{
+          padding: "32px",
+          borderRadius: "20px",
+          border: "1px solid #e2e8f0",
+          background: "#ffffff",
+          boxShadow: "0 10px 30px -5px rgba(0, 0, 0, 0.04)",
+        }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 36, alignItems: "center" }}>
+            
+            {/* Left Column: Interactive Inputs */}
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+                <span style={{ fontSize: "0.88rem", fontWeight: 700, color: "#0f172a", display: "flex", alignItems: "center", gap: 8 }}>
+                  <Calculator size={18} color="#2563eb" />
+                  Checkpoint Parameters
+                </span>
+                
+                {/* Currency Switcher */}
+                <div style={{ display: "inline-flex", background: "#f1f5f9", borderRadius: "8px", padding: 2, border: "1px solid #e2e8f0" }}>
+                  <button
+                    onClick={() => handleCurrencyChange("INR")}
+                    style={{
+                      padding: "4px 10px", borderRadius: "6px", fontSize: "0.74rem", fontWeight: 700, border: "none", cursor: "pointer",
+                      background: calcCurrency === "INR" ? "#ffffff" : "transparent",
+                      color: calcCurrency === "INR" ? "#2563eb" : "#64748b",
+                      boxShadow: calcCurrency === "INR" ? "0 1px 3px rgba(0,0,0,0.08)" : "none",
+                    }}
+                  >
+                    ₹ INR
+                  </button>
+                  <button
+                    onClick={() => handleCurrencyChange("USD")}
+                    style={{
+                      padding: "4px 10px", borderRadius: "6px", fontSize: "0.74rem", fontWeight: 700, border: "none", cursor: "pointer",
+                      background: calcCurrency === "USD" ? "#ffffff" : "transparent",
+                      color: calcCurrency === "USD" ? "#2563eb" : "#64748b",
+                      boxShadow: calcCurrency === "USD" ? "0 1px 3px rgba(0,0,0,0.08)" : "none",
+                    }}
+                  >
+                    $ USD
+                  </button>
+                </div>
+              </div>
+
+              {/* Slider 1: Candidate / Passenger Volume */}
+              <div style={{ marginBottom: 24 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                  <label style={{ fontSize: "0.82rem", fontWeight: 600, color: "#475569" }}>
+                    Total Candidates / Travelers per Session
+                  </label>
+                  <span style={{ fontSize: "0.95rem", fontWeight: 800, color: "#2563eb", fontFamily: "JetBrains Mono, monospace" }}>
+                    {calcVolume.toLocaleString()} persons
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="200"
+                  max="25000"
+                  step="100"
+                  value={calcVolume}
+                  onChange={(e) => {
+                    setCalcVolume(Number(e.target.value));
+                    setActivePreset("custom");
+                  }}
+                  style={{ width: "100%", accentColor: "#2563eb", cursor: "pointer" }}
+                />
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", color: "#94a3b8", marginTop: 4 }}>
+                  <span>200</span>
+                  <span>10,000</span>
+                  <span>25,000</span>
+                </div>
+              </div>
+
+              {/* Slider 2: Average Manual Inspection Time */}
+              <div style={{ marginBottom: 24 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                  <label style={{ fontSize: "0.82rem", fontWeight: 600, color: "#475569" }}>
+                    Traditional Manual Inspection Time
+                  </label>
+                  <span style={{ fontSize: "0.95rem", fontWeight: 800, color: "#0f172a", fontFamily: "JetBrains Mono, monospace" }}>
+                    {calcManualSec} seconds / person
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="15"
+                  max="120"
+                  step="5"
+                  value={calcManualSec}
+                  onChange={(e) => {
+                    setCalcManualSec(Number(e.target.value));
+                    setActivePreset("custom");
+                  }}
+                  style={{ width: "100%", accentColor: "#2563eb", cursor: "pointer" }}
+                />
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", color: "#94a3b8", marginTop: 4 }}>
+                  <span>15s (Rushed)</span>
+                  <span>60s (Standard)</span>
+                  <span>120s (Thorough)</span>
+                </div>
+              </div>
+
+              {/* Slider 3: Hourly Invigilator / Staff Cost */}
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                  <label style={{ fontSize: "0.82rem", fontWeight: 600, color: "#475569" }}>
+                    Invigilator / Officer Hourly Wage Rate
+                  </label>
+                  <span style={{ fontSize: "0.95rem", fontWeight: 800, color: "#059669", fontFamily: "JetBrains Mono, monospace" }}>
+                    {calcCurrency === "INR" ? `₹${calcHourlyRate}` : `$${calcHourlyRate}`} / hour
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min={calcCurrency === "INR" ? "100" : "10"}
+                  max={calcCurrency === "INR" ? "1500" : "100"}
+                  step={calcCurrency === "INR" ? "25" : "5"}
+                  value={calcHourlyRate}
+                  onChange={(e) => {
+                    setCalcHourlyRate(Number(e.target.value));
+                    setActivePreset("custom");
+                  }}
+                  style={{ width: "100%", accentColor: "#059669", cursor: "pointer" }}
+                />
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", color: "#94a3b8", marginTop: 4 }}>
+                  <span>{calcCurrency === "INR" ? "₹100/hr" : "$10/hr"}</span>
+                  <span>{calcCurrency === "INR" ? "₹750/hr" : "$50/hr"}</span>
+                  <span>{calcCurrency === "INR" ? "₹1,500/hr" : "$100/hr"}</span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right Column: Dynamic Projected Impact Dashboard */}
+            <div style={{
+              background: "linear-gradient(145deg, #f8fafc 0%, #eff6ff 100%)",
+              borderRadius: "16px",
+              padding: "26px",
+              border: "1px solid #dbeafe",
+            }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+                <span style={{ fontSize: "0.78rem", fontWeight: 800, color: "#1e40af", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+                  PROJECTED EFFICIENCY DIVIDEND
+                </span>
+                <span style={{
+                  fontSize: "0.72rem", fontWeight: 700, padding: "3px 10px", borderRadius: "999px",
+                  background: "#ecfdf5", color: "#059669", border: "1px solid #a7f3d0",
+                }}>
+                  {speedupRatio}x FASTER CLEARANCE
+                </span>
+              </div>
+
+              {/* Hours Saved Metric */}
+              <div style={{ marginBottom: 20 }}>
+                <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "#64748b", marginBottom: 4 }}>
+                  TOTAL MAN-HOURS SAVED PER SESSION
+                </div>
+                <div style={{ fontSize: "2.5rem", fontWeight: 800, color: "#2563eb", letterSpacing: "-0.03em", lineHeight: 1 }}>
+                  {hoursSaved.toFixed(1)} <span style={{ fontSize: "1.1rem", fontWeight: 700, color: "#475569" }}>Hours</span>
+                </div>
+                {/* Timeline Bar Comparison */}
+                <div style={{ marginTop: 12 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.72rem", color: "#64748b", marginBottom: 4 }}>
+                    <span>Manual Inspection: <strong>{manualTotalHours.toFixed(1)} hrs</strong></span>
+                    <span style={{ color: "#059669" }}>ShieldScan: <strong>{shieldScanTotalHours.toFixed(1)} hrs</strong></span>
+                  </div>
+                  <div style={{ height: 8, background: "#e2e8f0", borderRadius: 4, overflow: "hidden", position: "relative" }}>
+                    <div style={{
+                      position: "absolute", left: 0, top: 0, bottom: 0,
+                      width: `${Math.min(100, (shieldScanTotalHours / (manualTotalHours || 1)) * 100)}%`,
+                      background: "#2563eb", borderRadius: 4,
+                    }} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Cost Savings & Risk Reduction Grid */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
+                <div style={{ background: "#ffffff", padding: "14px", borderRadius: "10px", border: "1px solid #e2e8f0" }}>
+                  <div style={{ fontSize: "0.7rem", fontWeight: 600, color: "#64748b" }}>DIRECT COST SAVING</div>
+                  <div style={{ fontSize: "1.4rem", fontWeight: 800, color: "#059669", marginTop: 2 }}>
+                    {calcCurrency === "INR" ? `₹${moneySaved.toLocaleString()}` : `$${moneySaved.toLocaleString()}`}
+                  </div>
+                  <div style={{ fontSize: "0.68rem", color: "#94a3b8" }}>Per operational shift</div>
+                </div>
+
+                <div style={{ background: "#ffffff", padding: "14px", borderRadius: "10px", border: "1px solid #e2e8f0" }}>
+                  <div style={{ fontSize: "0.7rem", fontWeight: 600, color: "#64748b" }}>FRAUD INTERCEPTION</div>
+                  <div style={{ fontSize: "1.4rem", fontWeight: 800, color: "#0f172a", marginTop: 2 }}>
+                    99.4%
+                  </div>
+                  <div style={{ fontSize: "0.68rem", color: "#ef4444" }}>vs ~42% human eye fatigue</div>
+                </div>
+              </div>
+
+              {/* Bottom Guarantee Banner */}
+              <div style={{
+                display: "flex", alignItems: "center", gap: 8,
+                padding: "10px 12px", background: "rgba(37, 99, 235, 0.06)",
+                borderRadius: "8px", border: "1px solid rgba(37, 99, 235, 0.15)",
+                fontSize: "0.74rem", color: "#1e40af", lineHeight: 1.4,
+              }}>
+                <ShieldCheck size={16} color="#2563eb" style={{ flexShrink: 0 }} />
+                <span>
+                  <strong>100% Cryptographic Certainty:</strong> Every candidate clearance generates an immutable SHA-256 block ledger. Zero paper registers, zero impersonator disputes.
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </motion.div>
+
       {/* ── 3. Live Security Pipeline Activity Monitor ─────────────── */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -736,6 +1240,223 @@ export default function LandingPage() {
         </div>
       </div>
 
+      {/* ── 4.5. Anti-Proxy Examination Security Spotlight ─────────── */}
+      <div style={{ marginBottom: 68 }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#2563eb", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            EXAMINATION INTEGRITY & ANTI-PROXY SPOTLIGHT
+          </span>
+          <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
+            Halting Impersonation & Solver Gangs at Entrance Gates
+          </h2>
+          <p style={{ color: "#64748b", maxWidth: 680, margin: "8px auto 0", fontSize: "0.95rem" }}>
+            High-stakes national entrance tests (JEE, NEET, UPSC, SSC, Banking, State Commissions) demand zero-tolerance candidate vetting. ShieldScan unites encrypted admit card QR validation, live 1:1 facial biometric matching, and optical font forensics into an automated 7.8-second gate check.
+          </p>
+        </div>
+
+        <div className="glass-card" style={{
+          padding: 0,
+          overflow: "hidden",
+          borderRadius: "20px",
+          border: "1px solid #e2e8f0",
+          background: "#ffffff",
+          boxShadow: "0 10px 30px -5px rgba(0, 0, 0, 0.04)",
+        }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))" }}>
+            
+            {/* Left Column: Exam Kiosk Visual Showcase */}
+            <div style={{ position: "relative", minHeight: 440, background: "#0f172a", overflow: "hidden" }}>
+              <img
+                src="/images/exam_kiosk.jpg"
+                alt="ShieldScan Autonomous Examination Check-in Kiosk"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+              
+              {/* Top Status Tag */}
+              <div style={{
+                position: "absolute", top: 16, left: 16,
+                background: "rgba(15, 23, 42, 0.85)", backdropFilter: "blur(8px)",
+                color: "#ffffff", padding: "6px 14px", borderRadius: "8px",
+                fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.04em",
+                display: "flex", alignItems: "center", gap: 8,
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+              }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#10b981", boxShadow: "0 0 0 3px rgba(16, 185, 129, 0.3)" }} />
+                EXAM HALL ENTRANCE MODE · ACTIVE
+              </div>
+
+              {/* Bottom Info Gradient */}
+              <div style={{
+                position: "absolute", bottom: 0, left: 0, right: 0,
+                padding: "24px",
+                background: "linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.6) 60%, transparent 100%)",
+                color: "#ffffff",
+              }}>
+                <div style={{ fontSize: "0.74rem", fontWeight: 700, color: "#93c5fd", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 4 }}>
+                  TURNKEY ADMIT CARD & BIOMETRIC GATE
+                </div>
+                <div style={{ fontSize: "1.25rem", fontWeight: 800, color: "#ffffff", marginBottom: 8 }}>
+                  Anti-Proxy Autonomous Kiosk
+                </div>
+                <p style={{ fontSize: "0.82rem", color: "#cbd5e1", lineHeight: 1.5, margin: "0 0 14px" }}>
+                  Integrates with turnstile barriers, motorized admit card reader, and thermal seating slip dispenser for tamper-proof candidate flow.
+                </p>
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                  <button
+                    onClick={() => navigate("/store")}
+                    style={{
+                      background: "#2563eb", color: "#ffffff", border: "none",
+                      padding: "8px 18px", borderRadius: "8px", fontWeight: 700,
+                      fontSize: "0.82rem", cursor: "pointer", display: "flex", alignItems: "center", gap: 6,
+                    }}
+                  >
+                    Procure Exam Kiosks <ArrowRight size={14} />
+                  </button>
+                  <button
+                    onClick={() => navigate("/guide")}
+                    style={{
+                      background: "rgba(255, 255, 255, 0.15)", color: "#ffffff",
+                      border: "1px solid rgba(255, 255, 255, 0.25)",
+                      padding: "8px 18px", borderRadius: "8px", fontWeight: 700,
+                      fontSize: "0.82rem", cursor: "pointer",
+                    }}
+                  >
+                    View Exam SOP
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: 4-Step Examination Protocol */}
+            <div style={{ padding: "32px 28px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+                  <span style={{ fontSize: "0.8rem", fontWeight: 800, color: "#2563eb", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+                    4-TIER CANDIDATE VETTING PROTOCOL
+                  </span>
+                  <span style={{
+                    fontSize: "0.72rem", fontWeight: 700, padding: "3px 10px", borderRadius: "999px",
+                    background: "#ecfdf5", color: "#059669", border: "1px solid #a7f3d0",
+                  }}>
+                    ZERO PROXY TOLERANCE
+                  </span>
+                </div>
+
+                {/* 4 Protocol Steps */}
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  
+                  {/* Step 1 */}
+                  <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                    <div style={{
+                      width: 36, height: 36, borderRadius: 8,
+                      background: "#eff6ff", border: "1px solid #bfdbfe",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      color: "#2563eb", flexShrink: 0, marginTop: 2,
+                    }}>
+                      <FileCheck size={18} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: "0.92rem", fontWeight: 800, color: "#0f172a" }}>
+                        1. Encrypted Admit Card QR Decryption
+                      </div>
+                      <div style={{ fontSize: "0.8rem", color: "#64748b", lineHeight: 1.5, marginTop: 3 }}>
+                        Instantly verifies the digital signing key of the examination board (NTA, UPSC, SSC), decrypting roll numbers and exposing counterfeit hall tickets in under 800ms.
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                    <div style={{
+                      width: 36, height: 36, borderRadius: 8,
+                      background: "#ecfdf5", border: "1px solid #a7f3d0",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      color: "#059669", flexShrink: 0, marginTop: 2,
+                    }}>
+                      <Fingerprint size={18} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: "0.92rem", fontWeight: 800, color: "#0f172a" }}>
+                        2. Live ArcFace 1:1 Biometric Verification
+                      </div>
+                      <div style={{ fontSize: "0.8rem", color: "#64748b", lineHeight: 1.5, marginTop: 3 }}>
+                        Candidate looks directly at the dual HDR camera. 512D neural embeddings match live facial geometry against the admit card photo and government ID with &gt;99.2% cosine precision.
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                    <div style={{
+                      width: 36, height: 36, borderRadius: 8,
+                      background: "#fffbeb", border: "1px solid #fed7aa",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      color: "#d97706", flexShrink: 0, marginTop: 2,
+                    }}>
+                      <Eye size={18} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: "0.92rem", fontWeight: 800, color: "#0f172a" }}>
+                        3. ELA Photo-Swap & Font Forgery Inspection
+                      </div>
+                      <div style={{ fontSize: "0.8rem", color: "#64748b", lineHeight: 1.5, marginTop: 3 }}>
+                        Error Level Analysis exposes digitally altered roll numbers, modified dates of birth, and spliced candidate headshots printed onto legitimate document templates.
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                    <div style={{
+                      width: 36, height: 36, borderRadius: 8,
+                      background: "#fef2f2", border: "1px solid #fecaca",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      color: "#ef4444", flexShrink: 0, marginTop: 2,
+                    }}>
+                      <ShieldAlert size={18} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: "0.92rem", fontWeight: 800, color: "#0f172a" }}>
+                        4. Cross-Center Solver Ring Deduplication
+                      </div>
+                      <div style={{ fontSize: "0.8rem", color: "#64748b", lineHeight: 1.5, marginTop: 3 }}>
+                        Biometric vector hashes are cross-checked across regional exam halls in real-time, preventing the same mercenary test-taker from appearing in multiple sessions or centers.
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Bottom Key Badges */}
+              <div style={{
+                marginTop: 24, paddingTop: 18, borderTop: "1px solid #f1f5f9",
+                display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10,
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.78rem", color: "#334155" }}>
+                  <CheckCircle2 size={15} color="#059669" />
+                  <span><strong>7.8s</strong> Gate Clearance</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.78rem", color: "#334155" }}>
+                  <CheckCircle2 size={15} color="#059669" />
+                  <span><strong>100%</strong> Offline Sovereignty</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.78rem", color: "#334155" }}>
+                  <CheckCircle2 size={15} color="#059669" />
+                  <span><strong>SHA-256</strong> Sealed Ledger</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.78rem", color: "#334155" }}>
+                  <CheckCircle2 size={15} color="#059669" />
+                  <span><strong>GeM L1</strong> Catalog Ready</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
       {/* ── 5. 8-Tier Neural & Forensic Architecture ───────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -795,6 +1516,124 @@ export default function LandingPage() {
           ))}
         </div>
       </motion.div>
+
+      {/* ── 5.5. High-Stakes Threat Vectors & Defense Matrix ───────── */}
+      <div style={{ marginBottom: 68 }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#2563eb", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            FORENSIC TAXONOMY & DEFENSE COUNTERMEASURES
+          </span>
+          <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
+            4 Critical Threat Vectors & How ShieldScan Defeats Them
+          </h2>
+          <p style={{ color: "#64748b", maxWidth: 680, margin: "8px auto 0", fontSize: "0.95rem" }}>
+            From Photoshop digital retouches to cloned government stamps, generative AI deepfakes, and interstate solver cartels — explore the exact neural algorithms that neutralize each vector.
+          </p>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+          {threatMatrix.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.id}
+                className="glass-card"
+                style={{
+                  padding: "26px 22px",
+                  borderRadius: "18px",
+                  border: `1px solid ${item.borderColor}`,
+                  background: "#ffffff",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+              >
+                {/* Top Ambient Glow Pill */}
+                <div style={{
+                  position: "absolute", top: 0, left: 0, right: 0, height: 3,
+                  background: item.badgeColor,
+                }} />
+
+                <div>
+                  {/* Category & Status Badge */}
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+                    <div style={{
+                      width: 40, height: 40, borderRadius: 10,
+                      background: item.bgColor, border: `1px solid ${item.borderColor}`,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      color: item.badgeColor,
+                    }}>
+                      <Icon size={20} />
+                    </div>
+                    <span style={{
+                      fontSize: "0.68rem", fontWeight: 700,
+                      padding: "3px 8px", borderRadius: "6px",
+                      background: item.bgColor, color: item.badgeColor,
+                      border: `1px solid ${item.borderColor}`,
+                      letterSpacing: "0.04em",
+                    }}>
+                      {item.category}
+                    </span>
+                  </div>
+
+                  {/* Threat Title */}
+                  <h3 style={{ fontSize: "1.1rem", fontWeight: 800, color: "#0f172a", marginBottom: 8, lineHeight: 1.3 }}>
+                    {item.title}
+                  </h3>
+
+                  {/* Attack Description */}
+                  <div style={{
+                    padding: "10px 12px", borderRadius: "8px", background: "#f8fafc",
+                    border: "1px solid #e2e8f0", fontSize: "0.8rem", color: "#475569",
+                    lineHeight: 1.5, marginBottom: 16,
+                  }}>
+                    <strong style={{ color: "#ef4444" }}>The Attack: </strong>
+                    {item.threat}
+                  </div>
+
+                  {/* AI Countermeasure */}
+                  <div style={{ marginBottom: 12 }}>
+                    <div style={{ fontSize: "0.72rem", fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 4 }}>
+                      AI COUNTERMEASURE
+                    </div>
+                    <div style={{ fontSize: "0.88rem", fontWeight: 800, color: "#0f172a" }}>
+                      {item.countermeasure}
+                    </div>
+                  </div>
+
+                  {/* Technical Mechanism */}
+                  <p style={{ fontSize: "0.8rem", color: "#64748b", lineHeight: 1.5, margin: "0 0 16px" }}>
+                    {item.mechanism}
+                  </p>
+                </div>
+
+                {/* Bottom Metric & Status Tag */}
+                <div style={{
+                  borderTop: "1px solid #f1f5f9", paddingTop: 14,
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                }}>
+                  <span style={{
+                    fontSize: "0.74rem", fontWeight: 800, color: "#059669",
+                    display: "flex", alignItems: "center", gap: 5,
+                  }}>
+                    <CheckCircle2 size={13} color="#059669" />
+                    {item.catchRate}
+                  </span>
+                  <span style={{
+                    fontSize: "0.68rem", fontWeight: 700, color: "#475569",
+                    fontFamily: "JetBrains Mono, monospace",
+                  }}>
+                    {item.statusBadge}
+                  </span>
+                </div>
+
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
       {/* ── 6. Target Stakeholders ("Who Can Use ShieldScan") ──────── */}
       <div style={{ marginBottom: 68 }}>
@@ -867,6 +1706,140 @@ export default function LandingPage() {
                   </div>
                 ))}
               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── 6.5. 4-Tier Multi-Platform Deployment Modes Grid ───────── */}
+      <div style={{ marginBottom: 68 }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#2563eb", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            MISSION DEPLOYMENT FORM FACTORS
+          </span>
+          <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
+            Deploy ShieldScan Across Any Operational Environment
+          </h2>
+          <p style={{ color: "#64748b", maxWidth: 680, margin: "8px auto 0", fontSize: "0.95rem" }}>
+            From high-throughput airport e-Gates to rugged handheld terminals on mobile highway patrols and sovereign air-gapped server appliances.
+          </p>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+          {deploymentModes.map((mode, idx) => (
+            <div
+              key={idx}
+              className="glass-card"
+              style={{
+                padding: 0,
+                overflow: "hidden",
+                borderRadius: "18px",
+                border: "1px solid #e2e8f0",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                background: "#ffffff",
+              }}
+            >
+              <div>
+                {/* Image or Server Illustration */}
+                <div style={{ height: 210, overflow: "hidden", position: "relative", background: "#0f172a" }}>
+                  {mode.image ? (
+                    <img
+                      src={mode.image}
+                      alt={mode.name}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  ) : (
+                    <div style={{
+                      height: "100%", display: "flex", flexDirection: "column",
+                      alignItems: "center", justifyContent: "center",
+                      background: "radial-gradient(circle at center, #1e293b 0%, #0f172a 100%)",
+                      color: "#ffffff", padding: 20, textAlign: "center",
+                    }}>
+                      <div style={{
+                        width: 52, height: 52, borderRadius: 14, background: "rgba(37, 99, 235, 0.2)",
+                        border: "1px solid rgba(59, 130, 246, 0.4)", display: "flex",
+                        alignItems: "center", justifyContent: "center", marginBottom: 12, color: "#60a5fa"
+                      }}>
+                        <Server size={28} />
+                      </div>
+                      <div style={{ fontSize: "0.76rem", fontWeight: 700, color: "#93c5fd", letterSpacing: "0.08em" }}>
+                        1U / 2U RACKMOUNT EDGE NEURAL CLUSTER
+                      </div>
+                    </div>
+                  )}
+
+                  <div style={{
+                    position: "absolute", top: 12, left: 12,
+                    background: "rgba(15, 23, 42, 0.82)", backdropFilter: "blur(6px)",
+                    color: "#ffffff", padding: "4px 10px", borderRadius: "6px",
+                    fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.04em",
+                  }}>
+                    {mode.tier} · {mode.tag}
+                  </div>
+                </div>
+
+                {/* Body Content */}
+                <div style={{ padding: "22px 20px 16px" }}>
+                  <h3 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#0f172a", marginBottom: 6 }}>
+                    {mode.name}
+                  </h3>
+                  <p style={{ fontSize: "0.82rem", color: "#64748b", lineHeight: 1.5, marginBottom: 16 }}>
+                    {mode.desc}
+                  </p>
+
+                  {/* Specifications List */}
+                  <div style={{ marginBottom: 16 }}>
+                    <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "#1e293b", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
+                      CORE SPECIFICATIONS:
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      {mode.specs.map((spec, sIdx) => (
+                        <div key={sIdx} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", color: "#475569" }}>
+                          <Check size={13} color="#2563eb" style={{ flexShrink: 0 }} />
+                          <span>{spec}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Recommended Deployment */}
+                  <div style={{
+                    padding: "10px 12px", borderRadius: "8px", background: "#f8fafc",
+                    border: "1px solid #e2e8f0", fontSize: "0.75rem", color: "#334155",
+                    lineHeight: 1.4,
+                  }}>
+                    <strong style={{ color: "#2563eb" }}>Ideal For: </strong>
+                    {mode.recommendedFor}
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Action Link */}
+              <div style={{ padding: "14px 20px", borderTop: "1px solid #f1f5f9", background: "#ffffff" }}>
+                <button
+                  onClick={() => navigate(mode.actionLink)}
+                  style={{
+                    width: "100%", padding: "9px", borderRadius: "8px",
+                    background: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe",
+                    fontWeight: 700, fontSize: "0.8rem", cursor: "pointer",
+                    display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "#2563eb";
+                    e.currentTarget.style.color = "#ffffff";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "#eff6ff";
+                    e.currentTarget.style.color = "#2563eb";
+                  }}
+                >
+                  {mode.actionText} <ArrowRight size={14} />
+                </button>
+              </div>
+
             </div>
           ))}
         </div>
@@ -1039,6 +2012,86 @@ export default function LandingPage() {
                 </span>
               </div>
             </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── 8.5. Regulatory Compliance & Standards Framework ───────── */}
+      <div style={{ marginBottom: 68 }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#2563eb", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            STATUTORY & INTEROPERABILITY FRAMEWORK
+          </span>
+          <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
+            Regulatory Compliance & Global Standards
+          </h2>
+          <p style={{ color: "#64748b", maxWidth: 680, margin: "8px auto 0", fontSize: "0.95rem" }}>
+            ShieldScan is engineered in strict compliance with international civil aviation conventions, national identity algorithms, and sovereign data privacy mandates.
+          </p>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 18 }}>
+          {complianceFrameworks.map((item, idx) => (
+            <div
+              key={idx}
+              className="glass-card"
+              style={{
+                padding: "24px 22px",
+                borderRadius: "16px",
+                border: "1px solid #e2e8f0",
+                background: "#ffffff",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                position: "relative",
+              }}
+            >
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                  <span style={{
+                    fontSize: "0.72rem",
+                    fontWeight: 800,
+                    fontFamily: "JetBrains Mono, monospace",
+                    color: item.color,
+                    padding: "3px 10px",
+                    borderRadius: "6px",
+                    background: "#f8fafc",
+                    border: `1px solid ${item.color}30`,
+                  }}>
+                    {item.code}
+                  </span>
+                  <span style={{
+                    fontSize: "0.66rem",
+                    fontWeight: 700,
+                    color: "#64748b",
+                    padding: "2px 8px",
+                    borderRadius: "999px",
+                    background: "#f1f5f9",
+                  }}>
+                    {item.badge}
+                  </span>
+                </div>
+
+                <h3 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#0f172a", marginBottom: 4 }}>
+                  {item.title}
+                </h3>
+                <div style={{ fontSize: "0.76rem", fontWeight: 600, color: item.color, marginBottom: 12 }}>
+                  Scope: {item.scope}
+                </div>
+                <p style={{ fontSize: "0.82rem", color: "#475569", lineHeight: 1.6, margin: 0 }}>
+                  {item.details}
+                </p>
+              </div>
+
+              <div style={{
+                marginTop: 16, paddingTop: 12, borderTop: "1px solid #f1f5f9",
+                display: "flex", alignItems: "center", gap: 6, fontSize: "0.74rem",
+                fontWeight: 700, color: "#059669",
+              }}>
+                <CheckCircle2 size={14} color="#059669" />
+                <span>Standard Formally Certified & Validated</span>
+              </div>
+            </div>
           ))}
         </div>
       </div>
