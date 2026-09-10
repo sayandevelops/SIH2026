@@ -32,7 +32,7 @@ export default function GuidePage() {
   };
 
   return (
-    <div style={{ maxWidth: 1240, margin: "0 auto", padding: "36px 24px 80px" }}>
+    <div className="page-container" style={{ maxWidth: 1240, margin: "0 auto", padding: "36px 24px 80px" }}>
       
       {/* ── 1. Guide Header ──────────────────────────────────────── */}
       <div style={{ textAlign: "center", marginBottom: 36 }}>
@@ -145,7 +145,7 @@ export default function GuidePage() {
             </div>
 
             {/* 4-Stage Flowchart Cards */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 18, marginBottom: 36 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))", gap: 18, marginBottom: 36 }}>
               {[
                 {
                   step: "STAGE 01",
@@ -307,7 +307,7 @@ export default function GuidePage() {
             </div>
 
             {/* Visual Kiosk SOP Cards */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20, marginBottom: 32 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: 20, marginBottom: 32 }}>
               <div style={{ padding: 0, borderRadius: "16px", border: "1px solid #e2e8f0", overflow: "hidden" }}>
                 <img src="/images/exam_kiosk.jpg" alt="Exam Kiosk" style={{ width: "100%", height: 220, objectFit: "cover" }} />
                 <div style={{ padding: "20px" }}>
@@ -492,7 +492,7 @@ with open("passport_scan.jpg", "rb") as doc_file, \\
               </p>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 18, marginBottom: 28 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))", gap: 18, marginBottom: 28 }}>
               <div style={{ padding: "22px", borderRadius: "14px", background: "#f8fafc", border: "1px solid #e2e8f0" }}>
                 <h4 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#0f172a", marginBottom: 6 }}>
                   Court-Admissible Chain of Custody

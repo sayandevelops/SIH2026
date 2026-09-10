@@ -581,7 +581,7 @@ export default function LandingPage() {
   }, [activityLogs.length]);
 
   return (
-    <div style={{ maxWidth: 1240, margin: "0 auto", padding: "36px 24px 80px" }}>
+    <div className="page-container" style={{ maxWidth: 1240, margin: "0 auto", padding: "36px 24px 80px" }}>
       
       {/* ── 1. Executive Hero ────────────────────────────────── */}
       <motion.div
@@ -674,20 +674,6 @@ export default function LandingPage() {
                 AUTOMATED BORDER CHECKPOINT KIOSK & e-GATE SUITE
               </span>
             </div>
-            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-              <span style={{
-                fontSize: "0.72rem", fontWeight: 700, padding: "3px 10px", borderRadius: "999px",
-                background: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe",
-              }}>
-                OPTICAL 500 DPI UV/IR
-              </span>
-              <span style={{
-                fontSize: "0.72rem", fontWeight: 700, padding: "3px 10px", borderRadius: "999px",
-                background: "#ecfdf5", color: "#059669", border: "1px solid #a7f3d0",
-              }}>
-                ARCFACE 1:1 LIVE
-              </span>
-            </div>
           </div>
 
           {/* Banner Image Container */}
@@ -757,7 +743,7 @@ export default function LandingPage() {
         transition={{ duration: 0.5, delay: 0.1 }}
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
           gap: 18,
           marginBottom: 60,
         }}
@@ -870,7 +856,7 @@ export default function LandingPage() {
           background: "#ffffff",
           boxShadow: "0 10px 30px -5px rgba(0, 0, 0, 0.04)",
         }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 36, alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: 36, alignItems: "center" }}>
             
             {/* Left Column: Interactive Inputs */}
             <div>
@@ -1143,7 +1129,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: 24 }}>
           {/* Card 1: Document Scanner Hardware */}
           <div className="glass-card" style={{ padding: 0, overflow: "hidden", borderRadius: "18px", border: "1px solid #e2e8f0" }}>
             <div style={{ height: 250, overflow: "hidden", position: "relative", background: "#f1f5f9" }}>
@@ -1152,28 +1138,12 @@ export default function LandingPage() {
                 alt="Optical Document & e-Passport Reader Cradle"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
-              <div style={{
-                position: "absolute", top: 14, left: 14,
-                background: "rgba(15, 23, 42, 0.8)", backdropFilter: "blur(6px)",
-                color: "#ffffff", padding: "5px 12px", borderRadius: "6px",
-                fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.04em",
-                display: "flex", alignItems: "center", gap: 6,
-              }}>
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#10b981" }} />
-                CRADLE STATUS: OPTICAL READY
-              </div>
             </div>
             <div style={{ padding: "24px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+              <div style={{ marginBottom: 8 }}>
                 <h3 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#0f172a", margin: 0 }}>
                   Optical & RFID Document Reader
                 </h3>
-                <span style={{
-                  fontSize: "0.72rem", fontWeight: 700, padding: "2px 8px", borderRadius: "6px",
-                  background: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe"
-                }}>
-                  3M / GEMALTO CLASS
-                </span>
               </div>
               <p style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: 1.6, marginBottom: 16 }}>
                 Multi-spectral illumination bed capturing high-resolution 500 DPI images under White light, UV 365nm for forensic watermarks, and IR 850nm for B900 ink validation.
@@ -1199,28 +1169,12 @@ export default function LandingPage() {
                 alt="Automated e-Gate Biometric Facial Verification"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
-              <div style={{
-                position: "absolute", top: 14, left: 14,
-                background: "rgba(15, 23, 42, 0.8)", backdropFilter: "blur(6px)",
-                color: "#ffffff", padding: "5px 12px", borderRadius: "6px",
-                fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.04em",
-                display: "flex", alignItems: "center", gap: 6,
-              }}>
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#10b981" }} />
-                SENSOR STATUS: LIVE 60 FPS
-              </div>
             </div>
             <div style={{ padding: "24px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+              <div style={{ marginBottom: 8 }}>
                 <h3 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#0f172a", margin: 0 }}>
                   Biometric e-Gate Facial Terminal
                 </h3>
-                <span style={{
-                  fontSize: "0.72rem", fontWeight: 700, padding: "2px 8px", borderRadius: "6px",
-                  background: "#ecfdf5", color: "#059669", border: "1px solid #a7f3d0"
-                }}>
-                  ARCFACE 512D
-                </span>
               </div>
               <p style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: 1.6, marginBottom: 16 }}>
                 Real-time 1:1 facial matching against ID document photos with sub-second vector cosine comparison and neural passive liveness detection.
@@ -1262,7 +1216,7 @@ export default function LandingPage() {
           background: "#ffffff",
           boxShadow: "0 10px 30px -5px rgba(0, 0, 0, 0.04)",
         }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))" }}>
             
             {/* Left Column: Exam Kiosk Visual Showcase */}
             <div style={{ position: "relative", minHeight: 440, background: "#0f172a", overflow: "hidden" }}>
@@ -1333,12 +1287,6 @@ export default function LandingPage() {
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
                   <span style={{ fontSize: "0.8rem", fontWeight: 800, color: "#2563eb", letterSpacing: "0.06em", textTransform: "uppercase" }}>
                     4-TIER CANDIDATE VETTING PROTOCOL
-                  </span>
-                  <span style={{
-                    fontSize: "0.72rem", fontWeight: 700, padding: "3px 10px", borderRadius: "999px",
-                    background: "#ecfdf5", color: "#059669", border: "1px solid #a7f3d0",
-                  }}>
-                    ZERO PROXY TOLERANCE
                   </span>
                 </div>
 
@@ -1476,7 +1424,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 18 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))", gap: 18 }}>
           {features.map((f, i) => (
             <motion.div
               key={i}
@@ -1531,7 +1479,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))", gap: 20 }}>
           {threatMatrix.map((item) => {
             const Icon = item.icon;
             return (
@@ -1649,7 +1597,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: 20 }}>
           {stakeholders.map((s, idx) => (
             <div
               key={idx}
@@ -1725,7 +1673,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))", gap: 24 }}>
           {deploymentModes.map((mode, idx) => (
             <div
               key={idx}
@@ -1909,7 +1857,7 @@ export default function LandingPage() {
           </h2>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))", gap: 16 }}>
           {supportedDocs.map((doc, idx) => (
             <motion.div
               key={idx}
@@ -2030,7 +1978,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 18 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: 18 }}>
           {complianceFrameworks.map((item, idx) => (
             <div
               key={idx}

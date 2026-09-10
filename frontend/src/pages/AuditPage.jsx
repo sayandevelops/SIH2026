@@ -69,7 +69,7 @@ export default function AuditPage() {
   const threatCount = events.filter((e) => (e.risk_band || "") === "RED" || (e.risk_band || "") === "YELLOW").length;
 
   return (
-    <div style={{ maxWidth: 1240, margin: "0 auto", padding: "36px 24px 80px" }}>
+    <div className="page-container" style={{ maxWidth: 1240, margin: "0 auto", padding: "36px 24px 80px" }}>
 
       {/* ── Top Header ────────────────────────────────────────────── */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
@@ -98,7 +98,7 @@ export default function AuditPage() {
       </div>
 
       {/* ── Metric Summary Tiles ──────────────────────────────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginBottom: 28 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))", gap: 16, marginBottom: 28 }}>
         <div className="glass-card" style={{ padding: "22px 20px" }}>
           <div style={{ fontSize: "0.74rem", color: "#64748b", textTransform: "uppercase", fontWeight: 700 }}>Total Screened Records</div>
           <div style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>{events.length}</div>
@@ -225,7 +225,7 @@ export default function AuditPage() {
             </p>
           </div>
         ) : (
-          <div style={{ overflowX: "auto" }}>
+          <div className="table-responsive">
             <table className="data-table">
               <thead>
                 <tr>

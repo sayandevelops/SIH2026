@@ -234,7 +234,7 @@ echo "Document Verified Successfully!";
   };
 
   return (
-    <div style={{ maxWidth: 1240, margin: "0 auto", padding: "36px 24px 80px" }}>
+    <div className="page-container" style={{ maxWidth: 1240, margin: "0 auto", padding: "36px 24px 80px" }}>
 
       {/* ── Header ────────────────────────────────────────────────── */}
       <motion.div
@@ -270,7 +270,7 @@ echo "Document Verified Successfully!";
       </motion.div>
 
       {/* ── SECTION 1: Free API Key Generator & Dashboard ──────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(480px, 1fr))", gap: 24, marginBottom: 36 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))", gap: 24, marginBottom: 36 }}>
 
         {/* Generate Key Form */}
         <div className="glass-card" style={{ padding: 28 }}>
@@ -425,7 +425,7 @@ echo "Document Verified Successfully!";
           </span>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: 24 }}>
 
           {/* Test Inputs */}
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>

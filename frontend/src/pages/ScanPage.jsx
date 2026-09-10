@@ -198,7 +198,7 @@ export default function ScanPage() {
   };
 
   return (
-    <div style={{ maxWidth: 1160, margin: "0 auto", padding: "36px 24px 60px" }}>
+    <div className="page-container" style={{ maxWidth: 1160, margin: "0 auto", padding: "36px 24px 60px" }}>
       
       {/* Executive Clean Header */}
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
@@ -213,7 +213,7 @@ export default function ScanPage() {
           }}>
             <Shield size={13} /> BORDER CONTROL WORKSTATION · CHECKPOINT-ALPHA
           </div>
-          <h1 style={{ fontSize: "2.1rem", fontWeight: 800, color: "#0f172a", letterSpacing: "-0.02em" }}>
+          <h1 style={{ fontSize: "clamp(1.7rem, 4vw, 2.1rem)", fontWeight: 800, color: "#0f172a", letterSpacing: "-0.02em" }}>
             Document & Identity Screening
           </h1>
           <p style={{ color: "#64748b", fontSize: "0.95rem", marginTop: 4 }}>
@@ -304,7 +304,7 @@ export default function ScanPage() {
           const active = step === s.num;
           const done = step > s.num;
           return (
-            <div key={s.num} style={{ display: "flex", alignItems: "center", gap: 12, flex: 1, minWidth: 220 }}>
+            <div key={s.num} style={{ display: "flex", alignItems: "center", gap: 12, flex: 1, minWidth: 200 }}>
               <div style={{
                 width: 38, height: 38, borderRadius: "10px",
                 background: done ? "#ecfdf5" : active ? "#2563eb" : "#f1f5f9",
@@ -321,16 +321,19 @@ export default function ScanPage() {
                 <div style={{ fontSize: "0.68rem", textTransform: "uppercase", color: active ? "#2563eb" : done ? "#059669" : "#64748b", fontWeight: 700, letterSpacing: "0.04em" }}>
                   PHASE 0{s.num}
                 </div>
-                <div style={{ fontSize: "0.9rem", fontWeight: 700, color: active ? "#0f172a" : done ? "#0f172a" : "#64748b" }}>
+                <div style={{ fontSize: "0.88rem", fontWeight: 700, color: active ? "#0f172a" : done ? "#0f172a" : "#64748b" }}>
                   {s.label}
                 </div>
               </div>
               {i < 2 && (
-                <div style={{
-                  flex: 1, height: 2,
-                  background: done ? "#10b981" : "#e2e8f0",
-                  margin: "0 12px",
-                }} />
+                <div
+                  className="step-divider"
+                  style={{
+                    flex: 1, height: 2,
+                    background: done ? "#10b981" : "#e2e8f0",
+                    margin: "0 12px",
+                  }}
+                />
               )}
             </div>
           );
@@ -360,14 +363,14 @@ export default function ScanPage() {
       </AnimatePresence>
 
       {/* Main Screening Layout Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: docPreview ? "1.2fr 1fr" : "1fr", gap: 28, alignItems: "start" }}>
+      <div className={`scan-grid-layout ${docPreview ? "" : "single-col"}`}>
 
         {/* Left Column: Controls & Ingestion */}
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
 
           {/* Document Type Selector Card */}
           <div className="glass-card" style={{ padding: 24 }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16, flexWrap: "wrap", gap: 8 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <Layers size={16} color="#2563eb" />
                 <span style={{ fontSize: "0.82rem", fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: "#475569", fontFamily: "Outfit" }}>
@@ -379,7 +382,7 @@ export default function ScanPage() {
               </span>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 12 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 140px), 1fr))", gap: 12 }}>
               {DOC_TYPES.map(dt => {
                 const isSelected = docType === dt.id;
                 return (

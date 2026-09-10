@@ -84,7 +84,7 @@ export default function ResultsPage() {
   };
 
   return (
-    <div style={{ maxWidth: 1180, margin: "0 auto", padding: "36px 24px 80px" }}>
+    <div className="page-container" style={{ maxWidth: 1180, margin: "0 auto", padding: "36px 24px 80px" }}>
       
       {/* ── Top Navigation & Utility Controls ────────────────────────── */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24, flexWrap: "wrap", gap: 14 }}>
@@ -156,10 +156,7 @@ export default function ResultsPage() {
         className="glass-card"
         style={{ padding: "34px 30px", marginBottom: 28 }}
       >
-        <div style={{
-          display: "grid", gridTemplateColumns: "auto 1fr", gap: 36, alignItems: "center",
-          flexWrap: "wrap"
-        }}>
+        <div className="results-gauge-grid">
           {/* Circular SVG Speedometer Gauge */}
           <div style={{ position: "relative", width: 170, height: 170, margin: "0 auto" }}>
             <svg width="170" height="170" className="ring-gauge">
@@ -261,7 +258,7 @@ export default function ResultsPage() {
       </motion.div>
 
       {/* ── Two Column Primary Results Grid ─────────────────────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(480px, 1fr))", gap: 24, marginBottom: 28 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))", gap: 24, marginBottom: 28 }}>
 
         {/* ── CARD 1: Tampering Forensics & Heatmaps ─────────────────── */}
         <motion.div
@@ -308,7 +305,7 @@ export default function ResultsPage() {
           {tampering?.heatmap_url ? (
             <div style={{ marginBottom: 20 }}>
               {forensicView === "side_by_side" ? (
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div className="results-image-grid">
                   <div style={{
                     background: "#f8fafc", borderRadius: 10,
                     border: "1px solid #e2e8f0", padding: 10, textAlign: "center"
@@ -526,7 +523,7 @@ export default function ResultsPage() {
       </div>
 
       {/* ── Two Column Secondary Grid: OCR Data & Checksum Validation ─ */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(480px, 1fr))", gap: 24, marginBottom: 28 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))", gap: 24, marginBottom: 28 }}>
 
         {/* ── CARD 3: OCR Extracted Fields Table ──────────────────────── */}
         <motion.div

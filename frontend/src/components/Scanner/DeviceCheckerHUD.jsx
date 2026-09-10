@@ -153,7 +153,7 @@ export default function DeviceCheckerHUD({
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
           gap: 20,
         }}
       >
@@ -288,19 +288,6 @@ export default function DeviceCheckerHUD({
             >
               <span style={{ fontSize: "0.74rem", color: "#ffffff", fontWeight: 700 }}>
                 3M / Gemalto CR5400 Optical Bed
-              </span>
-              <span
-                style={{
-                  fontSize: "0.68rem",
-                  fontWeight: 700,
-                  color: "#a7f3d0",
-                  background: "rgba(5, 150, 105, 0.2)",
-                  padding: "2px 8px",
-                  borderRadius: "4px",
-                  border: "1px solid rgba(167, 243, 208, 0.4)",
-                }}
-              >
-                500 DPI UV/IR ACTIVE
               </span>
             </div>
           </div>
@@ -475,19 +462,6 @@ export default function DeviceCheckerHUD({
             >
               <span style={{ fontSize: "0.74rem", color: "#ffffff", fontWeight: 700 }}>
                 Automated e-Gate Biometric Sensor
-              </span>
-              <span
-                style={{
-                  fontSize: "0.68rem",
-                  fontWeight: 700,
-                  color: "#93c5fd",
-                  background: "rgba(37, 99, 235, 0.2)",
-                  padding: "2px 8px",
-                  borderRadius: "4px",
-                  border: "1px solid rgba(147, 197, 253, 0.4)",
-                }}
-              >
-                ARCFACE 1:1 READY
               </span>
             </div>
           </div>

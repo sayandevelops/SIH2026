@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Shield, Scan, BookOpen, Code, ArrowRight, ShoppingBag, Lock } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Shield, Scan, BookOpen, Code, ArrowRight, ShoppingBag, Lock, Menu, X } from "lucide-react";
 
 const navLinks = [
   { to: "/", label: "Overview", icon: Shield },
@@ -12,6 +14,24 @@ const navLinks = [
 
 export default function Navbar() {
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Auto-close menu when navigating
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <header
@@ -34,7 +54,7 @@ export default function Navbar() {
           maxWidth: "1280px",
           height: "100%",
           margin: "0 auto",
-          padding: "0 24px",
+          padding: "0 20px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -77,16 +97,15 @@ export default function Navbar() {
           </span>
         </NavLink>
 
-        {/* Center Nav Links - Modern Clean Floating Navigation */}
+        {/* Center Nav Links - Desktop Only */}
         <nav
+          className="desktop-nav"
           style={{
-            display: "flex",
             alignItems: "center",
             gap: "6px",
             background: "transparent",
             padding: "4px",
             borderRadius: "12px",
-            border: "1px solid transparent",
           }}
         >
           {navLinks.map(({ to, label, icon: Icon }) => {
@@ -119,40 +138,13 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Right Actions - Clean, Modern & Purposeful */}
-        <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-          {/* Subtle Live Status Indicator */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "7px",
-              padding: "5px 11px",
-              borderRadius: "999px",
-              background: "#ecfdf5",
-              border: "1px solid #a7f3d0",
-              fontSize: "0.74rem",
-              fontWeight: 600,
-              color: "#059669",
-            }}
-          >
-            <span
-              style={{
-                width: "6px",
-                height: "6px",
-                borderRadius: "50%",
-                background: "#10b981",
-                boxShadow: "0 0 6px rgba(16, 185, 129, 0.6)",
-              }}
-            />
-            Live Engine
-          </div>
-
-          {/* Primary Action Button */}
+        {/* Right Actions & Hamburger */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {/* Primary Action Button - Desktop */}
           <NavLink
             to="/scan"
+            className="desktop-action-btn"
             style={{
-              display: "inline-flex",
               alignItems: "center",
               gap: "7px",
               padding: "8px 18px",
@@ -169,8 +161,148 @@ export default function Navbar() {
             <span>Launch Detection</span>
             <ArrowRight size={14} />
           </NavLink>
+
+          {/* Mobile Hamburger Toggle Button */}
+          <button
+            className="mobile-nav-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "10px",
+              border: "1px solid #e2e8f0",
+              background: mobileMenuOpen ? "#eff6ff" : "#ffffff",
+              color: mobileMenuOpen ? "#2563eb" : "#0f172a",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+              boxShadow: "0 1px 3px rgba(0, 0, 0, 0.05)",
+            }}
+          >
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </div>
+
+      {/* ── Mobile Navigation Drawer & Backdrop ──────────────────────── */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMobileMenuOpen(false)}
+              style={{
+                position: "fixed",
+                top: "64px",
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: "rgba(15, 23, 42, 0.4)",
+                backdropFilter: "blur(4px)",
+                WebkitBackdropFilter: "blur(4px)",
+                zIndex: 98,
+              }}
+            />
+
+            {/* Slide-down Drawer */}
+            <motion.div
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              style={{
+                position: "fixed",
+                top: "64px",
+                left: 0,
+                right: 0,
+                background: "rgba(255, 255, 255, 0.98)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                borderBottom: "1px solid #e2e8f0",
+                boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.15)",
+                zIndex: 99,
+                padding: "20px 20px 26px",
+                maxHeight: "calc(100vh - 64px)",
+                overflowY: "auto",
+              }}
+            >
+              {/* Navigation Links list */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "18px" }}>
+                {navLinks.map(({ to, label, icon: Icon }) => {
+                  const isActive = location.pathname === to;
+                  return (
+                    <NavLink
+                      key={to}
+                      to={to}
+                      onClick={() => setMobileMenuOpen(false)}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                        padding: "11px 14px",
+                        borderRadius: "10px",
+                        fontSize: "0.92rem",
+                        fontWeight: isActive ? 700 : 500,
+                        textDecoration: "none",
+                        color: isActive ? "#2563eb" : "#334155",
+                        background: isActive ? "#eff6ff" : "transparent",
+                        border: isActive ? "1px solid #bfdbfe" : "1px solid transparent",
+                        transition: "all 0.15s ease",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "32px",
+                          height: "32px",
+                          borderRadius: "8px",
+                          background: isActive ? "#2563eb" : "#f1f5f9",
+                          color: isActive ? "#ffffff" : "#64748b",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Icon size={16} />
+                      </div>
+                      <span>{label}</span>
+                    </NavLink>
+                  );
+                })}
+              </div>
+
+              {/* Mobile Drawer Action Button */}
+              <NavLink
+                to="/scan"
+                onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  width: "100%",
+                  padding: "13px 20px",
+                  borderRadius: "10px",
+                  background: "linear-gradient(135deg, #2563eb, #1d4ed8)",
+                  color: "#ffffff",
+                  fontSize: "0.92rem",
+                  fontWeight: 700,
+                  textDecoration: "none",
+                  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.3)",
+                }}
+              >
+                <span>Launch AI Detection</span>
+                <ArrowRight size={16} />
+              </NavLink>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -181,7 +181,7 @@ export default function StorePage() {
   };
 
   return (
-    <div style={{ maxWidth: 1240, margin: "0 auto", padding: "36px 24px 80px" }}>
+    <div className="page-container" style={{ maxWidth: 1240, margin: "0 auto", padding: "36px 24px 80px" }}>
       
       {/* ── 1. Store Header & GovTech Trust Banner ──────────────── */}
       <div style={{ textAlign: "center", marginBottom: 44 }}>
@@ -275,7 +275,7 @@ export default function StorePage() {
       {/* ── 3. Product Catalog Grid ──────────────────────────────── */}
       <div style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
         gap: 28,
         marginBottom: 68,
       }}>
@@ -484,7 +484,7 @@ export default function StorePage() {
 
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
           gap: 18,
         }}>
           {[
