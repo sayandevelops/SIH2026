@@ -65,8 +65,8 @@ def authenticate_key(api_key: Optional[str]) -> dict:
             status_code=401,
             detail={
                 "error": "Unauthorized",
-                "message": "Missing 'X-API-Key' header. Generate your free key at http://localhost:5173/developers",
-                "docs_url": "http://localhost:5173/developers"
+                "message": "Missing 'X-API-Key' header. Generate your free key at https://sih-2026-sayandevelops.vercel.app/developers",
+                "docs_url": "https://sih-2026-sayandevelops.vercel.app/developers"
             }
         )
     keys = load_keys()
@@ -78,7 +78,7 @@ def authenticate_key(api_key: Optional[str]) -> dict:
             detail={
                 "error": "Invalid API Key",
                 "message": f"API key '{cleaned_key[:12]}...' is invalid or revoked. Generate a new key at /developers",
-                "docs_url": "http://localhost:5173/developers"
+                "docs_url": "https://sih-2026-sayandevelops.vercel.app/developers"
             }
         )
     # Increment usage
@@ -121,7 +121,7 @@ async def generate_api_key(
         "api_key": new_key,
         "app_name": app_name,
         "tier": "FREE_TIER (500 req/day)",
-        "docs_url": "http://localhost:5173/developers"
+        "docs_url": "https://sih-2026-sayandevelops.vercel.app/developers"
     }
 
 
@@ -302,7 +302,7 @@ async def verify_document_api(
         },
         "forensics_summary": {
             "is_tampered": is_tampered,
-            "ela_heatmap_url": f"http://localhost:8000{tampering_res.get('heatmap_url')}" if tampering_res.get("heatmap_url") else None,
+            "ela_heatmap_url": f"https://sih2026-f1o1.onrender.com{tampering_res.get('heatmap_url')}" if tampering_res.get("heatmap_url") else None,
         },
         "blockchain_audit": {
             "event_hash": audit_event.get("event_hash"),
