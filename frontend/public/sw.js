@@ -67,6 +67,18 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
+  // Bypass service worker in dev mode or for Vite internals and API proxies
+  if (
+    url.hostname === "localhost" ||
+    url.hostname === "127.0.0.1" ||
+    url.pathname.startsWith("/@") ||
+    url.pathname.startsWith("/src/") ||
+    url.pathname.startsWith("/nvidia-api") ||
+    url.pathname.includes("node_modules")
+  ) {
+    return;
+  }
+
   // Handle API requests: Network-first, with fallback JSON if offline
   if (url.pathname.startsWith("/api/")) {
     event.respondWith(
@@ -140,7 +152,7 @@ self.addEventListener("fetch", (event) => {
           }
           return networkResponse;
         })
-        .catch(() => cachedResponse); // if network fails, continue with cache
+        .catch(() => cachedResponse || new Response("", { status: 408, statusText: "Offline or Network Timeout" }));
 
       return cachedResponse || fetchPromise;
     })

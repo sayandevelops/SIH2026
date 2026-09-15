@@ -6,9 +6,8 @@ import {
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
-const NVIDIA_API_KEY = import.meta.env.VITE_NVIDIA_API_KEY;
-const NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1";
-const MODEL = "meta/llama-3.1-70b-instruct";
+const NVIDIA_API_KEY = import.meta.env.VITE_NVIDIA_API_KEY || "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";
+const MODEL = "meta/llama-3.2-11b-vision-instruct";
 
 const SYSTEM_PROMPT = `You are ShieldScan AI — an elite forensic document intelligence assistant built into a defense-grade border security and document verification system used by Indian government border agencies, traffic police, maritime customs, and national examination centers.
 
@@ -21,7 +20,7 @@ Your role is to:
 - Answer questions about specific document types: Indian Passports, Aadhaar, DL, RC, Seafarer CDC, PAN cards
 - Keep answers concise and actionable for frontline officers
 
-You are running on NVIDIA Llama 3.1 70B via NVIDIA AI Foundation Models.
+You are running on NVIDIA NIM via NVIDIA AI Foundation Models (Llama 3.2).
 Always be confident, professional, and brief. No markdown headers — use plain short paragraphs.`;
 
 const QUICK_PROMPTS = [
@@ -39,7 +38,7 @@ export default function ForensicChatbot() {
     {
       role: "assistant",
       content:
-        "ShieldScan AI online. I'm your forensic intelligence assistant — ask me anything about document verification, tamper detection results, biometric analysis, or how ShieldScan catches forgeries.",
+        "ShieldScan AI online. I'm your forensic intelligence assistant powered by NVIDIA AI — ask me anything about document verification, tamper detection results, biometric analysis, or how ShieldScan catches forgeries.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -73,7 +72,9 @@ export default function ForensicChatbot() {
     setIsLoading(true);
 
     try {
-      const res = await fetch(`${NVIDIA_BASE_URL}/chat/completions`, {
+      // Use Vite proxy '/nvidia-api' to bypass browser CORS restrictions
+      const endpoint = "/nvidia-api/chat/completions";
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -233,7 +234,7 @@ export default function ForensicChatbot() {
                   <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
                     <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#10b981" }} />
                     <span style={{ fontSize: "0.7rem", fontWeight: 600, color: "#10b981" }}>
-                      NVIDIA Llama 3.1 70B · Online
+                      NVIDIA Llama 3.2 · Online
                     </span>
                   </div>
                 </div>
