@@ -5,7 +5,13 @@
 
 import axios from "axios";
 
-const rawBaseURL = import.meta.env.VITE_API_URL || "";
+const isBrowser = typeof window !== "undefined";
+const isLocal = isBrowser && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
+
+// In production on Vercel, use same-origin relative path ("") to route through Vercel's server-side proxy in vercel.json.
+// This completely eliminates cross-origin CORS errors!
+// In local development, target the local FastAPI backend.
+const rawBaseURL = isLocal ? (import.meta.env.VITE_API_URL || "http://127.0.0.1:8000") : "";
 const cleanBaseURL = rawBaseURL.endsWith("/") ? rawBaseURL.slice(0, -1) : rawBaseURL;
 
 const API = axios.create({
