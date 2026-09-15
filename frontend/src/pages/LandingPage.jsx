@@ -1191,7 +1191,27 @@ export default function LandingPage() {
                     ? "#059669" : "#2563eb",
                   border: `1px solid ${log.status === "VALID" || log.status === "CLEARED" || log.status === "AUTHENTIC" || log.status === "MATCH" || log.status === "SEALED" || log.status === "OK" ? "#a7f3d0" : "#bfdbfe"}`,
                 }}>
-                   <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
+                  {log.status}
+                </span>
+              </div>
+            ))}
+            {logIndex < activityLogs.length && (
+              <div style={{ display: "flex", gap: 8, alignItems: "center", color: "#2563eb", marginTop: 12, fontSize: "0.8rem" }}>
+                <span className="spinner" style={{ width: 14, height: 14, borderWidth: 2 }} />
+                <span>Running neural verification models...</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </motion.div>
+
+      {/* ── 4. Real-World Checkpoint Hardware Suite ─────────────────── */}
+      <div style={{ marginBottom: 68 }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#2563eb", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            HARDWARE INTEGRATION
+          </span>
+          <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
             Engineered for Border Checkpoints & Automated e-Gates
           </h2>
           <p style={{ color: "#64748b", maxWidth: 640, margin: "8px auto 0", fontSize: "0.95rem" }}>

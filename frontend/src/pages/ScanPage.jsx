@@ -8,18 +8,73 @@ import {
   Upload, Camera, FileText, Shield, Loader2,
   CheckCircle2, XCircle, ChevronRight, RotateCcw,
   Fingerprint, Eye, Cpu, AlertTriangle, Layers,
-  Terminal, Check, Sparkles, Usb, Laptop
+  Terminal, Check, Sparkles, Usb, Laptop,
+  Globe, CreditCard, Car, FileCheck2, BadgeCheck
 } from "lucide-react";
 import { screenDocument } from "../api/shieldscan";
 import DeviceCheckerHUD from "../components/Scanner/DeviceCheckerHUD";
 
 const DOC_TYPES = [
-  { id: "PASSPORT",        label: "Passport",        sub: "ICAO 9303 MRZ",          icon: "🛂", desc: "Passports with machine readable zone & checksums" },
-  { id: "AADHAAR",         label: "Aadhaar Card",    sub: "UIDAI Verhoeff D5",      icon: "🆔", desc: "12-digit UIDAI format + QR verification" },
-  { id: "PAN_CARD",        label: "PAN Card",        sub: "Income Tax Dept",        icon: "💳", desc: "10-char format + surname initial cross-match" },
-  { id: "DRIVING_LICENSE", label: "Driving License", sub: "MoRTH Smart Card",       icon: "🚗", desc: "State code + issue year + DL number format" },
-  { id: "VISA",            label: "Visa Permit",     sub: "Consular Entry Stamp",   icon: "📄", desc: "Entry dates, expiry, validity & jurisdiction" },
-  { id: "NATIONAL_ID",     label: "National ID",     sub: "Universal Citizen Card", icon: "🪪", desc: "Standard identity document with OCR text" },
+  {
+    id: "PASSPORT",
+    label: "Passport",
+    sub: "ICAO 9303 MRZ",
+    icon: Globe,
+    color: "#2563eb",
+    bgSoft: "#eff6ff",
+    borderSoft: "#bfdbfe",
+    desc: "Passports with machine readable zone & checksums",
+  },
+  {
+    id: "AADHAAR",
+    label: "Aadhaar Card",
+    sub: "UIDAI Verhoeff D5",
+    icon: Fingerprint,
+    color: "#059669",
+    bgSoft: "#ecfdf5",
+    borderSoft: "#a7f3d0",
+    desc: "12-digit UIDAI format + QR verification",
+  },
+  {
+    id: "PAN_CARD",
+    label: "PAN Card",
+    sub: "Income Tax Dept",
+    icon: CreditCard,
+    color: "#0284c7",
+    bgSoft: "#f0f9ff",
+    borderSoft: "#bae6fd",
+    desc: "10-char format + surname initial cross-match",
+  },
+  {
+    id: "DRIVING_LICENSE",
+    label: "Driving License",
+    sub: "MoRTH Smart Card",
+    icon: Car,
+    color: "#d97706",
+    bgSoft: "#fffbeb",
+    borderSoft: "#fde68a",
+    desc: "State code + issue year + DL number format",
+  },
+  {
+    id: "VISA",
+    label: "Visa Permit",
+    sub: "Consular Entry Stamp",
+    icon: FileCheck2,
+    color: "#7c3aed",
+    bgSoft: "#f5f3ff",
+    borderSoft: "#ddd6fe",
+    desc: "Entry dates, expiry, validity & jurisdiction",
+  },
+  {
+    id: "NATIONAL_ID",
+    label: "National ID",
+    sub: "Universal Citizen Card",
+    icon: BadgeCheck,
+    color: "#4f46e5",
+    bgSoft: "#eef2ff",
+    borderSoft: "#c7d2fe",
+    desc: "Standard identity document with OCR text",
+  },
 ];
 
 export default function ScanPage() {
@@ -354,51 +409,143 @@ export default function ScanPage() {
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
 
           {/* Document Type Selector Card */}
-          <div className="glass-card" style={{ padding: 24 }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16, flexWrap: "wrap", gap: 8 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <Layers size={16} color="#2563eb" />
-                <span style={{ fontSize: "0.82rem", fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: "#475569", fontFamily: "Outfit" }}>
-                  Select Document Protocol
-                </span>
+          <div className="glass-card" style={{ padding: 24, borderRadius: "18px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18, flexWrap: "wrap", gap: 8 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <div style={{
+                  width: 30, height: 30, borderRadius: "8px",
+                  background: "#eff6ff", border: "1px solid #bfdbfe",
+                  display: "flex", alignItems: "center", justifyContent: "center"
+                }}>
+                  <Layers size={16} color="#2563eb" />
+                </div>
+                <div>
+                  <span style={{ fontSize: "0.84rem", fontWeight: 800, letterSpacing: "0.04em", textTransform: "uppercase", color: "#1e293b", fontFamily: "Outfit" }}>
+                    Select Document Protocol
+                  </span>
+                </div>
               </div>
-              <span style={{ fontSize: "0.72rem", color: "#2563eb", background: "#eff6ff", border: "1px solid #bfdbfe", padding: "2px 8px", borderRadius: "6px", fontWeight: 600 }}>
+              <span style={{
+                fontSize: "0.72rem", color: "#2563eb", background: "#eff6ff",
+                border: "1px solid #bfdbfe", padding: "3px 10px", borderRadius: "999px",
+                fontWeight: 700, letterSpacing: "0.03em"
+              }}>
                 {DOC_TYPES.length} PROTOCOLS READY
               </span>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 140px), 1fr))", gap: 12 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 155px), 1fr))", gap: 12 }}>
               {DOC_TYPES.map(dt => {
                 const isSelected = docType === dt.id;
+                const IconComponent = dt.icon;
                 return (
                   <button
                     key={dt.id}
+                    type="button"
                     onClick={() => setDocType(dt.id)}
                     style={{
-                      padding: "14px 12px",
-                      borderRadius: "12px",
-                      background: isSelected ? "#eff6ff" : "#ffffff",
-                      border: `1.5px solid ${isSelected ? "#2563eb" : "#e2e8f0"}`,
-                      boxShadow: isSelected ? "0 2px 8px rgba(37, 99, 235, 0.12)" : "0 1px 2px rgba(0, 0, 0, 0.03)",
+                      position: "relative",
+                      padding: "16px 14px",
+                      borderRadius: "14px",
+                      background: isSelected
+                        ? `linear-gradient(145deg, ${dt.color}10 0%, #ffffff 100%)`
+                        : "#ffffff",
+                      border: `1.5px solid ${isSelected ? dt.color : "#e2e8f0"}`,
+                      boxShadow: isSelected
+                        ? `0 10px 24px -6px ${dt.color}35, 0 0 0 1px ${dt.color}`
+                        : "0 1px 3px rgba(0, 0, 0, 0.03)",
                       textAlign: "left",
                       cursor: "pointer",
-                      transition: "all 0.2s ease",
+                      transition: "all 0.22s cubic-bezier(0.16, 1, 0.3, 1)",
                       display: "flex",
                       flexDirection: "column",
-                      gap: 4,
+                      gap: 10,
+                      transform: isSelected ? "translateY(-2px)" : "translateY(0)",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isSelected) {
+                        e.currentTarget.style.borderColor = dt.color + "99";
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow = `0 6px 16px -4px ${dt.color}20`;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isSelected) {
+                        e.currentTarget.style.borderColor = "#e2e8f0";
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.03)";
+                      }
                     }}
                   >
+                    {/* Top Row: Icon Container + Selection Radio */}
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                      <span style={{ fontSize: "1.4rem" }}>{dt.icon}</span>
-                      {isSelected && (
-                        <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#2563eb" }} />
+                      <div
+                        style={{
+                          width: 38,
+                          height: 38,
+                          borderRadius: "10px",
+                          background: isSelected ? `linear-gradient(135deg, ${dt.color}, ${dt.color}dd)` : dt.bgSoft,
+                          border: `1px solid ${isSelected ? dt.color : dt.borderSoft}`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: isSelected ? "#ffffff" : dt.color,
+                          boxShadow: isSelected ? `0 4px 12px ${dt.color}45` : "none",
+                          transition: "all 0.2s ease",
+                        }}
+                      >
+                        <IconComponent size={19} strokeWidth={2.2} />
+                      </div>
+
+                      {isSelected ? (
+                        <div
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: "50%",
+                            background: dt.color,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            boxShadow: `0 2px 8px ${dt.color}55`,
+                          }}
+                        >
+                          <Check size={12} color="#ffffff" strokeWidth={3} />
+                        </div>
+                      ) : (
+                        <div
+                          style={{
+                            width: 16,
+                            height: 16,
+                            borderRadius: "50%",
+                            border: "1.5px solid #cbd5e1",
+                            background: "transparent",
+                          }}
+                        />
                       )}
                     </div>
-                    <div style={{ fontSize: "0.88rem", fontWeight: 700, color: isSelected ? "#1d4ed8" : "#0f172a", marginTop: 4 }}>
-                      {dt.label}
-                    </div>
-                    <div style={{ fontSize: "0.72rem", color: isSelected ? "#2563eb" : "#64748b" }}>
-                      {dt.sub}
+
+                    {/* Bottom Content: Title & Subtitle Badge */}
+                    <div>
+                      <div style={{ fontSize: "0.9rem", fontWeight: 800, color: isSelected ? "#0f172a" : "#1e293b", marginBottom: 4, letterSpacing: "-0.01em" }}>
+                        {dt.label}
+                      </div>
+                      <div
+                        style={{
+                          display: "inline-block",
+                          fontSize: "0.68rem",
+                          fontWeight: 700,
+                          fontFamily: "JetBrains Mono, monospace",
+                          color: isSelected ? dt.color : "#64748b",
+                          background: isSelected ? dt.bgSoft : "#f8fafc",
+                          padding: "2px 7px",
+                          borderRadius: "5px",
+                          border: `1px solid ${isSelected ? dt.borderSoft : "#e2e8f0"}`,
+                          letterSpacing: "0.02em",
+                        }}
+                      >
+                        {dt.sub}
+                      </div>
                     </div>
                   </button>
                 );
