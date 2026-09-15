@@ -72,6 +72,134 @@
   --shadow-button: 0 2px 8px rgba(37, 99, 235, 0.2);
 }
 
+/* ── Theme Overrides: Traffic Police (High-Contrast Solar Glare Mode) ── */
+[data-theme="traffic"] {
+  --bg-core: #fefce8;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #fffbeb;
+  --bg-glass: rgba(255, 255, 255, 0.95);
+  --bg-glass-card: #ffffff;
+  --bg-glass-hover: #fef3c7;
+
+  /* Traffic Amber / Highway Intercept Accents */
+  --blue-core: #d97706;
+  --blue-hover: #b45309;
+  --blue-soft: #fffbeb;
+  --blue-border: #fde68a;
+
+  --cyan-core: #ca8a04;
+  --cyan-soft: #fefce8;
+
+  --border-subtle: #fde68a;
+  --border-light: #fef3c7;
+  --border-focus: #f59e0b;
+  --border-neon: #d97706;
+  --border-glass: #fef08a;
+
+  --text-pure: #000000;
+  --text-primary: #1c1917;
+  --text-secondary: #44403c;
+  --text-muted: #78716c;
+  --text-dim: #a8a29e;
+
+  --shadow-hud: 0 4px 20px -2px rgba(217, 119, 6, 0.12), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 10px 25px -3px rgba(217, 119, 6, 0.22), 0 4px 8px -2px rgba(0, 0, 0, 0.06);
+  --shadow-button: 0 4px 14px rgba(217, 119, 6, 0.35);
+}
+
+[data-theme="traffic"] body {
+  background-color: #fefce8;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(254, 243, 199, 0.85) 0px, transparent 55%),
+    radial-gradient(at 100% 0%, rgba(254, 240, 138, 0.6) 0px, transparent 55%);
+}
+
+/* ── Theme Overrides: Maritime Ship Checking (Deep Sea Nautical Midnight) ── */
+[data-theme="maritime"] {
+  --bg-core: #050d18;
+  --bg-surface: #0b182b;
+  --bg-surface-elevated: #10233d;
+  --bg-glass: rgba(11, 24, 43, 0.94);
+  --bg-glass-card: #0b182b;
+  --bg-glass-hover: #162f52;
+
+  /* Bioluminescent Cyan & Nautical Sonar Accents */
+  --blue-core: #06b6d4;
+  --blue-hover: #0891b2;
+  --blue-soft: rgba(6, 182, 212, 0.15);
+  --blue-border: #164e63;
+
+  --cyan-core: #38bdf8;
+  --cyan-soft: rgba(56, 189, 248, 0.15);
+
+  --emerald-core: #10b981;
+  --emerald-soft: rgba(16, 185, 129, 0.15);
+  --emerald-border: #065f46;
+
+  --amber-core: #f59e0b;
+  --amber-soft: rgba(245, 158, 11, 0.15);
+  --amber-border: #78350f;
+
+  --crimson-core: #f43f5e;
+  --crimson-soft: rgba(244, 63, 94, 0.15);
+  --crimson-border: #881337;
+
+  --border-subtle: #172d47;
+  --border-light: #10243b;
+  --border-focus: #06b6d4;
+  --border-neon: #0891b2;
+  --border-glass: #172d47;
+
+  --text-pure: #f8fafc;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-dim: #475569;
+
+  --shadow-hud: 0 4px 24px -2px rgba(6, 182, 212, 0.15), 0 2px 8px -1px rgba(0, 0, 0, 0.6);
+  --shadow-card-hover: 0 12px 30px -3px rgba(6, 182, 212, 0.25), 0 6px 12px -2px rgba(0, 0, 0, 0.5);
+  --shadow-button: 0 4px 16px rgba(6, 182, 212, 0.4);
+}
+
+[data-theme="maritime"] body {
+  background-color: #050d18;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.14) 0px, transparent 55%),
+    radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.1) 0px, transparent 55%);
+  color: #e2e8f0;
+}
+
+[data-theme="maritime"] h1,
+[data-theme="maritime"] h2,
+[data-theme="maritime"] h3,
+[data-theme="maritime"] h4,
+[data-theme="maritime"] h5,
+[data-theme="maritime"] h6 {
+  color: #f8fafc !important;
+}
+
+[data-theme="maritime"] p {
+  color: #94a3b8;
+}
+
+[data-theme="maritime"] .glass-card,
+[data-theme="maritime"] .feature-card-glow {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+[data-theme="maritime"] .tab-pill-group {
+  background: #091322 !important;
+  border-color: #172d47 !important;
+}
+
+[data-theme="maritime"] .tab-pill-btn.active {
+  background: #0e2038 !important;
+  color: #38bdf8 !important;
+  border-color: #164e63 !important;
+}
+
+
 /* ── Base Reset & Setup ──────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;

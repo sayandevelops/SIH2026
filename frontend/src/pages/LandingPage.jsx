@@ -8,9 +8,12 @@ import {
   ChevronDown, ChevronUp, Globe, AlertTriangle, UserCheck,
   Award, FileSpreadsheet, Activity, GraduationCap, Clock,
   Calculator, ShieldAlert, MonitorCheck, TabletSmartphone,
-  Server, FileCheck, RefreshCw, BarChart3
+  Server, FileCheck, RefreshCw, BarChart3,
+  Siren, Anchor, Sun, Compass, Radio, Droplets, Gauge
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
+import toast from "react-hot-toast";
 
 // ── 8-Stage Forensic Pipeline Modules ─────────────────────────────
 const features = [
@@ -524,8 +527,95 @@ const calculatorPresets = [
   },
 ];
 
+// ── Specialized Tactical Operational Environments ────────────────
+const tacticalEnvironments = [
+  {
+    id: "traffic",
+    themeKey: "traffic",
+    title: "Traffic Police & Highway Patrol",
+    shortName: "Highway Intercept",
+    tag: "SOLAR GLARE PROTECTION",
+    tagline: "Ultra-high contrast amber HUD engineered for extreme roadside sunlight (>85k Lux) and rapid 5-second motorist spot checks.",
+    accentColor: "#d97706",
+    badgeBg: "#fffbeb",
+    badgeBorder: "#fde68a",
+    icon: Siren,
+    operationalSpecs: [
+      { label: "Target Credentials", value: "Indian Smart Card DL, Vehicle RC, E-Challan Registry, Aadhaar" },
+      { label: "Tactical Environment", value: "Direct solar glare (>85,000 Lux), highway dust, heavy motorcycle glove operation" },
+      { label: "Specialized Engine", value: "Solar amber high-contrast palette, anti-glare typography, 1-tap DL/RC OCR" },
+      { label: "Interceptor Feed", value: "Sub-second query against National Stolen Vehicle Registry & Non-Bailable Warrants" },
+    ],
+    sampleDoc: {
+      type: "INDIAN DRIVING LICENSE (DL)",
+      idNumber: "DL-1420240098231",
+      holder: "RAJESH KUMAR SHARMA",
+      status: "VERIFIED AUTHENTIC · NO VIOLATIONS",
+      checks: ["QR Digital Signature: VALID", "HSRP / RC Match: 100%", "State RTO Database: ACTIVE"],
+      luxTelemetry: "86,200 LUX · SOLAR SHIELD ACTIVE",
+      badge: "GLARE DEFENSE ACTIVE",
+    },
+  },
+  {
+    id: "maritime",
+    themeKey: "maritime",
+    title: "Maritime & Vessel Cargo Boarding",
+    shortName: "Ship Checking",
+    tag: "NAUTICAL BRIDGE MODE",
+    tagline: "Deep sea midnight palette with bioluminescent cyan telemetry to preserve dark-adapted vision on ship bridges and open-water boarding.",
+    accentColor: "#06b6d4",
+    badgeBg: "rgba(6, 182, 212, 0.12)",
+    badgeBorder: "#164e63",
+    icon: Anchor,
+    operationalSpecs: [
+      { label: "Target Credentials", value: "Seafarer CDC, Vessel Crew Manifests, Bills of Lading, Sailor Passports" },
+      { label: "Tactical Environment", value: "Night boarding at 02:00 AM, salt-spray mist, pitch-dark ship navigation bridge" },
+      { label: "Specialized Engine", value: "Bioluminescent cyan HUD, scotopic night-vision preservation, offline neural cache" },
+      { label: "Maritime Watchlist", value: "Sub-second cross-reference with IMO vessel registry & Coastal Guard Lookout Circulars" },
+    ],
+    sampleDoc: {
+      type: "SEAFARER CONTINUOUS DISCHARGE BOOK (CDC)",
+      idNumber: "IN-CDC-2023-88412",
+      holder: "CAPT. VIKRAMADITYA SEN",
+      status: "CLEARED FOR HARBOR ENTRY",
+      checks: ["IMO SOLAS Standard: COMPLIANT", "Port Customs Manifest: MATCH", "Interpol Maritime SLTD: NEGATIVE"],
+      luxTelemetry: "0.2 LUX · SCOTOPIC PRESERVATION ACTIVE",
+      badge: "NIGHT-BRIDGE SAFE",
+    },
+  },
+  {
+    id: "default",
+    themeKey: "default",
+    title: "Border Defense & Immigration e-Gates",
+    shortName: "Border Defense HQ",
+    tag: "SOVEREIGN COMMAND MODE",
+    tagline: "Executive high-trust GovTech interface optimized for immigration counters, walk-through e-Gates, and forensic audit centers.",
+    accentColor: "#2563eb",
+    badgeBg: "#eff6ff",
+    badgeBorder: "#bfdbfe",
+    icon: Shield,
+    operationalSpecs: [
+      { label: "Target Credentials", value: "ICAO 9303 Passports (TD1/TD2/TD3), Diplomatic Visas, UIDAI Aadhaar" },
+      { label: "Tactical Environment", value: "24/7 high-throughput international airport terminals & sovereign checkpoints" },
+      { label: "Specialized Engine", value: "8-Stage Forensic Pipeline, ArcFace 512D Biometric Liveness, SHA-256 Ledger" },
+      { label: "Immigration Ledger", value: "Cross-checks against Interpol SLTD, MHA LOC database, and Verhoeff D5 algorithm" },
+    ],
+    sampleDoc: {
+      type: "INTERNATIONAL DIPLOMATIC PASSPORT",
+      idNumber: "Z9810472",
+      holder: "DR. ANANYA MUKHERJEE",
+      status: "AUTHENTIC & VERIFIED · CLEARED",
+      checks: ["ICAO Checksums: 100% MATCH", "ArcFace Biometrics: 99.4% COSINE", "Tamper Ledger: SHA-256 ANCHORED"],
+      luxTelemetry: "450 LUX · AIRPORT TERMINAL DOCK",
+      badge: "e-GATE RELAY READY",
+    },
+  },
+];
+
 export default function LandingPage() {
   const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
+  const [activeEnvTab, setActiveEnvTab] = useState(theme === "traffic" ? "traffic" : theme === "maritime" ? "maritime" : "traffic");
 
   // Activity feed simulation
   const [logIndex, setLogIndex] = useState(0);
@@ -1791,6 +1881,503 @@ export default function LandingPage() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* ── 6.7. Specialized Tactical Operational Environments ────── */}
+      <div style={{ marginBottom: 68 }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <div style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "4px 14px",
+            borderRadius: "9999px",
+            background: theme === "traffic" ? "#fffbeb" : theme === "maritime" ? "rgba(6, 182, 212, 0.12)" : "#eff6ff",
+            border: `1px solid ${theme === "traffic" ? "#fde68a" : theme === "maritime" ? "#164e63" : "#bfdbfe"}`,
+            marginBottom: 10,
+          }}>
+            <Radio size={14} color={theme === "traffic" ? "#d97706" : theme === "maritime" ? "#06b6d4" : "#2563eb"} />
+            <span style={{
+              fontSize: "0.76rem",
+              fontWeight: 800,
+              color: theme === "traffic" ? "#d97706" : theme === "maritime" ? "#06b6d4" : "#2563eb",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase"
+            }}>
+              TACTICAL FIELD ENVIRONMENTS · ADAPTIVE HUD
+            </span>
+          </div>
+          <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "var(--text-pure)", marginTop: 4 }}>
+            Engineered for Highway Patrol & Maritime Ship Checking
+          </h2>
+          <p style={{ color: "var(--text-secondary)", maxWidth: 720, margin: "8px auto 0", fontSize: "0.95rem" }}>
+            Frontline officers face extreme conditions: blinding outdoor sunlight glare during highway spot-checks versus pitch-black night vision preservation when boarding cargo ships at sea. ShieldScan dynamically adapts its UI, contrast thresholds, and optical filters.
+          </p>
+        </div>
+
+        {/* 3 Tactical Profiles Selector Cards */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 310px), 1fr))",
+          gap: 20,
+          marginBottom: 28,
+        }}>
+          {tacticalEnvironments.map((env) => {
+            const Icon = env.icon;
+            const isSelected = activeEnvTab === env.id;
+            const isThemeActive = theme === env.themeKey;
+
+            return (
+              <div
+                key={env.id}
+                onClick={() => setActiveEnvTab(env.id)}
+                className="glass-card"
+                style={{
+                  padding: "22px 20px",
+                  borderRadius: "16px",
+                  border: isSelected ? `2px solid ${env.accentColor}` : "1px solid var(--border-subtle)",
+                  background: isSelected ? env.badgeBg : "var(--bg-surface)",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  position: "relative",
+                  boxShadow: isSelected ? `0 8px 24px -4px ${env.accentColor}30` : "var(--shadow-hud)",
+                }}
+              >
+                {/* Active Global Indicator Pill */}
+                {isThemeActive && (
+                  <div style={{
+                    position: "absolute",
+                    top: 14,
+                    right: 14,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 5,
+                    padding: "3px 9px",
+                    borderRadius: "9999px",
+                    background: env.accentColor,
+                    color: "#ffffff",
+                    fontSize: "0.68rem",
+                    fontWeight: 800,
+                    letterSpacing: "0.04em",
+                  }}>
+                    <Check size={11} strokeWidth={3} />
+                    APP THEME ACTIVE
+                  </div>
+                )}
+
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+                  <div style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: 12,
+                    background: isSelected ? env.accentColor : env.badgeBg,
+                    color: isSelected ? "#ffffff" : env.accentColor,
+                    border: `1px solid ${env.badgeBorder}`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}>
+                    <Icon size={22} strokeWidth={2.2} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: "0.7rem", fontWeight: 800, color: env.accentColor, letterSpacing: "0.06em" }}>
+                      {env.tag}
+                    </div>
+                    <div style={{ fontSize: "1.05rem", fontWeight: 800, color: "var(--text-pure)" }}>
+                      {env.title}
+                    </div>
+                  </div>
+                </div>
+
+                <p style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: 1.45, marginBottom: 16 }}>
+                  {env.tagline}
+                </p>
+
+                {/* Specs List */}
+                <div style={{ display: "flex", flexDirection: "column", gap: 8, fontSize: "0.78rem" }}>
+                  {env.operationalSpecs.slice(0, 2).map((spec, sIdx) => (
+                    <div key={sIdx} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                      <span style={{ fontWeight: 700, color: "var(--text-primary)", fontSize: "0.72rem", textTransform: "uppercase" }}>
+                        {spec.label}:
+                      </span>
+                      <span style={{ color: "var(--text-secondary)" }}>
+                        {spec.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Bottom Select Tab Indicator */}
+                <div style={{
+                  marginTop: 18,
+                  paddingTop: 12,
+                  borderTop: "1px solid var(--border-light)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}>
+                  <span style={{ fontSize: "0.74rem", fontWeight: 700, color: env.accentColor }}>
+                    {isSelected ? "● Viewing Live HUD Simulation" : "Click to Preview HUD →"}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setTheme(env.themeKey);
+                      setActiveEnvTab(env.id);
+                      toast.success(`Switched app to ${env.title}!`, {
+                        icon: env.themeKey === "traffic" ? "🚦" : env.themeKey === "maritime" ? "⚓" : "🛡️",
+                      });
+                    }}
+                    style={{
+                      padding: "4px 10px",
+                      borderRadius: "6px",
+                      background: isThemeActive ? "var(--bg-surface)" : env.accentColor,
+                      color: isThemeActive ? env.accentColor : "#ffffff",
+                      border: `1px solid ${env.accentColor}`,
+                      fontSize: "0.72rem",
+                      fontWeight: 700,
+                      cursor: "pointer",
+                      transition: "all 0.15s ease",
+                    }}
+                  >
+                    {isThemeActive ? "Active" : "Apply Theme"}
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Live Field HUD Simulator Container */}
+        {(() => {
+          const selectedEnv = tacticalEnvironments.find((e) => e.id === activeEnvTab) || tacticalEnvironments[0];
+          const isSelectedTraffic = selectedEnv.id === "traffic";
+          const isSelectedMaritime = selectedEnv.id === "maritime";
+
+          return (
+            <div
+              style={{
+                background: isSelectedMaritime ? "#081322" : isSelectedTraffic ? "#fffef5" : "#ffffff",
+                border: isSelectedTraffic ? "2px solid #f59e0b" : isSelectedMaritime ? "2px solid #06b6d4" : "1px solid #bfdbfe",
+                borderRadius: "20px",
+                overflow: "hidden",
+                boxShadow: isSelectedMaritime
+                  ? "0 20px 50px -10px rgba(6, 182, 212, 0.25)"
+                  : isSelectedTraffic
+                  ? "0 20px 50px -10px rgba(217, 119, 6, 0.2)"
+                  : "0 20px 50px -10px rgba(37, 99, 235, 0.12)",
+                transition: "all 0.3s ease",
+              }}
+            >
+              {/* Simulator HUD Top Bar */}
+              <div
+                style={{
+                  padding: "14px 22px",
+                  background: isSelectedMaritime ? "#0c1a2e" : isSelectedTraffic ? "#fef3c7" : "#f8fafc",
+                  borderBottom: `1px solid ${isSelectedMaritime ? "#163354" : isSelectedTraffic ? "#fde68a" : "#e2e8f0"}`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                  gap: 12,
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: "50%",
+                      background: selectedEnv.accentColor,
+                      boxShadow: `0 0 0 3px ${selectedEnv.accentColor}40`,
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "JetBrains Mono, monospace",
+                      fontSize: "0.78rem",
+                      fontWeight: 700,
+                      color: isSelectedMaritime ? "#e2e8f0" : isSelectedTraffic ? "#000000" : "#1e293b",
+                      letterSpacing: "0.04em",
+                    }}
+                  >
+                    HUD SIMULATOR · {selectedEnv.tag}
+                  </span>
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                      fontSize: "0.72rem",
+                      fontWeight: 700,
+                      fontFamily: "JetBrains Mono, monospace",
+                      color: selectedEnv.accentColor,
+                      padding: "3px 10px",
+                      borderRadius: "6px",
+                      background: isSelectedMaritime ? "rgba(6, 182, 212, 0.12)" : isSelectedTraffic ? "#ffffff" : "#eff6ff",
+                      border: `1px solid ${isSelectedMaritime ? "#164e63" : isSelectedTraffic ? "#fde68a" : "#bfdbfe"}`,
+                    }}
+                  >
+                    {isSelectedTraffic ? <Sun size={13} /> : isSelectedMaritime ? <Anchor size={13} /> : <Shield size={13} />}
+                    <span>{selectedEnv.sampleDoc.luxTelemetry}</span>
+                  </div>
+
+                  <span
+                    style={{
+                      fontSize: "0.72rem",
+                      fontWeight: 800,
+                      color: isSelectedMaritime ? "#38bdf8" : isSelectedTraffic ? "#92400e" : "#2563eb",
+                    }}
+                  >
+                    {selectedEnv.sampleDoc.badge}
+                  </span>
+                </div>
+              </div>
+
+              {/* Simulator Body Content */}
+              <div style={{ padding: "26px 24px" }}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
+                    gap: 22,
+                    alignItems: "center",
+                  }}
+                >
+                  {/* Left Column: Simulated Document Card */}
+                  <div
+                    style={{
+                      background: isSelectedMaritime ? "#0e2038" : isSelectedTraffic ? "#ffffff" : "#f8fafc",
+                      border: `1.5px solid ${isSelectedMaritime ? "#1e3a5f" : isSelectedTraffic ? "#f59e0b" : "#cbd5e1"}`,
+                      borderRadius: "14px",
+                      padding: "20px",
+                      position: "relative",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+                      <span
+                        style={{
+                          fontSize: "0.68rem",
+                          fontWeight: 800,
+                          letterSpacing: "0.06em",
+                          color: selectedEnv.accentColor,
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {selectedEnv.sampleDoc.type}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "0.66rem",
+                          fontWeight: 800,
+                          padding: "2px 7px",
+                          borderRadius: "4px",
+                          background: isSelectedMaritime ? "rgba(16, 185, 129, 0.2)" : "#ecfdf5",
+                          color: "#10b981",
+                          border: "1px solid #10b981",
+                        }}
+                      >
+                        LIVE SCAN
+                      </span>
+                    </div>
+
+                    <div style={{ fontSize: "1.15rem", fontWeight: 800, color: isSelectedMaritime ? "#ffffff" : "#000000", marginBottom: 4 }}>
+                      {selectedEnv.sampleDoc.holder}
+                    </div>
+
+                    <div
+                      style={{
+                        fontFamily: "JetBrains Mono, monospace",
+                        fontSize: "0.85rem",
+                        fontWeight: 700,
+                        color: selectedEnv.accentColor,
+                        marginBottom: 16,
+                      }}
+                    >
+                      ID: {selectedEnv.sampleDoc.idNumber}
+                    </div>
+
+                    {/* Check list */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 }}>
+                      {selectedEnv.sampleDoc.checks.map((chk, cIdx) => (
+                        <div
+                          key={cIdx}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 8,
+                            fontSize: "0.78rem",
+                            color: isSelectedMaritime ? "#94a3b8" : "#334155",
+                          }}
+                        >
+                          <CheckCircle2 size={15} color="#10b981" style={{ flexShrink: 0 }} />
+                          <span style={{ fontWeight: 600 }}>{chk}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Status Banner */}
+                    <div
+                      style={{
+                        padding: "10px 12px",
+                        borderRadius: "8px",
+                        background: isSelectedMaritime ? "rgba(16, 185, 129, 0.15)" : isSelectedTraffic ? "#ecfdf5" : "#ecfdf5",
+                        border: "1px solid #a7f3d0",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                      }}
+                    >
+                      <ShieldCheck size={18} color="#059669" />
+                      <span style={{ fontSize: "0.82rem", fontWeight: 800, color: "#059669" }}>
+                        {selectedEnv.sampleDoc.status}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Tactical Parameters & Action CTAs */}
+                  <div>
+                    <div
+                      style={{
+                        fontSize: "0.72rem",
+                        fontWeight: 800,
+                        letterSpacing: "0.08em",
+                        color: selectedEnv.accentColor,
+                        textTransform: "uppercase",
+                        marginBottom: 6,
+                      }}
+                    >
+                      OPERATIONAL ADVANTAGE
+                    </div>
+                    <h3
+                      style={{
+                        fontSize: "1.35rem",
+                        fontWeight: 800,
+                        color: isSelectedMaritime ? "#ffffff" : isSelectedTraffic ? "#000000" : "#0f172a",
+                        marginBottom: 10,
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {isSelectedTraffic
+                        ? "Anti-Glare Optics & 5-Second Traffic Stop Verification"
+                        : isSelectedMaritime
+                        ? "Dark Bridge Scotopic Preservation & Seafarer CDC Vetting"
+                        : "Sovereign e-Gate Biometric Verification & Tamper Ledgers"}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "0.86rem",
+                        color: isSelectedMaritime ? "#94a3b8" : "#475569",
+                        lineHeight: 1.5,
+                        marginBottom: 20,
+                      }}
+                    >
+                      {selectedEnv.operationalSpecs[2].value}. {selectedEnv.operationalSpecs[3].value}.
+                    </p>
+
+                    {/* Operational Metric Badges */}
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 22 }}>
+                      <div
+                        style={{
+                          padding: "10px 12px",
+                          borderRadius: "8px",
+                          background: isSelectedMaritime ? "#0c1a2e" : isSelectedTraffic ? "#fef3c7" : "#f1f5f9",
+                          border: `1px solid ${isSelectedMaritime ? "#163354" : isSelectedTraffic ? "#fde68a" : "#e2e8f0"}`,
+                        }}
+                      >
+                        <div style={{ fontSize: "0.68rem", fontWeight: 700, color: selectedEnv.accentColor, textTransform: "uppercase" }}>
+                          TOUCH TARGETS
+                        </div>
+                        <div style={{ fontSize: "0.98rem", fontWeight: 800, color: isSelectedMaritime ? "#ffffff" : "#000000" }}>
+                          {isSelectedTraffic ? "+35% Glove Ready" : isSelectedMaritime ? "Ergonomic Night" : "Standard Kiosk"}
+                        </div>
+                      </div>
+
+                      <div
+                        style={{
+                          padding: "10px 12px",
+                          borderRadius: "8px",
+                          background: isSelectedMaritime ? "#0c1a2e" : isSelectedTraffic ? "#fef3c7" : "#f1f5f9",
+                          border: `1px solid ${isSelectedMaritime ? "#163354" : isSelectedTraffic ? "#fde68a" : "#e2e8f0"}`,
+                        }}
+                      >
+                        <div style={{ fontSize: "0.68rem", fontWeight: 700, color: selectedEnv.accentColor, textTransform: "uppercase" }}>
+                          OFFLINE RELIABILITY
+                        </div>
+                        <div style={{ fontSize: "0.98rem", fontWeight: 800, color: isSelectedMaritime ? "#ffffff" : "#000000" }}>
+                          100% On-Device Neural
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setTheme(selectedEnv.themeKey);
+                          toast.success(`Active theme switched to ${selectedEnv.title}!`, {
+                            icon: selectedEnv.themeKey === "traffic" ? "🚦" : selectedEnv.themeKey === "maritime" ? "⚓" : "🛡️",
+                          });
+                        }}
+                        style={{
+                          flex: "1 1 200px",
+                          padding: "12px 18px",
+                          borderRadius: "10px",
+                          background: selectedEnv.accentColor,
+                          color: "#ffffff",
+                          border: "none",
+                          fontWeight: 700,
+                          fontSize: "0.85rem",
+                          cursor: "pointer",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: 8,
+                          boxShadow: `0 4px 14px ${selectedEnv.accentColor}40`,
+                          transition: "all 0.2s ease",
+                        }}
+                      >
+                        <Check size={16} />
+                        {theme === selectedEnv.themeKey ? "Theme Active Globally" : `Activate ${selectedEnv.shortName} Theme`}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setTheme(selectedEnv.themeKey);
+                          navigate("/scan");
+                        }}
+                        style={{
+                          padding: "12px 18px",
+                          borderRadius: "10px",
+                          background: "transparent",
+                          color: selectedEnv.accentColor,
+                          border: `1.5px solid ${selectedEnv.accentColor}`,
+                          fontWeight: 700,
+                          fontSize: "0.85rem",
+                          cursor: "pointer",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 6,
+                          transition: "all 0.2s ease",
+                        }}
+                      >
+                        <span>Scan In This Mode</span>
+                        <ArrowRight size={14} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       {/* ── 7. Before vs After: Capability Comparison Matrix ─────────── */}

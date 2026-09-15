@@ -3,6 +3,8 @@ import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Scan, BookOpen, Code, ArrowRight, ShoppingBag, Lock, Menu, X } from "lucide-react";
 import PwaInstallButton from "../PWA/PwaInstallButton";
+import ThemeSelector from "./ThemeSelector";
+import { useTheme } from "../../context/ThemeContext";
 
 const navLinks = [
   { to: "/", label: "Overview", icon: Shield },
@@ -16,6 +18,7 @@ const navLinks = [
 export default function Navbar() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, themeMeta } = useTheme();
 
   // Auto-close menu when navigating
   useEffect(() => {
@@ -27,10 +30,10 @@ export default function Navbar() {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = "unset";
     };
   }, [mobileMenuOpen]);
 
@@ -43,10 +46,10 @@ export default function Navbar() {
         right: 0,
         zIndex: 100,
         height: "64px",
-        background: "rgba(255, 255, 255, 0.85)",
+        background: "var(--bg-glass)",
         backdropFilter: "blur(18px) saturate(180%)",
         WebkitBackdropFilter: "blur(18px) saturate(180%)",
-        borderBottom: "1px solid rgba(226, 232, 240, 0.8)",
+        borderBottom: "1px solid var(--border-subtle)",
         transition: "all 0.2s ease",
       }}
     >
@@ -75,12 +78,13 @@ export default function Navbar() {
             style={{
               width: "36px",
               height: "36px",
-              background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)",
+              background: `linear-gradient(135deg, ${themeMeta.accentColor} 0%, ${themeMeta.accentColor}dd 100%)`,
               borderRadius: "10px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 4px 12px rgba(37, 99, 235, 0.22)",
+              boxShadow: `0 4px 12px ${themeMeta.accentColor}44`,
+              transition: "all 0.2s ease",
             }}
           >
             <Shield size={20} color="#ffffff" strokeWidth={2.4} />
@@ -91,10 +95,10 @@ export default function Navbar() {
               fontSize: "1.22rem",
               fontWeight: 800,
               letterSpacing: "-0.02em",
-              color: "#0f172a",
+              color: "var(--text-pure)",
             }}
           >
-            Shield<span style={{ color: "#2563eb" }}>Scan</span>
+            Shield<span style={{ color: themeMeta.accentColor, transition: "color 0.2s ease" }}>Scan</span>
           </span>
         </NavLink>
 
@@ -125,9 +129,9 @@ export default function Navbar() {
                   fontWeight: isActive ? 600 : 500,
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   textDecoration: "none",
-                  color: isActive ? "#2563eb" : "#64748b",
-                  background: isActive ? "#ffffff" : "transparent",
-                  border: isActive ? "1px solid #e2e8f0" : "1px solid transparent",
+                  color: isActive ? themeMeta.accentColor : "var(--text-secondary)",
+                  background: isActive ? "var(--bg-surface)" : "transparent",
+                  border: isActive ? "1px solid var(--border-subtle)" : "1px solid transparent",
                   boxShadow: isActive ? "0 1px 3px rgba(0, 0, 0, 0.06)" : "none",
                   transition: "all 0.18s ease",
                 }}
@@ -141,6 +145,11 @@ export default function Navbar() {
 
         {/* Right Actions & Hamburger */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {/* Operational Environment Theme Selector - Desktop */}
+          <div className="desktop-action-btn">
+            <ThemeSelector />
+          </div>
+
           {/* PWA Install Button - Desktop */}
           <div className="desktop-action-btn">
             <PwaInstallButton />
@@ -155,12 +164,12 @@ export default function Navbar() {
               gap: "7px",
               padding: "8px 18px",
               borderRadius: "10px",
-              background: "linear-gradient(135deg, #2563eb, #1d4ed8)",
+              background: `linear-gradient(135deg, ${themeMeta.accentColor}, ${themeMeta.accentColor}dd)`,
               color: "#ffffff",
               fontSize: "0.84rem",
               fontWeight: 600,
               textDecoration: "none",
-              boxShadow: "0 2px 8px rgba(37, 99, 235, 0.25)",
+              boxShadow: `0 2px 8px ${themeMeta.accentColor}35`,
               transition: "all 0.2s ease",
             }}
           >
@@ -227,10 +236,10 @@ export default function Navbar() {
                 top: "64px",
                 left: 0,
                 right: 0,
-                background: "rgba(255, 255, 255, 0.98)",
+                background: "var(--bg-surface)",
                 backdropFilter: "blur(20px)",
                 WebkitBackdropFilter: "blur(20px)",
-                borderBottom: "1px solid #e2e8f0",
+                borderBottom: "1px solid var(--border-subtle)",
                 boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.15)",
                 zIndex: 99,
                 padding: "20px 20px 26px",
@@ -256,9 +265,9 @@ export default function Navbar() {
                         fontSize: "0.92rem",
                         fontWeight: isActive ? 700 : 500,
                         textDecoration: "none",
-                        color: isActive ? "#2563eb" : "#334155",
-                        background: isActive ? "#eff6ff" : "transparent",
-                        border: isActive ? "1px solid #bfdbfe" : "1px solid transparent",
+                        color: isActive ? themeMeta.accentColor : "var(--text-primary)",
+                        background: isActive ? themeMeta.softBg : "transparent",
+                        border: isActive ? `1px solid ${themeMeta.borderColor}` : "1px solid transparent",
                         transition: "all 0.15s ease",
                       }}
                     >
@@ -267,8 +276,8 @@ export default function Navbar() {
                           width: "32px",
                           height: "32px",
                           borderRadius: "8px",
-                          background: isActive ? "#2563eb" : "#f1f5f9",
-                          color: isActive ? "#ffffff" : "#64748b",
+                          background: isActive ? themeMeta.accentColor : "var(--border-light)",
+                          color: isActive ? "#ffffff" : "var(--text-muted)",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
@@ -280,6 +289,11 @@ export default function Navbar() {
                     </NavLink>
                   );
                 })}
+              </div>
+
+              {/* Mobile Drawer Operational Environment Switcher */}
+              <div style={{ marginBottom: "16px" }}>
+                <ThemeSelector mobile={true} />
               </div>
 
               {/* Mobile Drawer PWA Install Button */}
@@ -299,12 +313,12 @@ export default function Navbar() {
                   width: "100%",
                   padding: "13px 20px",
                   borderRadius: "10px",
-                  background: "linear-gradient(135deg, #2563eb, #1d4ed8)",
+                  background: `linear-gradient(135deg, ${themeMeta.accentColor}, ${themeMeta.accentColor}dd)`,
                   color: "#ffffff",
                   fontSize: "0.92rem",
                   fontWeight: 700,
                   textDecoration: "none",
-                  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.3)",
+                  boxShadow: `0 4px 14px ${themeMeta.accentColor}40`,
                 }}
               >
                 <span>Launch AI Detection</span>

@@ -9,13 +9,16 @@ import DeveloperPortal from "./pages/DeveloperPortal";
 import StorePage from "./pages/StorePage";
 import GuidePage from "./pages/GuidePage";
 import { PwaProvider } from "./pwa/PwaContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import OfflineIndicator from "./components/PWA/OfflineIndicator";
 import PwaInstallBanner from "./components/PWA/PwaInstallBanner";
+import ForensicChatbot from "./components/ForensicChatbot";
 
 export default function App() {
   return (
-    <PwaProvider>
-      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <ThemeProvider>
+      <PwaProvider>
+        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Toaster
           position="top-right"
           toastOptions={{
@@ -44,7 +47,9 @@ export default function App() {
           </Routes>
         </main>
         <PwaInstallBanner />
+        <ForensicChatbot />
       </Router>
     </PwaProvider>
+    </ThemeProvider>
   );
 }
