@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
-const NVIDIA_API_KEY = import.meta.env.VITE_NVIDIA_API_KEY || "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";
+const NVIDIA_API_KEY = "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";
 const MODEL = "meta/llama-3.2-11b-vision-instruct";
 
 const SYSTEM_PROMPT = `You are ShieldScan AI — an elite forensic document intelligence assistant built into a defense-grade border security and document verification system used by Indian government border agencies, traffic police, maritime customs, and national examination centers.
