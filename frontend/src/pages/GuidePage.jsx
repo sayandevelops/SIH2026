@@ -65,22 +65,6 @@ export default function GuidePage() {
         }}>
           Comprehensive blueprint explaining forensic tamper detection mathematics, biometric 1:1 facial matching, physical entrance kiosk deployment SOPs, and REST API integration.
         </p>
-
-        {/* Quick Spec Pills */}
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10, fontSize: "0.8rem", color: "#334155", fontWeight: 600 }}>
-          <span style={{ padding: "5px 12px", borderRadius: 8, background: "#f8fafc", border: "1px solid #e2e8f0" }}>
-            ⏱️ &lt; 8.4s Total Latency
-          </span>
-          <span style={{ padding: "5px 12px", borderRadius: 8, background: "#f8fafc", border: "1px solid #e2e8f0" }}>
-            🔒 100% Offline Air-Gap Mode
-          </span>
-          <span style={{ padding: "5px 12px", borderRadius: 8, background: "#f8fafc", border: "1px solid #e2e8f0" }}>
-            📐 ICAO Doc 9303 & Verhoeff D5 Compliant
-          </span>
-          <span style={{ padding: "5px 12px", borderRadius: 8, background: "#f8fafc", border: "1px solid #e2e8f0" }}>
-            🛡️ SHA-256 Court-Admissible Proofs
-          </span>
-        </div>
       </div>
 
       {/* ── 2. Interactive Navigation Pills ───────────────────────── */}
