@@ -85,7 +85,7 @@ export default function PwaInstallBanner() {
             </div>
 
             <p style={{ margin: "0 0 14px 0", fontSize: "0.8rem", color: "#94a3b8", lineHeight: 1.45 }}>
-              Install on your device for instant launch, standalone window mode, and offline inspection kiosk capabilities.
+              Install on your device for instant launch, standalone window mode, and offline inspection capabilities.
             </p>
 
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>

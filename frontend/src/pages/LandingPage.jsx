@@ -402,13 +402,13 @@ const threatMatrix = [
 const deploymentModes = [
   {
     tier: "TIER 01",
-    name: "Turnkey Autonomous Kiosk",
+    name: "Turnkey Autonomous Station",
     tag: "WALK-THROUGH e-GATE",
     image: "/images/exam_kiosk.jpg",
     desc: "Self-service floor-standing pedestal with motorized turnstile relay, integrated document hopper, and dual biometric cameras.",
     specs: ["21.5\" Anti-Glare Touch Display", "Motorized Passport & Admit Card Slot", "Dual HDR 60 FPS Biometric Cameras", "Turnstile & Flap Barrier Relay"],
     recommendedFor: "Airport e-Gates, National Exam Center Entrances, Defense Perimeter Access",
-    actionText: "View Kiosks in Store",
+    actionText: "View Hardware in Store",
     actionLink: "/store",
   },
   {
@@ -761,7 +761,7 @@ export default function LandingPage() {
                 boxShadow: "0 0 0 3px rgba(16, 185, 129, 0.2)",
               }} />
               <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#1e293b", letterSpacing: "0.04em" }}>
-                AUTOMATED BORDER CHECKPOINT KIOSK & e-GATE SUITE
+                AUTOMATED BORDER CHECKPOINT & e-GATE SUITE
               </span>
             </div>
           </div>
@@ -1191,28 +1191,8 @@ export default function LandingPage() {
                     ? "#059669" : "#2563eb",
                   border: `1px solid ${log.status === "VALID" || log.status === "CLEARED" || log.status === "AUTHENTIC" || log.status === "MATCH" || log.status === "SEALED" || log.status === "OK" ? "#a7f3d0" : "#bfdbfe"}`,
                 }}>
-                  {log.status}
-                </span>
-              </div>
-            ))}
-            {logIndex < activityLogs.length && (
-              <div style={{ display: "flex", gap: 8, alignItems: "center", color: "#2563eb", marginTop: 12, fontSize: "0.8rem" }}>
-                <span className="spinner" style={{ width: 14, height: 14, borderWidth: 2 }} />
-                <span>Running neural verification models...</span>
-              </div>
-            )}
-          </div>
-        </div>
-      </motion.div>
-
-      {/* ── 4. Real-World Checkpoint Hardware Suite ─────────────────── */}
-      <div style={{ marginBottom: 68 }}>
-        <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#2563eb", letterSpacing: "0.08em", textTransform: "uppercase" }}>
-            HARDWARE INTEGRATION
-          </span>
-          <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
-            Engineered for Border Kiosks & Automated e-Gates
+                   <h2 style={{ fontSize: "1.9rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
+            Engineered for Border Checkpoints & Automated e-Gates
           </h2>
           <p style={{ color: "#64748b", maxWidth: 640, margin: "8px auto 0", fontSize: "0.95rem" }}>
             Direct plug-and-play compatibility with standard immigration checkpoint hardware, desktop passport readers, and biometric traveler cameras.
@@ -1298,6 +1278,7 @@ export default function LandingPage() {
           </p>
         </div>
 
+        {/* ── Featured Showcase: Entrance Station Setup ── */}
         <div className="glass-card" style={{
           padding: 0,
           overflow: "hidden",
@@ -1308,11 +1289,11 @@ export default function LandingPage() {
         }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))" }}>
             
-            {/* Left Column: Exam Kiosk Visual Showcase */}
+            {/* Left Column: Visual Showcase */}
             <div style={{ position: "relative", minHeight: 440, background: "#0f172a", overflow: "hidden" }}>
               <img
                 src="/images/exam_kiosk.jpg"
-                alt="ShieldScan Autonomous Examination Check-in Kiosk"
+                alt="ShieldScan Autonomous Examination Check-in Station"
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
               
@@ -1340,7 +1321,7 @@ export default function LandingPage() {
                   TURNKEY ADMIT CARD & BIOMETRIC GATE
                 </div>
                 <div style={{ fontSize: "1.25rem", fontWeight: 800, color: "#ffffff", marginBottom: 8 }}>
-                  Anti-Proxy Autonomous Kiosk
+                  Anti-Proxy Autonomous Station
                 </div>
                 <p style={{ fontSize: "0.82rem", color: "#cbd5e1", lineHeight: 1.5, margin: "0 0 14px" }}>
                   Integrates with turnstile barriers, motorized admit card reader, and thermal seating slip dispenser for tamper-proof candidate flow.
@@ -1354,7 +1335,7 @@ export default function LandingPage() {
                       fontSize: "0.82rem", cursor: "pointer", display: "flex", alignItems: "center", gap: 6,
                     }}
                   >
-                    Procure Exam Kiosks <ArrowRight size={14} />
+                    Procure Hardware Units <ArrowRight size={14} />
                   </button>
                   <button
                     onClick={() => navigate("/guide")}
@@ -2294,7 +2275,7 @@ export default function LandingPage() {
                           TOUCH TARGETS
                         </div>
                         <div style={{ fontSize: "0.98rem", fontWeight: 800, color: isSelectedMaritime ? "#ffffff" : "#000000" }}>
-                          {isSelectedTraffic ? "+35% Glove Ready" : isSelectedMaritime ? "Ergonomic Night" : "Standard Kiosk"}
+                          {isSelectedTraffic ? "+35% Glove Ready" : isSelectedMaritime ? "Ergonomic Night" : "Standard Interface"}
                         </div>
                       </div>
 
@@ -2406,7 +2387,7 @@ export default function LandingPage() {
               <tr style={{ background: "#f8fafc", borderBottom: "1px solid #e2e8f0" }}>
                 <th style={{ padding: "16px 20px", color: "#1e293b", fontWeight: 700, width: "24%" }}>SECURITY VECTOR</th>
                 <th style={{ padding: "16px 20px", color: "#ef4444", fontWeight: 700, width: "38%" }}>TRADITIONAL MANUAL INSPECTION</th>
-                <th style={{ padding: "16px 20px", color: "#059669", fontWeight: 700, width: "38%" }}>SHIELDSCAN DEFENSE KIOSK</th>
+                <th style={{ padding: "16px 20px", color: "#059669", fontWeight: 700, width: "38%" }}>SHIELDSCAN DEFENSE PLATFORM</th>
               </tr>
             </thead>
             <tbody>

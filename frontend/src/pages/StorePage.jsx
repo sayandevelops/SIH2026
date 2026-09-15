@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 const products = [
   {
     id: "exam-guard",
-    name: "ShieldScan ExamGuard Kiosk v3",
+    name: "ShieldScan ExamGuard Station v3",
     subtitle: "Turnkey Anti-Impersonation Examination Entrance Station",
     category: "exam",
     badge: "BESTSELLER · EXAM BOARDS",
@@ -107,7 +107,7 @@ const products = [
     image: "/images/biometric_face.jpg",
     priceNumber: 245000,
     priceDisplay: "₹2,45,000",
-    rentalDisplay: "Includes 50 Kiosk Licenses",
+    rentalDisplay: "Includes 50 Device Licenses",
     targetSectors: "Exam Board HQs, Enterprise Server Rooms, Armed Forces",
     gemId: "GEM-SEC-2026-RACK",
     specs: [
@@ -117,7 +117,7 @@ const products = [
       "Redundant dual hot-plug power supplies and 10 GbE SFP+ ports",
       "Air-gap sovereign operation with zero external internet dependency",
     ],
-    highlight: "Central brain for multi-kiosk campus or multi-venue exam monitoring."
+    highlight: "Central brain for multi-station campus or multi-venue exam monitoring."
   },
 ];
 
@@ -132,6 +132,8 @@ const categoryTabs = [
 export default function StorePage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [customQuoteOpen, setCustomQuoteOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const [units, setUnits] = useState(1);
   const [procureType, setProcureType] = useState("purchase");
   const [formData, setFormData] = useState({
@@ -147,6 +149,11 @@ export default function StorePage() {
   const filteredProducts = activeCategory === "all"
     ? products
     : products.filter(p => p.category === activeCategory);
+
+  const handleAddToCart = (product) => {
+    setCartCount(prev => prev + 1);
+    toast.success(`Procurement item added: ${product.name}`, { icon: "🛒" });
+  };
 
   const handleOpenModal = (product) => {
     setSelectedProduct(product);
@@ -181,20 +188,18 @@ export default function StorePage() {
   };
 
   return (
-    <div className="page-container" style={{ maxWidth: 1240, margin: "0 auto", padding: "36px 24px 80px" }}>
+    <div style={{ maxWidth: 1280, margin: "0 auto", padding: "40px 24px 80px" }}>
       
-      {/* ── 1. Store Header & GovTech Trust Banner ──────────────── */}
-      <div style={{ textAlign: "center", marginBottom: 44 }}>
+      {/* ── 1. Hero Header & Mission Statement ──────────────────── */}
+      <div style={{ textAlign: "center", marginBottom: 36 }}>
         <div style={{
-          display: "inline-flex", alignItems: "center", gap: 10,
-          padding: "6px 18px", borderRadius: "999px",
-          background: "#eff6ff", border: "1px solid #bfdbfe",
-          fontSize: "0.78rem", fontWeight: 700, color: "#2563eb",
-          letterSpacing: "0.04em", textTransform: "uppercase",
-          marginBottom: 16,
+          display: "inline-flex", alignItems: "center", gap: 6,
+          background: "#eff6ff", color: "#2563eb",
+          padding: "6px 14px", borderRadius: 999,
+          fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.04em",
+          marginBottom: 16
         }}>
-          <ShoppingBag size={15} color="#2563eb" />
-          HARDWARE & TURNKEY SYSTEMS PROCUREMENT PORTAL
+          <ShoppingBag size={14} /> SOVEREIGN DEFENSE HARDWARE STORE
         </div>
 
         <h1 style={{
@@ -204,7 +209,7 @@ export default function StorePage() {
           color: "#0f172a",
           marginBottom: 16,
         }}>
-          Turnkey Identity Verification<br />Hardware & Kiosks
+          Turnkey Identity Verification<br />Hardware & Systems
         </h1>
 
         <p style={{
@@ -212,7 +217,7 @@ export default function StorePage() {
           maxWidth: 680, margin: "0 auto 24px",
           lineHeight: 1.6,
         }}>
-          Deploy defense-grade anti-proxy examination kiosks, multi-spectral document cradles, and automated transit turnstiles across universities, test centers, corporate buildings, and checkpoints.
+          Deploy defense-grade anti-proxy examination stations, multi-spectral document cradles, and automated transit turnstiles across universities, test centers, corporate buildings, and checkpoints.
         </p>
       </div>
 
@@ -486,7 +491,7 @@ export default function StorePage() {
             },
             {
               title: "Custom Hardware Branded Pods",
-              desc: "Kiosks and e-Gate acrylic panels customized with official state, examination board, or university crests.",
+              desc: "Hardware units and e-Gate acrylic panels customized with official state, examination board, or university crests.",
               icon: Award,
             },
           ].map((item, idx) => (

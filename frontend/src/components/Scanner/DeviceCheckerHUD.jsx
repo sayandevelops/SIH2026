@@ -112,7 +112,7 @@ export default function DeviceCheckerHUD({
                 display: "inline-block",
               }}
             />
-            KIOSK HARDWARE LINK: 2/2 CONNECTED
+            HARDWARE LINK: 2/2 CONNECTED
           </div>
           <span style={{ fontSize: "0.8rem", color: "#64748b", fontFamily: "JetBrains Mono" }}>
             USB 3.2 HUB · BUS 002 DEV 004 · LATENCY {telemetry.latency}

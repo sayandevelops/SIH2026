@@ -72,7 +72,7 @@ export default function OfflineIndicator() {
               }}
             >
               <AlertTriangle size={12} />
-              <span>Kiosk Cache Ready</span>
+              <span>Local Cache Ready</span>
             </div>
           </div>
         </motion.div>

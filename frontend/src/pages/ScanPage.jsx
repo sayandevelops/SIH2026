@@ -223,15 +223,15 @@ export default function ScanPage() {
 
         {/* Status Indicators & Hardware Mode Toggle */}
         <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-          {/* Hardware Kiosk Mode Toggle */}
+          {/* Hardware Link Mode Toggle */}
           <div
             onClick={() => {
               const next = !hardwareMode;
               setHardwareMode(next);
               if (next) {
-                toast.success("Hardware Kiosk Link Engaged: Querying Peripherals...", { icon: "🔌" });
+                toast.success("Hardware Link Connected: Querying Peripherals...", { icon: "🔌" });
               } else {
-                toast("Manual Cloud Mode Active: Drag & drop enabled.", { icon: "💻" });
+                toast("Manual Mode Active: Drag & drop enabled.", { icon: "💻" });
               }
             }}
             style={{
@@ -253,7 +253,7 @@ export default function ScanPage() {
                 HARDWARE LINK
               </div>
               <div style={{ fontSize: "0.85rem", fontWeight: 700, color: hardwareMode ? "#065f46" : "#0f172a", fontFamily: "Outfit" }}>
-                {hardwareMode ? "KIOSK ONLINE" : "MANUAL MODE"}
+                {hardwareMode ? "ONLINE" : "MANUAL MODE"}
               </div>
             </div>
             <div style={{

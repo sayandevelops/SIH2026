@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 const guideSections = [
   { id: "architecture", label: "🗺️ Architecture & Pipeline", icon: Layers },
   { id: "algorithms", label: "🔬 AI Forensic Math & Logic", icon: Cpu },
-  { id: "hardware-sop", label: "🎓 Exam & Entrance Kiosk SOP", icon: GraduationCap },
+  { id: "hardware-sop", label: "🎓 Exam & Entrance Station SOP", icon: GraduationCap },
   { id: "api-reference", label: "⚡ Developer REST API", icon: Terminal },
   { id: "blockchain", label: "⛓️ Cryptographic Audit Ledger", icon: Lock },
   { id: "walkthrough", label: "🧪 Live Hands-On Testing", icon: Play },
@@ -63,7 +63,7 @@ export default function GuidePage() {
           maxWidth: 720, margin: "0 auto 24px",
           lineHeight: 1.6,
         }}>
-          Comprehensive blueprint explaining forensic tamper detection mathematics, biometric 1:1 facial matching, physical entrance kiosk deployment SOPs, and REST API integration.
+          Comprehensive blueprint explaining forensic tamper detection mathematics, biometric 1:1 facial matching, physical entrance station deployment SOPs, and REST API integration.
         </p>
       </div>
 
@@ -124,7 +124,7 @@ export default function GuidePage() {
                 End-to-End System Architecture & Pipeline
               </h2>
               <p style={{ color: "#64748b", fontSize: "0.95rem", lineHeight: 1.6 }}>
-                ShieldScan operates on an air-gapped sovereign edge pipeline designed to run on desktop document cradles, exam kiosks, or local edge server racks without sending data outside the local facility.
+                ShieldScan operates on an air-gapped sovereign edge pipeline designed to run on desktop document cradles, verification stations, or local edge server racks without sending data outside the local facility.
               </p>
             </div>
 
@@ -134,7 +134,7 @@ export default function GuidePage() {
                 {
                   step: "STAGE 01",
                   title: "Multi-Source Document Ingestion",
-                  desc: "Captures identity credential from optical cradle (3M CR-5400), exam kiosk camera, webcam, or digital PDF/image upload. Normalizes resolution and color balance.",
+                  desc: "Captures identity credential from optical cradle (3M CR-5400), station camera, webcam, or digital PDF/image upload. Normalizes resolution and color balance.",
                   color: "#2563eb",
                 },
                 {
@@ -283,23 +283,23 @@ export default function GuidePage() {
                 SECTION 03
               </span>
               <h2 style={{ fontSize: "1.8rem", fontWeight: 800, color: "#0f172a", marginTop: 4 }}>
-                Examination Center & Entrance Kiosk SOP
+                Examination Center & Entrance Station SOP
               </h2>
               <p style={{ color: "#64748b", fontSize: "0.95rem", lineHeight: 1.6 }}>
-                Standard Operating Procedure for deploying the <strong>ShieldScan ExamGuard Kiosk v3</strong> at competitive examination centers (UPSC, JEE/NEET, SSC, Banking) to completely stop solver gangs and impersonation.
+                Standard Operating Procedure for deploying the <strong>ShieldScan ExamGuard Station v3</strong> at competitive examination centers (UPSC, JEE/NEET, SSC, Banking) to completely stop solver gangs and impersonation.
               </p>
             </div>
 
-            {/* Visual Kiosk SOP Cards */}
+            {/* Visual Station SOP Cards */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))", gap: 20, marginBottom: 32 }}>
               <div style={{ padding: 0, borderRadius: "16px", border: "1px solid #e2e8f0", overflow: "hidden" }}>
-                <img src="/images/exam_kiosk.jpg" alt="Exam Kiosk" style={{ width: "100%", height: 220, objectFit: "cover" }} />
+                <img src="/images/exam_kiosk.jpg" alt="Exam Station" style={{ width: "100%", height: 220, objectFit: "cover" }} />
                 <div style={{ padding: "20px" }}>
                   <h4 style={{ fontSize: "1.1rem", fontWeight: 800, color: "#0f172a", marginBottom: 6 }}>
-                    Kiosk Gate Setup Checklist
+                    Station Gate Setup Checklist
                   </h4>
                   <ul style={{ paddingLeft: 18, fontSize: "0.84rem", color: "#475569", lineHeight: 1.7, margin: 0 }}>
-                    <li>Place kiosk at entry gate 45 minutes prior to candidate reporting time.</li>
+                    <li>Place station at entry gate 45 minutes prior to candidate reporting time.</li>
                     <li>Verify internal lithium battery capacity (&gt;80%) or connect AC 220V.</li>
                     <li>Load candidate pre-registration manifest via encrypted USB token.</li>
                     <li>Test optical barcode reader and LED facial ring illumination.</li>
@@ -343,7 +343,7 @@ export default function GuidePage() {
                 </h4>
               </div>
               <p style={{ fontSize: "0.84rem", color: "#7f1d1d", lineHeight: 1.55, margin: 0 }}>
-                If ArcFace cosine similarity is &lt; 0.68 or the admit card QR signature fails cryptographic hash verification, the kiosk flashes an amber alert silently to the Center Superintendent's console and locks the entry turnstile. The candidate is escorted to the verification room for manual biometric iris re-scan without disrupting general entry queues.
+                If ArcFace cosine similarity is &lt; 0.68 or the admit card QR signature fails cryptographic hash verification, the hardware unit flashes an amber alert silently to the Center Superintendent's console and locks the entry turnstile. The candidate is escorted to the verification room for manual biometric iris re-scan without disrupting general entry queues.
               </p>
             </div>
           </motion.div>
