@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/nvidia-api/:path*",
+      "destination": "https://integrate.api.nvidia.com/v1/:path*"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "https://sih2026-f1o1.onrender.com/api/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

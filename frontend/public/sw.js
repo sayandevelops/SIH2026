@@ -62,6 +62,11 @@ self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
+  // Ignore non-http/https requests (e.g. chrome-extension://, moz-extension://)
+  if (!url.protocol.startsWith("http")) {
+    return;
+  }
+
   // Ignore non-GET requests (e.g. POST to /api/screen or /api/upload)
   if (request.method !== "GET") {
     return;
