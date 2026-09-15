@@ -22,6 +22,17 @@ app = FastAPI(
     license_info={"name": "MIT"},
 )
 
+@app.on_event("startup")
+def startup_event():
+    os.makedirs("uploads", exist_ok=True)
+    os.makedirs("reports", exist_ok=True)
+    os.makedirs("database", exist_ok=True)
+    try:
+        from database.init_db import init_watchlist
+        init_watchlist()
+    except Exception as e:
+        print("[WARN] Watchlist init warning:", e)
+
 # ─── CORS ─────────────────────────────────────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,

@@ -25,8 +25,12 @@ export default function DeveloperPortal() {
 
   // Code snippet tab
   const [activeCodeTab, setActiveCodeTab] = useState("javascript");
+  const [loadingKeys, setLoadingKeys] = useState(false);
+  const [keysError, setKeysError] = useState(null);
 
   const loadKeys = async () => {
+    setLoadingKeys(true);
+    setKeysError(null);
     try {
       const data = await listApiKeys();
       setKeys(data.keys || []);
@@ -35,6 +39,14 @@ export default function DeveloperPortal() {
       }
     } catch (err) {
       console.error("Failed to load keys", err);
+      const is503 = err.response?.status === 503;
+      setKeysError(
+        is503
+          ? "Backend service was sleeping (Render 503). Retrying or starting up..."
+          : err.message || "Failed to load keys from backend"
+      );
+    } finally {
+      setLoadingKeys(false);
     }
   };
 
@@ -342,63 +354,86 @@ echo "Document Verified Successfully!";
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 12, maxHeight: 260, overflowY: "auto" }}>
-            {keys.map((k) => (
-              <div
-                key={k.key}
-                style={{
-                  padding: "14px", borderRadius: 10,
-                  background: selectedKey === k.key ? "#eff6ff" : "#f8fafc",
-                  border: `1px solid ${selectedKey === k.key ? "#bfdbfe" : "#e2e8f0"}`,
-                  cursor: "pointer",
-                  transition: "all 0.2s ease"
-                }}
-                onClick={() => setSelectedKey(k.key)}
-              >
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
-                  <div style={{ fontWeight: 700, fontSize: "0.88rem", color: "#0f172a" }}>
-                    {k.app_name}
-                  </div>
-                  <span style={{
-                    fontSize: "0.68rem", fontWeight: 700, padding: "2px 8px", borderRadius: 4,
-                    background: "#ecfdf5", color: "#059669", border: "1px solid #a7f3d0"
-                  }}>
-                    {k.tier}
-                  </span>
-                </div>
-
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
-                  <span style={{
-                    fontFamily: "JetBrains Mono, monospace", fontSize: "0.78rem", color: "#2563eb",
-                    overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontWeight: 600
-                  }}>
-                    {k.key}
-                  </span>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      copyToClipboard(k.key, k.key);
-                    }}
-                    className="btn-secondary"
-                    style={{ padding: "4px 8px", borderRadius: 6 }}
-                  >
-                    {copiedKey === k.key ? <Check size={12} color="#059669" /> : <Copy size={12} />}
-                  </button>
-                </div>
-
-                <div style={{ marginTop: 10 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", color: "#64748b", marginBottom: 4 }}>
-                    <span>Daily Quota: {k.requests_used || 0} / {k.daily_limit || 500} requests</span>
-                    <span>{Math.round(((k.requests_used || 0) / (k.daily_limit || 500)) * 100)}%</span>
-                  </div>
-                  <div style={{ height: 4, background: "#e2e8f0", borderRadius: 2, overflow: "hidden" }}>
-                    <div style={{
-                      width: `${Math.min(100, ((k.requests_used || 0) / (k.daily_limit || 500)) * 100)}%`,
-                      height: "100%", background: "#2563eb"
-                    }} />
-                  </div>
-                </div>
+            {loadingKeys ? (
+              <div style={{ textAlign: "center", padding: "24px 0", color: "#64748b", fontSize: "0.85rem" }}>
+                <div className="spinner" style={{ width: 24, height: 24, margin: "0 auto 10px", borderTopColor: "#2563eb" }} />
+                <span>Connecting to backend...</span>
               </div>
-            ))}
+            ) : keysError ? (
+              <div style={{ padding: 14, borderRadius: 8, background: "#fef2f2", border: "1px solid #fecaca", fontSize: "0.82rem", color: "#991b1b" }}>
+                <div style={{ fontWeight: 600, marginBottom: 4 }}>⚠️ Backend Connection Warning</div>
+                <div>{keysError}</div>
+                <button
+                  onClick={loadKeys}
+                  className="btn-secondary"
+                  style={{ marginTop: 10, padding: "4px 12px", fontSize: "0.78rem" }}
+                >
+                  🔄 Retry Connection
+                </button>
+              </div>
+            ) : keys.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "20px 0", color: "#64748b", fontSize: "0.85rem" }}>
+                No API keys generated yet. Generate your first key using the form on the left!
+              </div>
+            ) : (
+              keys.map((k) => (
+                <div
+                  key={k.key}
+                  style={{
+                    padding: "14px", borderRadius: 10,
+                    background: selectedKey === k.key ? "#eff6ff" : "#f8fafc",
+                    border: `1px solid ${selectedKey === k.key ? "#bfdbfe" : "#e2e8f0"}`,
+                    cursor: "pointer",
+                    transition: "all 0.2s ease"
+                  }}
+                  onClick={() => setSelectedKey(k.key)}
+                >
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
+                    <div style={{ fontWeight: 700, fontSize: "0.88rem", color: "#0f172a" }}>
+                      {k.app_name}
+                    </div>
+                    <span style={{
+                      fontSize: "0.68rem", fontWeight: 700, padding: "2px 8px", borderRadius: 4,
+                      background: "#ecfdf5", color: "#059669", border: "1px solid #a7f3d0"
+                    }}>
+                      {k.tier}
+                    </span>
+                  </div>
+
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+                    <span style={{
+                      fontFamily: "JetBrains Mono, monospace", fontSize: "0.78rem", color: "#2563eb",
+                      overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontWeight: 600
+                    }}>
+                      {k.key}
+                    </span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        copyToClipboard(k.key, k.key);
+                      }}
+                      className="btn-secondary"
+                      style={{ padding: "4px 8px", borderRadius: 6 }}
+                    >
+                      {copiedKey === k.key ? <Check size={12} color="#059669" /> : <Copy size={12} />}
+                    </button>
+                  </div>
+
+                  <div style={{ marginTop: 10 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", color: "#64748b", marginBottom: 4 }}>
+                      <span>Daily Quota: {k.requests_used || 0} / {k.daily_limit || 500} requests</span>
+                      <span>{Math.round(((k.requests_used || 0) / (k.daily_limit || 500)) * 100)}%</span>
+                    </div>
+                    <div style={{ height: 4, background: "#e2e8f0", borderRadius: 2, overflow: "hidden" }}>
+                      <div style={{
+                        width: `${Math.min(100, ((k.requests_used || 0) / (k.daily_limit || 500)) * 100)}%`,
+                        height: "100%", background: "#2563eb"
+                      }} />
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

@@ -13,6 +13,41 @@ const API = axios.create({
   timeout: 120000, // 2 min timeout for AI processing
 });
 
+// ─── Render Cold-Start & 503 Auto-Retry Interceptor ─────────────────────────
+API.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    const status = error.response?.status;
+
+    // Initialize retry counter
+    if (status === 503 && originalRequest && originalRequest._retryCount === undefined) {
+      originalRequest._retryCount = 0;
+    }
+
+    // Auto-retry up to 3 times with 4-second delay for Render free tier cold-starts
+    if (status === 503 && originalRequest && originalRequest._retryCount < 3) {
+      originalRequest._retryCount += 1;
+      const attempt = originalRequest._retryCount;
+      
+      try {
+        const { default: toast } = await import("react-hot-toast");
+        toast.loading(`Backend service is waking up (Render cold-start)... Retrying attempt ${attempt}/3`, {
+          id: "render-cold-start",
+          duration: 4000,
+        });
+      } catch (e) {
+        console.log("Waking up server... Retrying attempt", attempt);
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 4000));
+      return API(originalRequest);
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 // ─── Master Screening (all modules) ──────────────────────────────────────────
 export async function screenDocument({ file, documentType, liveImageB64, officerId, checkpoint }) {
   const form = new FormData();
