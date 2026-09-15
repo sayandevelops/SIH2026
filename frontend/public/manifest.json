@@ -1,0 +1,104 @@
+{
+  "id": "/?source=pwa",
+  "name": "ShieldScan — AI Border Document Intelligence",
+  "short_name": "ShieldScan",
+  "description": "Defense-Grade AI Border & Document Intelligence System for Real-Time Passport, Visa, ID & Biometric Verification",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "theme_color": "#2563eb",
+  "background_color": "#0f172a",
+  "lang": "en",
+  "categories": [
+    "security",
+    "utilities",
+    "productivity",
+    "government"
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "AI Border Scanner",
+      "short_name": "Scanner",
+      "description": "Scan and analyze travel documents with multi-spectral forensic AI",
+      "url": "/scan?source=shortcut",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Audit Ledger",
+      "short_name": "Ledger",
+      "description": "View tamper-evident cryptographic border inspection logs",
+      "url": "/audit?source=shortcut",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Hardware Kiosks",
+      "short_name": "Store",
+      "description": "Inspect defense-grade border scanning hardware and spec sheets",
+      "url": "/store?source=shortcut",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Developer API",
+      "short_name": "API",
+      "description": "Access developer portal and generate border checkpoint API tokens",
+      "url": "/developers?source=shortcut",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Scan, BookOpen, Code, ArrowRight, ShoppingBag, Lock, Menu, X } from "lucide-react";
+import PwaInstallButton from "../PWA/PwaInstallButton";
 
 const navLinks = [
   { to: "/", label: "Overview", icon: Shield },
@@ -140,6 +141,11 @@ export default function Navbar() {
 
         {/* Right Actions & Hamburger */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {/* PWA Install Button - Desktop */}
+          <div className="desktop-action-btn">
+            <PwaInstallButton />
+          </div>
+
           {/* Primary Action Button - Desktop */}
           <NavLink
             to="/scan"
@@ -274,6 +280,11 @@ export default function Navbar() {
                     </NavLink>
                   );
                 })}
+              </div>
+
+              {/* Mobile Drawer PWA Install Button */}
+              <div style={{ marginBottom: "12px" }}>
+                <PwaInstallButton mobile={true} />
               </div>
 
               {/* Mobile Drawer Action Button */}

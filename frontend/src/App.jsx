@@ -8,36 +8,43 @@ import LandingPage from "./pages/LandingPage";
 import DeveloperPortal from "./pages/DeveloperPortal";
 import StorePage from "./pages/StorePage";
 import GuidePage from "./pages/GuidePage";
+import { PwaProvider } from "./pwa/PwaContext";
+import OfflineIndicator from "./components/PWA/OfflineIndicator";
+import PwaInstallBanner from "./components/PWA/PwaInstallBanner";
 
 export default function App() {
   return (
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: "#ffffff",
-            color: "#0f172a",
-            border: "1px solid #e2e8f0",
-            boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
-            fontFamily: "Plus Jakarta Sans, sans-serif",
-            fontWeight: 500,
-            fontSize: "0.88rem",
-          },
-        }}
-      />
-      <Navbar />
-      <main style={{ paddingTop: "64px", minHeight: "100vh" }}>
-        <Routes>
-          <Route path="/"           element={<LandingPage />} />
-          <Route path="/scan"       element={<ScanPage />} />
-          <Route path="/results"    element={<ResultsPage />} />
-          <Route path="/audit"      element={<AuditPage />} />
-          <Route path="/developers" element={<DeveloperPortal />} />
-          <Route path="/store"      element={<StorePage />} />
-          <Route path="/guide"      element={<GuidePage />} />
-        </Routes>
-      </main>
-    </Router>
+    <PwaProvider>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: "#ffffff",
+              color: "#0f172a",
+              border: "1px solid #e2e8f0",
+              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+              fontFamily: "Plus Jakarta Sans, sans-serif",
+              fontWeight: 500,
+              fontSize: "0.88rem",
+            },
+          }}
+        />
+        <Navbar />
+        <OfflineIndicator />
+        <main style={{ paddingTop: "64px", minHeight: "100vh" }}>
+          <Routes>
+            <Route path="/"           element={<LandingPage />} />
+            <Route path="/scan"       element={<ScanPage />} />
+            <Route path="/results"    element={<ResultsPage />} />
+            <Route path="/audit"      element={<AuditPage />} />
+            <Route path="/developers" element={<DeveloperPortal />} />
+            <Route path="/store"      element={<StorePage />} />
+            <Route path="/guide"      element={<GuidePage />} />
+          </Routes>
+        </main>
+        <PwaInstallBanner />
+      </Router>
+    </PwaProvider>
   );
 }
