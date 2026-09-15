@@ -214,25 +214,6 @@ export default function StorePage() {
         }}>
           Deploy defense-grade anti-proxy examination kiosks, multi-spectral document cradles, and automated transit turnstiles across universities, test centers, corporate buildings, and checkpoints.
         </p>
-
-        {/* Trust Badges Strip */}
-        <div style={{
-          display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12,
-          fontSize: "0.78rem", fontWeight: 600, color: "#334155"
-        }}>
-          <span style={{ padding: "6px 14px", borderRadius: 8, background: "#ecfdf5", border: "1px solid #a7f3d0", color: "#059669", display: "flex", alignItems: "center", gap: 6 }}>
-            <Award size={14} color="#059669" /> GeM Portal Registered
-          </span>
-          <span style={{ padding: "6px 14px", borderRadius: 8, background: "#f8fafc", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", gap: 6 }}>
-            <CheckCircle2 size={14} color="#2563eb" /> Make in India Sovereign Tech
-          </span>
-          <span style={{ padding: "6px 14px", borderRadius: 8, background: "#f8fafc", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", gap: 6 }}>
-            <Clock size={14} color="#2563eb" /> 3-Year On-Site AMC & SLA
-          </span>
-          <span style={{ padding: "6px 14px", borderRadius: 8, background: "#f8fafc", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", gap: 6 }}>
-            <HardDrive size={14} color="#7c3aed" /> 100% Offline Air-Gap Certified
-          </span>
-        </div>
       </div>
 
       {/* ── 2. Category Filter Tabs ─────────────────────────────── */}
@@ -489,8 +470,8 @@ export default function StorePage() {
         }}>
           {[
             {
-              title: "GeM Portal Direct Purchase",
-              desc: "Approved under Government e-Marketplace (GeM) categories for security kiosks and biometric readers.",
+              title: "Direct Enterprise Procurement",
+              desc: "Flexible turnkey procurement options for examination centers, security agencies, and corporate infrastructure.",
               icon: FileCheck,
             },
             {

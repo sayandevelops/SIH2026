@@ -276,21 +276,6 @@ export default function ScanPage() {
               }} />
             </div>
           </div>
-
-          {/* Operator ID Badge */}
-          <div style={{
-            padding: "8px 16px", borderRadius: "12px",
-            background: "#ffffff", border: "1px solid #e2e8f0",
-            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.04)",
-            textAlign: "right",
-          }}>
-            <div style={{ fontSize: "0.68rem", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.04em", fontWeight: 600 }}>
-              OPERATOR
-            </div>
-            <div style={{ fontSize: "0.88rem", fontWeight: 700, color: "#0f172a" }}>
-              SSB-OFFICER-01
-            </div>
-          </div>
         </div>
       </div>
 
